@@ -153,23 +153,22 @@ class _AuthScreenState extends State<AuthScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
+                                height: D.H/13,
+                                width: D.W/6.6,
                                 decoration: BoxDecoration(
                                     color: Color(0xFFE9F4FF),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(
-                                      child: SvgPicture.asset(
-                                          "assets/images/googleicon.svg")),
-                                ),
+                                child: Center(
+                                    child: SvgPicture.asset(
+                                        "assets/images/googleicon.svg")),
                               ),
                               SizedBox(
                                 width: D.W / 10,
                               ),
                               Container(
-                                  height: 62,
-                                  width: 60,
+                                  height: D.H/13.5,
+                                  width: D.W/6.8,
                                   decoration: BoxDecoration(
                                       color: Color(0xFF4460A0),
                                       borderRadius: BorderRadius.all(
@@ -178,8 +177,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                     child: Container(
                                       child: SvgPicture.asset(
                                         "assets/images/facebooklogo.svg",
-                                        height: 55,
-                                        width: 52,
+                                        height: D.H/14.5,
+                                        width: D.W/6.4,
                                       ),
                                     ),
                                   )),
