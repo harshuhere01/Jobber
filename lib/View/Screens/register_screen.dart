@@ -39,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
             SizedBox(height: D.H/50,),
+            CustomTextFormField(controller: controller, readOnly: false, hint: "Email Address", iconPath:Icons.email_outlined,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
             CustomTextFormField(controller: controller, readOnly: false, hint: "Email Address", iconPath:Icons.email_outlined,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress)
           ],
         ),
