@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobber/Constants/color_constants.dart';
+import 'package:jobber/View/Screens/welcome_page_main.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -24,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   Future changeRoute() async {
     await Future.delayed(Duration(milliseconds: 3000), () {
-       NavigationHelpers.redirect(context, AuthScreen());
+       NavigationHelpers.redirect(context, WelcomePageMain());
     });
 
     /*if (PreferenceUtils.isIntroDone("isIntroDone") &&
