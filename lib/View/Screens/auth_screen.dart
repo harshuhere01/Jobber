@@ -8,6 +8,7 @@ import 'package:jobber/View/Screens/register_screen.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
+import 'dash_board_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -103,7 +104,8 @@ class _AuthScreenState extends State<AuthScreen> {
                           text: "Login",
                           color: ColorConstants.whiteColor,
                           bordercolor: ColorConstants.primaryBlueColor,
-                          onTap: () {},
+                          onTap: () {
+                          },
                           textColor: ColorConstants.primaryBlueColor,
                         ),
                         SizedBox(
