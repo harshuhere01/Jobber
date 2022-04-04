@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/welcome_page_rounded_button.dart';
 import 'package:jobber/Utils/dimensions.dart';
+import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/View/Screens/auth_screen.dart';
 
 class WelcomePage3 extends StatelessWidget {
   const WelcomePage3({Key? key}) : super(key: key);
@@ -52,7 +54,9 @@ class WelcomePage3 extends StatelessWidget {
               width: D.H / 2.5,
               btnradius: D.H/50,
               fontweight: FontWeight.w500,
-              onTap: () {},
+              onTap: () {
+                NavigationHelpers.redirect(context, AuthScreen());
+              },
             ),
           ],
         ),

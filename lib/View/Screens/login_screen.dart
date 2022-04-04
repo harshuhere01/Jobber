@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
+import 'package:jobber/View/Screens/choose_your_use_screen.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -49,7 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: D.H / 40,
             ),
-            CustomButton(text: "Sign up", color: ColorConstants.primaryBlueColor, textColor: ColorConstants.whiteColor, bordercolor: ColorConstants.primaryBlueColor, onTap: (){}),
+            CustomButton(text: "Sign up", color: ColorConstants.primaryBlueColor, textColor: ColorConstants.whiteColor, bordercolor: ColorConstants.primaryBlueColor, onTap: (){
+              NavigationHelpers.redirect(context, ChooseYourUseScreen(
+              ));
+            }),
             SizedBox(
               height: D.H / 55,
             ),
