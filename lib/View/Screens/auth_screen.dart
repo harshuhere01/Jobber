@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
+import 'package:jobber/View/Screens/login_screen.dart';
 import 'package:jobber/View/Screens/register_screen.dart';
 
 import '../../Utils/dimensions.dart';
@@ -60,14 +61,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                 "Create better\ntoghether.",
                                 style: GoogleFonts.roboto(
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 24,
+                                    fontSize: D.H/25,
                                     color: Colors.black),
                               ),
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: D.H / 42,
+                          height: D.H / 50,
                         ),
                         Padding(
                             padding: EdgeInsets.symmetric(horizontal: D.W / 15),
@@ -77,14 +78,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                 "Join Our Community",
                                 style: GoogleFonts.roboto(
                                     fontWeight: FontWeight.normal,
-                                    fontSize: 16,
+                                    fontSize: D.H/42,
                                     color: Colors.black),
                               ),
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: D.H / 20,
+                          height: D.H / 28,
                         ),
                         CustomButton(
                           text: "Register",
@@ -103,7 +104,9 @@ class _AuthScreenState extends State<AuthScreen> {
                           text: "Login",
                           color: ColorConstants.whiteColor,
                           bordercolor: ColorConstants.primaryBlueColor,
-                          onTap: () {},
+                          onTap: () {
+                            NavigationHelpers.redirect(context, LoginScreen());
+                          },
                           textColor: ColorConstants.primaryBlueColor,
                         ),
                         SizedBox(
@@ -186,7 +189,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: D.H / 7.5,
+                          height: D.H / 15,
                         ),
                         Expanded(
                           child: Center(
