@@ -4,13 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../Constants/color_constants.dart';
 import '../Utils/dimensions.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField(
+class CustomBorderTextFormField extends StatelessWidget {
+  CustomBorderTextFormField(
       {Key? key,
         required this.controller,
         required this.readOnly,
         required this.hint,
-        required this.iconPath,
         required this.validators,
         required this.keyboardTYPE,
         this.maxlength, this.onChanged})
@@ -18,7 +17,6 @@ class CustomTextFormField extends StatelessWidget {
 
   final TextEditingController controller;
   String hint;
-  IconData iconPath;
   int? maxlength;
   bool readOnly;
   TextInputType? keyboardTYPE;
@@ -28,8 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
-      padding: EdgeInsets.symmetric(horizontal: D.W / 65, vertical: D.H / 60),
+      padding: EdgeInsets.symmetric( vertical: D.H / 60),
       child: SizedBox(
         height: 50,
         child: TextFormField(
@@ -40,30 +37,19 @@ class CustomTextFormField extends StatelessWidget {
           maxLength: maxlength,
           cursorColor: ColorConstants.primaryBlueColor,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.zero,
-            focusColor: ColorConstants.whiteColor,
-            filled: true,
-            fillColor: Colors.grey.withOpacity(0.1),
+            contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
             focusedBorder: OutlineInputBorder(
-
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
+              borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+              borderRadius: BorderRadius.circular(12),
             ),
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
             counterText: "",
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
+              borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+              borderRadius: BorderRadius.circular(12),
             ),
-            prefixIcon: Icon(iconPath,color: Colors.grey,),
-            errorMaxLines: 4,
+            errorMaxLines: 1,
             hintText: hint,
             labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
           ),
