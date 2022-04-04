@@ -5,5 +5,7 @@ class ColorConstants {
   static var primaryBlueColor = Color(0xFF1489A9);
   static var primaryGreenColor = Color(0xFF238841);
   static var whiteColor = Color(0xFFFFFFFF);
+  static var blackColor = Color(0xFF070707);
+  static var tabbtncolor = Color(0xFFC4C4C4);
 
 }

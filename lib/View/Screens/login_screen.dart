@@ -5,16 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
-
+import 'package:jobber/View/Screens/resetPassword_screen.dart';
 import '../../Utils/dimensions.dart';
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+import '../../Utils/navigation_helper.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController controller=TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -31,25 +33,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             Row(
               children: [
-                Text("Register Account",style: GoogleFonts.roboto(fontWeight: FontWeight.w500,fontSize: D.H/25),),
+                Text("Welcome Back",style: GoogleFonts.roboto(fontWeight: FontWeight.w500,fontSize: D.H/25),),
               ],
             ),
             SizedBox(height: D.H/90,),
             Row(
               children: [
-                Text("Fill your details or continue\nwith social media",style: GoogleFonts.roboto(fontWeight: FontWeight.w500,fontSize: D.H/50,color: Colors.black.withOpacity(0.5)),),
+                Text("Nice To See You Again!",style: GoogleFonts.roboto(fontWeight: FontWeight.w500,fontSize: D.H/50,color: Colors.black.withOpacity(0.5)),),
               ],
             ),
             SizedBox(height: D.H/50,),
             CustomTextFormField(controller: controller, readOnly: false, hint: "Email Address", iconPath:Icons.email_outlined,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
             CustomTextFormField(controller: controller, readOnly: false, hint: "Password", iconPath:Icons.lock_outline,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
-            CustomTextFormField(controller: controller, readOnly: false, hint: "Confirm Password", iconPath:Icons.lock_outline,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
+
             SizedBox(
-              height: D.H / 60,
+              height: D.H / 40,
             ),
             CustomButton(text: "Sign up", color: ColorConstants.primaryBlueColor, textColor: ColorConstants.whiteColor, bordercolor: ColorConstants.primaryBlueColor, onTap: (){}),
             SizedBox(
-              height: D.H / 35,
+              height: D.H / 55,
+            ),
+            GestureDetector(
+              onTap: (){
+                NavigationHelpers.redirect(context, ResetPasswordScreen());
+              },
+              child: Text(
+                "Forget Password?",
+                style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Colors.black),
+              ),
+            ),
+            SizedBox(
+              height: D.H / 10,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: D.W / 20),
