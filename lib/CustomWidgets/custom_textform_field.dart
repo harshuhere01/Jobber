@@ -30,45 +30,56 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
 
       padding: EdgeInsets.symmetric(horizontal: D.W / 65, vertical: D.H / 60),
-      child: SizedBox(
-        height: 50,
-        child: TextFormField(
-          readOnly: readOnly,
-          controller:controller,
-          validator: validators,
-          onChanged: onChanged,
-          maxLength: maxlength,
-          cursorColor: ColorConstants.primaryBlueColor,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.zero,
-            focusColor: ColorConstants.whiteColor,
-            filled: true,
-            fillColor: Colors.grey.withOpacity(0.1),
-            focusedBorder: OutlineInputBorder(
+      child: TextFormField(
+        readOnly: readOnly,
+        controller:controller,
+        validator: validators,
+        onChanged: onChanged,
+        maxLength: maxlength,
+        cursorColor: ColorConstants.primaryBlueColor,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
+          focusColor: ColorConstants.whiteColor,
+          filled: true,
+          fillColor: Colors.grey.withOpacity(0.1),
+          focusedBorder: OutlineInputBorder(
 
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              width: 0,
+              style: BorderStyle.none,
             ),
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            counterText: "",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
-            ),
-            prefixIcon: Icon(iconPath,color: Colors.grey,),
-            errorMaxLines: 4,
-            hintText: hint,
-            labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
           ),
-          keyboardType: keyboardTYPE,
+          errorBorder: OutlineInputBorder(
+
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
+          counterText: "",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
+          prefixIcon: Icon(iconPath,color: Colors.grey,),
+          errorMaxLines: 4,
+          hintText: hint,
+          labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
         ),
+        keyboardType: keyboardTYPE,
       ),
     );
   }

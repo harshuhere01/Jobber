@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +19,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController controller=TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,39 +30,98 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,
         elevation: 0,
-        leading: IconButton(icon: Icon(CupertinoIcons.left_chevron,color: Colors.black87,),onPressed: (){Navigator.pop(context);}),
+        leading: IconButton(
+            icon: Icon(
+              CupertinoIcons.left_chevron,
+              color: Colors.black87,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: D.W/20),
+        padding: EdgeInsets.symmetric(horizontal: D.W / 20),
         child: Column(
           children: [
             Row(
               children: [
-                Text("Welcome Back",style: GoogleFonts.roboto(fontWeight: FontWeight.w500,fontSize: D.H/25),),
+                Text(
+                  "Welcome Back",
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w500, fontSize: D.H / 25),
+                ),
               ],
             ),
-            SizedBox(height: D.H/90,),
+            SizedBox(
+              height: D.H / 90,
+            ),
             Row(
               children: [
-                Text("Nice To See You Again!",style: GoogleFonts.roboto(fontWeight: FontWeight.w500,fontSize: D.H/50,color: Colors.black.withOpacity(0.5)),),
+                Text(
+                  "Nice To See You Again!",
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w500,
+                      fontSize: D.H / 50,
+                      color: Colors.black.withOpacity(0.5)),
+                ),
               ],
             ),
-            SizedBox(height: D.H/50,),
-            CustomTextFormField(controller: controller, readOnly: false, hint: "Email Address", iconPath:Icons.email_outlined,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
-            CustomTextFormField(controller: controller, readOnly: false, hint: "Password", iconPath:Icons.lock_outline,  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
-
+            SizedBox(
+              height: D.H / 50,
+            ),
+            Form(
+              key: _formkey,
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                      controller: emailController,
+                      readOnly: false,
+                      hint: "Email Address",
+                      iconPath: Icons.email_outlined,
+                      validators: (e) {
+                      if(emailController.text== null || emailController.text == ''){
+                        return '*Please enter Email';
+                      }
+                      else if(!EmailValidator.validate(emailController.text)){
+                        return '*Please enter valid Email';
+                      }
+                      },
+                      keyboardTYPE: TextInputType.emailAddress),
+                  CustomTextFormField(
+                      controller: passwordController,
+                      readOnly: false,
+                      hint: "Password",
+                      iconPath: Icons.lock_outline,
+                      validators: (e) {
+                        if(passwordController.text== null || passwordController.text == ''){
+                          return '*Please enter Password';
+                        }
+                      },
+                      keyboardTYPE: TextInputType.emailAddress),
+                ],
+              ),
+            ),
             SizedBox(
               height: D.H / 40,
             ),
-            CustomButton(text: "Sign up", color: ColorConstants.primaryBlueColor, textColor: ColorConstants.whiteColor, bordercolor: ColorConstants.primaryBlueColor, onTap: (){
-              NavigationHelpers.redirect(context, ChooseYourUseScreen(
-              ));
-            }),
+            CustomButton(
+                text: "Sign up",
+                color: ColorConstants.primaryBlueColor,
+                textColor: ColorConstants.whiteColor,
+                bordercolor: ColorConstants.primaryBlueColor,
+                onTap: () {
+                  if (_formkey.currentState!.validate()) {
+                    NavigationHelpers.redirect(
+                      context,
+                      ChooseYourUseScreen(),
+                    );
+                  }
+                }),
             SizedBox(
               height: D.H / 55,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 NavigationHelpers.redirect(context, ResetPasswordScreen());
               },
               child: Text(
@@ -116,39 +179,38 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: D.H/13,
-                    width: D.W/6.6,
+                    height: D.H / 13,
+                    width: D.W / 6.6,
                     decoration: BoxDecoration(
                         color: Color(0xFFE9F4FF),
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(8))),
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: Center(
-                        child: SvgPicture.asset(
-                            "assets/images/googleicon.svg")),
+                        child:
+                            SvgPicture.asset("assets/images/googleicon.svg")),
                   ),
                   SizedBox(
                     width: D.W / 10,
                   ),
                   Container(
-                      height: D.H/13.5,
-                      width: D.W/6.8,
+                      height: D.H / 13.5,
+                      width: D.W / 6.8,
                       decoration: BoxDecoration(
                           color: Color(0xFF4460A0),
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(12))),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
                       child: Center(
                         child: Container(
                           child: SvgPicture.asset(
                             "assets/images/facebooklogo.svg",
-                            height: D.H/14.5,
-                            width: D.W/6.4,
+                            height: D.H / 14.5,
+                            width: D.W / 6.4,
                           ),
                         ),
                       )),
                 ],
               ),
             ),
-            Expanded(child: Container(),
+            Expanded(
+              child: Container(),
             ),
             Container(
               child: Center(
@@ -159,8 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextSpan(
                         text: ' Log in',
                         style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       )
                     ])),
               ),
