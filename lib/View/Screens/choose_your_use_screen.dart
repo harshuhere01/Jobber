@@ -65,6 +65,11 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                       radioGroupValue = value;
                     });
                   },
+                  onTap: (){
+                    setState(() {
+                      radioGroupValue = 0;
+                    });
+                  },
                   radioGroupValue: radioGroupValue,
                   text: 'Find A Job',
                   iconpath: 'assets/images/opportunity.png',
@@ -73,6 +78,11 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                   onChenaged: (value) {
                     setState(() {
                       radioGroupValue = value;
+                    });
+                  },
+                  onTap: (){
+                    setState(() {
+                      radioGroupValue = 1;
                     });
                   },
                   radioValue: 1,
@@ -86,6 +96,11 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                       radioGroupValue = value;
                     });
                   },
+                  onTap: (){
+                    setState(() {
+                      radioGroupValue = 2;
+                    });
+                  },
                   radioValue: 2,
                   radioGroupValue: radioGroupValue,
                   text: 'Write a Blog',
@@ -96,7 +111,11 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                     setState(() {
                       radioGroupValue = value;
                     });
-                  },
+                  },onTap: (){
+                  setState(() {
+                    radioGroupValue = 3;
+                  });
+                },
                   radioValue: 3,
                   radioGroupValue: radioGroupValue,
                   text: 'Start a Business',
