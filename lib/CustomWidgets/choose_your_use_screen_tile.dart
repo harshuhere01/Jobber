@@ -8,14 +8,16 @@ class ChooseYourUseTile extends StatelessWidget {
   ChooseYourUseTile({
     Key? key,
     required this.onChenaged,
-    required this.bottomRadioValue,
+    required this.radioValue,
+    required this.radioGroupValue,
     required this.iconpath,
     required this.text,
   }) : super(key: key);
   String iconpath;
   String text;
   Function onChenaged;
-  int bottomRadioValue;
+  int radioValue;
+  int radioGroupValue;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class ChooseYourUseTile extends StatelessWidget {
         width: D.W,
         decoration: BoxDecoration(
           // border: Border.all(color: bordercolor,width: 2),
-          color: ColorConstants.primaryBlueColor,
+          color:radioValue == radioGroupValue ? ColorConstants.primaryBlueColor : ColorConstants.chooseusecardcolor,
           borderRadius: BorderRadius.all(Radius.circular(D.H/50)),
         ),
         child: Row(
@@ -40,11 +42,11 @@ class ChooseYourUseTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Radio(
-                  value: bottomRadioValue,
+                  value: radioValue,
                   fillColor: MaterialStateProperty.all(ColorConstants.blackColor),
-                  groupValue: bottomRadioValue,
+                  groupValue: radioGroupValue,
                   onChanged: (value) {
-                    onChenaged();
+                    onChenaged(value);
                   },
                 ),
               ],

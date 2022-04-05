@@ -19,10 +19,7 @@ class ChooseYourUseScreen extends StatefulWidget {
 class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
   bool? bottomIsChecked = false;
   bool bottomIsSwitched = false;
-  int bottomRadioValue1 = 0;
-  int bottomRadioValue2 = 1;
-  int bottomRadioValue3 = 0;
-  int bottomRadioValue4 = 0;
+  int radioGroupValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -62,39 +59,58 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                   height: D.H / 50,
                 ),
                 ChooseYourUseTile(
-                  onChenaged: () {},
-                  bottomRadioValue: bottomRadioValue1,
+                  radioValue: 0,
+                  onChenaged: (value) {
+                    setState(() {
+                      radioGroupValue = value;
+                    });
+                  },
+                  radioGroupValue: radioGroupValue,
                   text: 'Find A Job',
                   iconpath: 'assets/images/opportunity.png',
                 ),
                 ChooseYourUseTile(
-                  onChenaged: () {},
-                  bottomRadioValue: bottomRadioValue2,
+                  onChenaged: (value) {
+                    setState(() {
+                      radioGroupValue = value;
+                    });
+                  },
+                  radioValue: 1,
+                  radioGroupValue: radioGroupValue,
                   text: 'Hire A Candidates',
                   iconpath: 'assets/images/amazon_shopping_app.png',
                 ),
                 ChooseYourUseTile(
-                  onChenaged: () {},
-                  bottomRadioValue: bottomRadioValue3,
+                  onChenaged: (value) {
+                    setState(() {
+                      radioGroupValue = value;
+                    });
+                  },
+                  radioValue: 2,
+                  radioGroupValue: radioGroupValue,
                   text: 'Write a Blog',
                   iconpath: 'assets/images/blogger.png',
                 ),
                 ChooseYourUseTile(
-                  onChenaged: () {},
-                  bottomRadioValue: bottomRadioValue4,
+                  onChenaged: (value) {
+                    setState(() {
+                      radioGroupValue = value;
+                    });
+                  },
+                  radioValue: 3,
+                  radioGroupValue: radioGroupValue,
                   text: 'Start a Business',
                   iconpath: 'assets/images/insidea.png',
                 ),
               ],
             ),
-
             WelcomePageRoundedButton(
               color: ColorConstants.primaryBlueColor,
               text: 'Next',
               fontsize: 22,
               height: D.H / 15,
               width: D.H / 2.5,
-              btnradius: D.H/50,
+              btnradius: D.H / 50,
               fontweight: FontWeight.w500,
               onTap: () {
                 NavigationHelpers.redirect(context, DashBoardScreen());
