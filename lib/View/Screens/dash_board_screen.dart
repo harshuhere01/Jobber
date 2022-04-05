@@ -26,14 +26,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     // MyCartScreen(),
     // ProfileScreen()
   ];
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(toolbarHeight: 100,
         backgroundColor: ColorConstants.whiteColor,
         elevation: 0,
-        leading: Center(child: SvgPicture.asset("assets/images/maindrawericon.svg",height: D.H/15,width:D.W/8,)),
+        leading: InkWell(
+            onTap:   () => _scaffoldKey.currentState!.openDrawer(),child: Center(child: SvgPicture.asset("assets/images/maindrawericon.svg",height: D.H/15,width:D.W/8,))),
         centerTitle: true,
         title: Image.asset("assets/images/appbarlogo.png"),
         actions: [
@@ -45,6 +47,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ],
       ),
       // body: _children[widget._currentIndex!],
+      drawer: Drawer(),
       body: HomeScreen(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

@@ -1,5 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
+import '../Model/model.dart';
+
 class ColorConstants {
   // static var statusBarColor = Color(0xFFFA8832);
   static var primaryBlueColor = Color(0xFF1489A9);
