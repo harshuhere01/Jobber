@@ -9,6 +9,7 @@ import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/login_screen.dart';
+import 'package:jobber/auth_class/AuthClass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/common_utils.dart';
@@ -202,15 +203,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: D.H / 13,
-                      width: D.W / 6.6,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFE9F4FF),
-                          borderRadius: BorderRadius.all(Radius.circular(8))),
-                      child: Center(
-                          child:
-                              SvgPicture.asset("assets/images/googleicon.svg")),
+                    InkWell(
+                      onTap:(){
+                        CommonUtils.showProgressDialog(context);
+                        AuthClass().googleSignin(context);
+                      },
+                      child: Container(
+                        height: D.H / 13,
+                        width: D.W / 6.6,
+                        decoration: BoxDecoration(
+                            color: Color(0xFFE9F4FF),
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: Center(
+                            child:
+                                SvgPicture.asset("assets/images/googleicon.svg")),
+                      ),
                     ),
                     SizedBox(
                       width: D.W / 10,

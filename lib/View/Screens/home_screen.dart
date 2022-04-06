@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: D.H/4.5,
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
-                      itemCount: 20,
+                      itemCount: Constants.popularjobs.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               child: Padding(
                                                 padding: const EdgeInsets.all(4.0),
                                                 child: SvgPicture.asset(
-                                                    "assets/images/googleicon.svg"),
+                                                    Constants.popularjobs[index].icon.toString()),
                                               )),
                                         ),
                                       ),
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:  EdgeInsets.only(left: 15,top: 4),
-                                        child: Text("Google",style: GoogleFonts.openSans(color:  Colors.grey,fontSize:12,fontWeight: FontWeight.w600),),
+                                        child: Text( Constants.popularjobs[index].text3.toString(),style: GoogleFonts.openSans(color:  Colors.grey,fontSize:12,fontWeight: FontWeight.w600),),
                                       ),
 
                                     ],
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:  EdgeInsets.only(left: 15),
-                                        child: Text("Lead Product Manager",style: GoogleFonts.openSans(color:  Colors.black,fontWeight: FontWeight.bold),),
+                                        child: Text( Constants.popularjobs[index].text1.toString(),style: GoogleFonts.openSans(color:  Colors.black,fontWeight: FontWeight.bold),),
                                       ),
                                     ],
                                   ),
@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:  EdgeInsets.only(left: 15),
-                                        child: Text('\$2500/m ',style: GoogleFonts.openSans(fontSize:12,color:  Colors.black,fontWeight: FontWeight.bold),),
+                                        child: Text( Constants.popularjobs[index].text2.toString(),style: GoogleFonts.openSans(fontSize:12,color:  Colors.black,fontWeight: FontWeight.bold),),
                                       ),
                                       Padding(
                                         padding:  EdgeInsets.only(left: 8),
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: 5,
+                      itemCount:  Constants.popularjobs.length,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -254,9 +254,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 BorderRadius.all(Radius.circular(8))),
                                             child: Center(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(4.0),
+                                                  padding: const EdgeInsets.all(6.0),
                                                   child: SvgPicture.asset(
-                                                      "assets/images/googleicon.svg"),
+                                                      Constants.popularjobs[index].icon.toString()),
                                                 )),
                                           ),
                                         ),
@@ -267,12 +267,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text('UI/UX Designer',style: GoogleFonts.openSans(fontSize:18,color:  Colors.black,fontWeight: FontWeight.bold),),
+                                        Text( Constants.popularjobs[index].text1.toString(),style: GoogleFonts.openSans(fontSize:18,color:  Colors.black,fontWeight: FontWeight.bold),),
                                         Text('Full Time',style: GoogleFonts.openSans(fontSize:13,color:  Colors.grey,fontWeight: FontWeight.w600),),
                                       ],
                                     ),
                                     Expanded(child: Container()),
-                                    Text('\$2500/m ',style: GoogleFonts.openSans(fontSize:14,color:  Colors.grey,fontWeight: FontWeight.bold),),
+                                    Text( Constants.popularjobs[index].text2.toString(),style: GoogleFonts.openSans(fontSize:14,color:  Colors.grey,fontWeight: FontWeight.bold),),
                                     SizedBox(width: 8,),
 
 

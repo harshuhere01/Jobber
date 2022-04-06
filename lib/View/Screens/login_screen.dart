@@ -6,10 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
-import 'package:jobber/View/Screens/choose_your_use_screen.dart';
 import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
+import 'package:jobber/auth_class/AuthClass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -82,25 +83,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: "Email Address",
                       iconPath: Icons.email_outlined,
                       validators: (e) {
-                      if(emailController.text== null || emailController.text == ''){
-                        return '*Please enter Email';
-                      }
-                      else if(!EmailValidator.validate(emailController.text)){
-                        return '*Please enter valid Email';
-                      }
+                        if (emailController.text == null ||
+                            emailController.text == '') {
+                          return '*Please enter Email';
+                        } else if (!EmailValidator.validate(
+                            emailController.text)) {
+                          return '*Please enter valid Email';
+                        }
                       },
-                      keyboardTYPE: TextInputType.emailAddress,obscured: false),
+                      keyboardTYPE: TextInputType.emailAddress,
+                      obscured: false),
                   CustomTextFormField(
                       controller: passwordController,
                       readOnly: false,
                       hint: "Password",
                       iconPath: Icons.lock_outline,
                       validators: (e) {
-                        if(passwordController.text== null || passwordController.text == ''){
+                        if (passwordController.text == null ||
+                            passwordController.text == '') {
                           return '*Please enter Password';
                         }
                       },
-                      keyboardTYPE: TextInputType.emailAddress,obscured: true),
+                      keyboardTYPE: TextInputType.emailAddress,
+                      obscured: true),
                 ],
               ),
             ),
@@ -114,17 +119,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 bordercolor: ColorConstants.primaryBlueColor,
                 onTap: () async {
                   if (_formkey.currentState!.validate()) {
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
                     CommonUtils.showProgressDialog(context);
-                    Future.delayed(const Duration(milliseconds: 2500), () async {
-
+                    Future.delayed(const Duration(milliseconds: 2500),
+                        () async {
                       // setState(() {
-                      var credential =prefs.getString(emailController.text,);
-                      if(credential==null){
+                      var credential = prefs.getString(
+                        emailController.text,
+                      );
+                      if (credential == null) {
                         CommonUtils.hideDialog(context);
-                        CommonUtils.showRedToastMessage("Please Register to Login");
-                      }else{
-                        if(passwordController.text==credential){
+                        CommonUtils.showRedToastMessage(
+                            "Please Register to Login");
+                      } else {
+                        if (passwordController.text == credential) {
                           CommonUtils.showGreenToastMessage(
                               "User LoggedIn Successfully");
                           prefs.setBool("isLogin", true);
@@ -133,14 +142,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context, DashBoardScreen());
                             // CommonUtils.hideDialog(context);
                           });
-                        }else {
+                        } else {
                           CommonUtils.hideDialog(context);
                           CommonUtils.showRedToastMessage(
                               "You Have Entered Wrong Password");
-                        };
-                      };
-
-
+                        }
+                        ;
+                      }
+                      ;
 
                       // });
                     });
@@ -207,15 +216,21 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: D.H / 13,
-                    width: D.W / 6.6,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFE9F4FF),
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    child: Center(
-                        child:
-                            SvgPicture.asset("assets/images/googleicon.svg")),
+                  InkWell(
+                    onTap:(){
+                      CommonUtils.showProgressDialog(context);
+                      AuthClass().googleSignin(context);
+                    },
+                    child: Container(
+                      height: D.H / 13,
+                      width: D.W / 6.6,
+                      decoration: BoxDecoration(
+                          color: Color(0xFFE9F4FF),
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      child: Center(
+                          child:
+                              SvgPicture.asset("assets/images/googleicon.svg")),
+                    ),
                   ),
                   SizedBox(
                     width: D.W / 10,

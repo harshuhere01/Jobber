@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
+import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
 class DashBoardScreen extends StatefulWidget {
@@ -47,7 +48,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ],
       ),
       // body: _children[widget._currentIndex!],
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Center(child: ListTile(leading: Text("                        LogOut"),onTap: (){
+          Navigator.pop(context);
+          AuthClass().signOut(context);},)),
+      ),
       body: HomeScreen(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
