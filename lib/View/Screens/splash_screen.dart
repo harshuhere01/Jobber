@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobber/Constants/color_constants.dart';
+import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/welcome_page_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -24,71 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
   Future changeRoute() async {
-    await Future.delayed(Duration(milliseconds: 3000), () {
-       NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
-    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getBool("isLogin")??false){
+      await Future.delayed(Duration(milliseconds: 3000), () {
+        NavigationHelpers.redirectFromSplash(context, DashBoardScreen());
+      });
+    }else{
+      await Future.delayed(Duration(milliseconds: 3000), () {
+        NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
+      });
+    }
 
-    /*if (PreferenceUtils.isIntroDone("isIntroDone") &&
-        SharedPreferenceUtil.getBool(Constants.isLoggedIn)) {
-      await Future.delayed(Duration(milliseconds: 3000), () {
-        Navigator.pushReplacement(
-          this.context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => DashboardScreen(0),
-            // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-            //     ? DashboardScreen(0)
-            //     : Register(),
-            // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-            //     ? DashboardScreen(0)
-            //     :LoginScreen(),
-          ),
-        );
-      });
-    } else if (PreferenceUtils.isIntroDone("isIntroDone")) {
-      await Future.delayed(Duration(milliseconds: 3000), () {
-        Navigator.pushReplacement(
-          this.context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => Register(),
-            // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-            //     ? DashboardScreen(0)
-            //     : Register(),
-            // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-            //     ? DashboardScreen(0)
-            //     :LoginScreen(),
-          ),
-        );
-      });
-    } else {
-      await Future.delayed(Duration(milliseconds: 3000), () {
-        Navigator.pushReplacement(
-          this.context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => IntroScreen1(),
-            // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-            //     ? DashboardScreen(0)
-            //     : Register(),
-            // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-            //     ? DashboardScreen(0)
-            //     :LoginScreen(),
-          ),
-        );
-      });
-    }*/
-    // await Future.delayed(Duration(milliseconds: 3000), () {
-    //   Navigator.pushReplacement(
-    //     this.context,
-    //     MaterialPageRoute(
-    //       builder: (BuildContext context) => Register(),
-    //       // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-    //       //     ? DashboardScreen(0)
-    //       //     : Register(),
-    //       // SharedPreferenceUtil.getBool(Constants.isLoggedIn,defValue: false)
-    //       //     ? DashboardScreen(0)
-    //       //     :LoginScreen(),
-    //     ),
-    //   );
-    // });
   }
 
   @override

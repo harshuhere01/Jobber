@@ -10,6 +10,7 @@ import 'package:jobber/CustomWidgets/custom_textform_field.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 
@@ -131,14 +132,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (_formkey.currentState!.validate()) {
                       if (passwordController.text ==
                           confirmPasswordController.text) {
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
                         CommonUtils.showProgressDialog(context);
-                        Future.delayed(Duration(milliseconds: 2500));
-                        prefs.setString(emailController.text, passwordController.text);
-                        CommonUtils.hideDialog(context);
-                        CommonUtils.showGreenToastMessage("User Registered Successfully");
-                        await Future.delayed(Duration(milliseconds: 3000), () {
-                          NavigationHelpers.redirectFromSplash(context, LoginScreen());
+                        Future.delayed(const Duration(milliseconds: 2500), () async {
+                          // setState(() {
+                            prefs.setString(
+                                emailController.text, passwordController.text);
+                            CommonUtils.hideDialog(context);
+                            CommonUtils.showGreenToastMessage(
+                                "User Registered Successfully");
+                            await Future.delayed(Duration(milliseconds: 500), () {
+                              NavigationHelpers.redirectFromSplash(
+                                  context, LoginScreen());
+                            });
+                          // });
                         });
 
                       } else {
@@ -146,9 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             msg: "PassWord Does Not Matched");
                       }
                     }
-                    setState(() {
-
-                    });
+                    setState(() {});
                   }),
               SizedBox(
                 height: D.H / 35,

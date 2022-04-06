@@ -7,7 +7,10 @@ import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
 import 'package:jobber/View/Screens/choose_your_use_screen.dart';
+import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
 
@@ -105,16 +108,42 @@ class _LoginScreenState extends State<LoginScreen> {
               height: D.H / 40,
             ),
             CustomButton(
-                text: "Sign up",
+                text: "Sign In",
                 color: ColorConstants.primaryBlueColor,
                 textColor: ColorConstants.whiteColor,
                 bordercolor: ColorConstants.primaryBlueColor,
-                onTap: () {
+                onTap: () async {
                   if (_formkey.currentState!.validate()) {
-                    NavigationHelpers.redirect(
-                      context,
-                      ChooseYourUseScreen(),
-                    );
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    CommonUtils.showProgressDialog(context);
+                    Future.delayed(const Duration(milliseconds: 2500), () async {
+
+                      // setState(() {
+                      var credential =prefs.getString(emailController.text,);
+                      if(credential==null){
+                        CommonUtils.hideDialog(context);
+                        CommonUtils.showRedToastMessage("Please Register to Login");
+                      }else{
+                        if(passwordController.text==credential){
+                          CommonUtils.showGreenToastMessage(
+                              "User LoggedIn Successfully");
+                          prefs.setBool("isLogin", true);
+                          await Future.delayed(Duration(milliseconds: 500), () {
+                            NavigationHelpers.redirectFromSplash(
+                                context, DashBoardScreen());
+                            // CommonUtils.hideDialog(context);
+                          });
+                        }else {
+                          CommonUtils.hideDialog(context);
+                          CommonUtils.showRedToastMessage(
+                              "You Have Entered Wrong Password");
+                        };
+                      };
+
+
+
+                      // });
+                    });
                   }
                 }),
             SizedBox(
