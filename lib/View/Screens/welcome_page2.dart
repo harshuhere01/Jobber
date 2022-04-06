@@ -4,10 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/welcome_page_rounded_button.dart';
 import 'package:jobber/Utils/dimensions.dart';
+import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/View/Screens/auth_screen.dart';
 
 class WelcomePage2 extends StatelessWidget {
-  const WelcomePage2({Key? key}) : super(key: key);
-
+   WelcomePage2({Key? key,required this.onTap}) : super(key: key);
+Function onTap;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,16 +17,19 @@ class WelcomePage2 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(
-                  vertical: D.H / 50, horizontal: D.H / 30),
-              child: Text(
-                'Skip',
-                style: GoogleFonts.roboto(
-                    color: ColorConstants.blackColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400),
+            GestureDetector(
+              onTap: (){NavigationHelpers.redirect(context, AuthScreen());},
+              child: Container(
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.symmetric(
+                    vertical: D.H / 50, horizontal: D.H / 30),
+                child: Text(
+                  'Skip',
+                  style: GoogleFonts.roboto(
+                      color: ColorConstants.blackColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
             ),
             Center(child: SvgPicture.asset('assets/images/welcome_page2.svg')),
@@ -58,7 +63,7 @@ class WelcomePage2 extends StatelessWidget {
               width: D.H / 10,
               btnradius: D.H/5,
               fontweight: FontWeight.bold,
-              onTap: () {},
+              onTap: () {onTap();},
             ),
           ],
         ),
