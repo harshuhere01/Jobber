@@ -4,9 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/welcome_page_rounded_button.dart';
 import 'package:jobber/Utils/dimensions.dart';
+import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/View/Screens/auth_screen.dart';
 
 class WelcomePage1 extends StatelessWidget {
-  const WelcomePage1({Key? key}) : super(key: key);
+  WelcomePage1({Key? key, required this.onTap}) : super(key: key);
+  Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +18,19 @@ class WelcomePage1 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.symmetric(
-                  vertical: D.H / 50, horizontal: D.H / 30),
-              child: Text(
-                'Skip',
-                style: GoogleFonts.roboto(
-                    color: ColorConstants.blackColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400),
+            GestureDetector(
+              onTap: (){NavigationHelpers.redirect(context, AuthScreen());},
+              child: Container(
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.symmetric(
+                    vertical: D.H / 50, horizontal: D.H / 30),
+                child: Text(
+                  'Skip',
+                  style: GoogleFonts.roboto(
+                      color: ColorConstants.blackColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
             ),
             Center(child: SvgPicture.asset('assets/images/welcome_page1.svg')),
@@ -56,9 +62,11 @@ class WelcomePage1 extends StatelessWidget {
               fontsize: 26,
               height: D.H / 10,
               width: D.H / 10,
-              btnradius: D.H/5,
+              btnradius: D.H / 5,
               fontweight: FontWeight.bold,
-              onTap: () {},
+              onTap: () {
+                onTap();
+              },
             ),
           ],
         ),

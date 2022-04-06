@@ -59,9 +59,9 @@ class _WelcomePageMainState extends State<WelcomePageMain> {
                 });
               },
               controller: _pageController,
-              children: const [
-                WelcomePage1(),
-                WelcomePage2(),
+              children:  [
+                WelcomePage1(onTap: (){_changePage(1);}),
+                WelcomePage2(onTap: (){_changePage(2);}),
                 WelcomePage3(),
               ],
             ),
