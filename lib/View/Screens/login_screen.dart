@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return '*Please enter valid Email';
                       }
                       },
-                      keyboardTYPE: TextInputType.emailAddress),
+                      keyboardTYPE: TextInputType.emailAddress,obscured: false),
                   CustomTextFormField(
                       controller: passwordController,
                       readOnly: false,
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           return '*Please enter Password';
                         }
                       },
-                      keyboardTYPE: TextInputType.emailAddress),
+                      keyboardTYPE: TextInputType.emailAddress,obscured: true),
                 ],
               ),
             ),

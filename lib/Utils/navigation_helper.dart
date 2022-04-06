@@ -9,5 +9,11 @@ class NavigationHelpers {
     return result;
   }
 
+  static Future<dynamic> redirectFromSplash(BuildContext context,Widget c) async {
+    var result = Navigator.of(context).pushAndRemoveUntil(PageTransition(
+      type: PageTransitionType.rightToLeft,duration: const Duration(milliseconds: 400), child: c,),(route) => false,);
+    return result;
+  }
+
 
 }

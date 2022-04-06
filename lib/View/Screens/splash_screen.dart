@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   Future changeRoute() async {
     await Future.delayed(Duration(milliseconds: 3000), () {
-       NavigationHelpers.redirect(context, WelcomePageMain());
+       NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
     });
 
     /*if (PreferenceUtils.isIntroDone("isIntroDone") &&

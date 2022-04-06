@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jobber/Constants/color_constants.dart';
 
 class CommonUtils {
+  static bool isShowing = false;
   static Future<bool> checkNetwork() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
@@ -55,5 +56,44 @@ class CommonUtils {
   }
   static hideDialog(BuildContext context){
     Navigator.pop(context);
+  }
+  static void showProgressDialog(BuildContext context) {
+    isShowing = true;
+    showDialog(
+        barrierDismissible: false,
+        useSafeArea: true,
+        context: context,
+        builder: (context) {
+          return Center(
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              height: 100.0,
+              width: 100.0,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20.0)),
+              child: const Center(
+                child: CircularProgressIndicator(color:  Color(0xFF1489A9)),
+              ),
+            ),
+          );
+        });
+  }
+
+  static void hideProgressDialog(BuildContext context) {
+    if (isShowing) {
+      Navigator.of(context, rootNavigator: true).pop('dialog');
+      isShowing = false;
+    }
+  }
+
+  static void showGreenToastMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 10.0);
   }
 }
