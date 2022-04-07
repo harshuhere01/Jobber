@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jobber</string>
+    <string name="facebook_app_id">519542323110464</string>
+    <string name="facebook_client_token">1fb197f800ce6f80629e82a87fd4de1d</string>
+    <string name="fb_login_protocol_scheme">fb519542323110464</string>
+</resources>

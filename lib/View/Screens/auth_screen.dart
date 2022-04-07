@@ -177,22 +177,27 @@ class _AuthScreenState extends State<AuthScreen> {
                               SizedBox(
                                 width: D.W / 10,
                               ),
-                              Container(
-                                  height: D.H/13.5,
-                                  width: D.W/6.8,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFF4460A0),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(12))),
-                                  child: Center(
-                                    child: Container(
-                                      child: SvgPicture.asset(
-                                        "assets/images/facebooklogo.svg",
-                                        height: D.H/14.5,
-                                        width: D.W/6.4,
+                              InkWell(
+                                onTap: (){
+                                  AuthClass().facebookLogin(context);
+                                },
+                                child: Container(
+                                    height: D.H/13.5,
+                                    width: D.W/6.8,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFF4460A0),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12))),
+                                    child: Center(
+                                      child: Container(
+                                        child: SvgPicture.asset(
+                                          "assets/images/facebooklogo.svg",
+                                          height: D.H/14.5,
+                                          width: D.W/6.4,
+                                        ),
                                       ),
-                                    ),
-                                  )),
+                                    )),
+                              ),
                             ],
                           ),
                         ),
