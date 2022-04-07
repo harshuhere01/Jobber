@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Constants/constants.dart';
 import 'package:jobber/CustomWidgets/search_bar_widget.dart';
+import 'package:jobber/View/Screens/search_screen.dart';
 
 import '../../Utils/dimensions.dart';
 
@@ -31,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                       child: CUstomSearchBar(
+                        function: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  SearchScreen()),
+                          );
+                        },
                           controller: controller,
                           readOnly: false,
                           hint: "Search here...",

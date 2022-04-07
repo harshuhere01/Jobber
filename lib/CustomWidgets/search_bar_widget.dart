@@ -11,6 +11,7 @@ class CUstomSearchBar extends StatelessWidget {
         required this.hint,
         required this.validators,
         required this.keyboardTYPE,
+        required this.function,
         this.maxlength, this.onChanged})
       : super(key: key);
 
@@ -21,6 +22,7 @@ class CUstomSearchBar extends StatelessWidget {
   TextInputType? keyboardTYPE;
   final FormFieldValidator<String> validators;
   final FormFieldValidator<String>? onChanged;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class CUstomSearchBar extends StatelessWidget {
       child: SizedBox(
         height: 50,
         child: TextFormField(
-
+          onTap:(){function.call();} ,
           readOnly: readOnly,
           controller:controller,
           validator: validators,

@@ -76,3 +76,33 @@ class PopularJobModelData {
     return data;
   }
 }
+
+class SearchJobListData {
+  String? icon;
+  bool? isLiked;
+  String? text1;
+  String? text2;
+  String? text3;
+
+
+  SearchJobListData({required this.icon,required this.isLiked,required this.text1,required this.text2, required this.text3});
+
+  SearchJobListData.fromJson(Map<String, dynamic> json) {
+    icon = json['icon'];
+    isLiked = json['isLiked'];
+    text1 = json['text1'];
+    text2 = json['text2'];
+    text3 = json['text3'];
+
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['icon'] = this.icon;
+    data['isLiked'] = this.isLiked;
+    data['text1'] = this.text1;
+    data['text2'] = this.text2;
+    data['text3'] = this.text3;
+    return data;
+  }
+}
