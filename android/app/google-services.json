@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "594835031128",
+    "project_id": "jobber-95e97",
+    "storage_bucket": "jobber-95e97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594835031128:android:0c0753e943d14feb79f62d",
+        "android_client_info": {
+          "package_name": "com.example.jobber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594835031128-5dmdh1ej07kchl3go99aanasq45ct41f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jobber",
+            "certificate_hash": "b22e5a6f70a61559f84f67d8595553435c4605b8"
+          }
+        },
+        {
+          "client_id": "594835031128-6q10mt2cardeclo8rd7223bs52j6mts5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGERQDBrLH5SKmEdjjwOrFE28p_XJ4qws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594835031128-6q10mt2cardeclo8rd7223bs52j6mts5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
