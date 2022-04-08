@@ -1,12 +1,16 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Constants/constants.dart';
 import 'package:jobber/CustomWidgets/search_bar_widget.dart';
+import 'package:jobber/View/Screens/category_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
 
+import '../../CustomWidgets/custom_border_textform_field.dart';
+import '../../CustomWidgets/welcome_page_rounded_button.dart';
 import '../../Utils/dimensions.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -50,7 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(8))),
                     width: D.W/9,
                     height: D.H/19,
-                    child: Image.asset("assets/images/filtericon.png"),
+                    child: InkWell(
+                      onTap: (){
+                        showFilterBottomSheet();
+                      },
+                        child: Image.asset("assets/images/filtericon.png")),
                   )
                 ],
               ),
@@ -80,7 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text("Categories",style: GoogleFonts.openSans(color: Colors.black,fontWeight: FontWeight.bold,fontSize: D.H/35),),
                         Expanded(child: Container()),
-                        Text("See all",style: GoogleFonts.openSans(color: Colors.black,fontWeight: FontWeight.w600,fontSize: D.H/55),),
+                        InkWell(onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  CategoryScreen()),
+                          );
+                        },
+                            child: Text("See all",style: GoogleFonts.openSans(color: Colors.black,fontWeight: FontWeight.w600,fontSize: D.H/55),)),
                         SizedBox(width: D.W/15,)
                       ],),
                   ),
@@ -300,5 +314,307 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  showFilterBottomSheet() {
+    showModalBottomSheet<void>(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight:  Radius.circular(25)),
+        ),
+        backgroundColor: Colors.white,
+        context: context,
+        isDismissible: false,
+        enableDrag: true,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter state) {
+                return Container(
+                  padding: EdgeInsets.only(bottom: D.H/50,left: D.W/30,right: D.W/30),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Center(
+                        child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Container(width: 100,height: 4,color: Colors.grey,)),
+                      ),
+                      Center(
+                        child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Set Filters',
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.bold,
+                                fontSize: D.H / 40,
+                                color: ColorConstants.blackColor,
+                              ),
+                            )),
+                      ),
+                      Row(children: [
+                        Text('Category',
+                          style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.bold,
+                            fontSize: D.H / 45,
+                            color: ColorConstants.blackColor,
+                          ),
+                        )
+                      ],),
+                      SizedBox(height: 4,),
+                      TextFormField(
+                        readOnly: false,
+                        controller:controller,
+                        cursorColor: ColorConstants.primaryBlueColor,
+                        decoration: InputDecoration(
+                          suffixIcon: Icon(CupertinoIcons.chevron_down,color: Colors.grey,),
+                          contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          counterText: "",
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          errorMaxLines: 1,
+                          hintText: "UI/UX Design",
+                          labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(height: 18,),
+                      Row(children: [
+                        Text('Sub Category',
+                          style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.bold,
+                            fontSize: D.H / 45,
+                            color: ColorConstants.blackColor,
+                          ),
+                        )
+                      ],),
+                      SizedBox(height: 4,),
+                      TextFormField(
+                        readOnly: false,
+                        controller:controller,
+                        cursorColor: ColorConstants.primaryBlueColor,
+                        decoration: InputDecoration(
+                          suffixIcon: Icon(CupertinoIcons.chevron_down,color: Colors.grey,),
+                          contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          counterText: "",
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          errorMaxLines: 1,
+                          hintText: "UI/UX Design",
+                          labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(height: 18,),
+                      Row(
+                        children: [
+                        Expanded(
+                          child: Text('Location',
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                              fontSize: D.H / 45,
+                              color: ColorConstants.blackColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: D.W/50,),
+                          Expanded(
+                          child: Text('Salary',
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                              fontSize: D.H / 45,
+                              color: ColorConstants.blackColor,
+                            ),
+                          ),
+                        ),
+                      ],),
+                      SizedBox(height: 8,),
+
+                      Row(children: [
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: false,
+                            controller:controller,
+                            cursorColor: ColorConstants.primaryBlueColor,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.location_on_outlined,color: Colors.grey,),
+                              suffixIcon: Icon(CupertinoIcons.chevron_down,color: Colors.grey,),
+                              contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              counterText: "",
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorMaxLines: 1,
+                              hintText: "India",
+                              labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: D.W/50,),
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: false,
+                            controller:controller,
+                            cursorColor: ColorConstants.primaryBlueColor,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.account_balance_wallet_outlined,color: Colors.grey,),
+                              suffixIcon: Icon(CupertinoIcons.chevron_down,color: Colors.grey,),
+                              contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              counterText: "",
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              errorMaxLines: 1,
+                              hintText: "15k-25k",
+                              labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
+                            ),
+                          ),
+                        ),
+
+                      ],),
+                      SizedBox(height: 8,),
+                      Row(children: [
+                        Text('Job Type',
+                          style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.bold,
+                            fontSize: D.H / 45,
+                            color: ColorConstants.blackColor,
+                          ),
+                        )
+                      ],),
+                      SizedBox(height: 8,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: InkWell(
+                            onTap: (){
+                              // isfirstTabSelected=true;
+                              // isSecondTabSelected=false;
+                              setState(() {
+
+                              });
+                            },
+                            child: Container( decoration: BoxDecoration(
+                                color: ColorConstants.primaryBlueColor,
+                                borderRadius: BorderRadius.all(Radius.circular(12))),height:50,child: Center(child: Text("Full Time",style: GoogleFonts.roboto(color:Colors.white,fontWeight: FontWeight.w400,fontSize: D.H/60),))),
+                          )),
+                          SizedBox(width: 25,),
+                          Expanded(child: InkWell(
+                            onTap: (){
+                              // isfirstTabSelected=true;
+                              // isSecondTabSelected=false;
+                              setState(() {
+
+                              });
+                            },
+                            child: Container( decoration: BoxDecoration(
+                                color: ColorConstants.primaryBlueColor,
+                                borderRadius: BorderRadius.all(Radius.circular(12))),height:50,child: Center(child: Text("Part Time",style: GoogleFonts.roboto(color:Colors.white,fontWeight: FontWeight.w400,fontSize: D.H/60),))),
+                          )),
+                          SizedBox(width: 25,),
+                          Expanded(child: InkWell(
+                            onTap: (){
+                              // isfirstTabSelected=true;
+                              // isSecondTabSelected=false;
+                              setState(() {
+
+                              });
+                            },
+                            child: Container( decoration: BoxDecoration(
+                                color: ColorConstants.primaryBlueColor,
+                                borderRadius: BorderRadius.all(Radius.circular(12))),height:50,child: Center(child: Text("Contract",style: GoogleFonts.roboto(color:Colors.white,fontWeight: FontWeight.w400,fontSize: D.H/60),))),
+                          )),
+                        ],
+                      ),
+                      SizedBox(height: 8,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(child: InkWell(
+                            onTap: (){
+                              // isfirstTabSelected=true;
+                              // isSecondTabSelected=false;
+                              setState(() {
+
+                              });
+                            },
+                            child: Container( decoration: BoxDecoration(
+                                color: ColorConstants.primaryBlueColor,
+                                borderRadius: BorderRadius.all(Radius.circular(12))),height:50,child: Center(child: Text("Freelance",style: GoogleFonts.roboto(color:Colors.white,fontWeight: FontWeight.w400,fontSize: D.H/60),))),
+                          )),
+                          SizedBox(width: 25,),
+                          Expanded(child: InkWell(
+                            onTap: (){
+                              // isfirstTabSelected=true;
+                              // isSecondTabSelected=false;
+                              setState(() {
+
+                              });
+                            },
+                            child: Container( decoration: BoxDecoration(
+                                color: ColorConstants.primaryBlueColor,
+                                borderRadius: BorderRadius.all(Radius.circular(12))),height:50,child: Center(child: Text("Remote",style: GoogleFonts.roboto(color:Colors.white,fontWeight: FontWeight.w400,fontSize: D.H/60),))),
+                          )),
+                          SizedBox(width: 25,),
+                          Expanded(child: InkWell(
+                            onTap: (){
+                              // isfirstTabSelected=true;
+                              // isSecondTabSelected=false;
+                              setState(() {
+
+                              });
+                            },
+                            child: Container( decoration: BoxDecoration(
+                                color: ColorConstants.primaryBlueColor,
+                                borderRadius: BorderRadius.all(Radius.circular(12))),height:50,child: Center(child: Text("Show All Type",style: GoogleFonts.roboto(color:Colors.white,fontWeight: FontWeight.w400,fontSize: D.H/60),))),
+                          )),
+                        ],
+                      ),
+                      SizedBox(height: 18,),
+                      WelcomePageRoundedButton(
+                        color: ColorConstants.primaryBlueColor,
+                        text: 'Apply Filters',
+                        fontsize: 22,
+                        height: D.H / 15,
+                        width: D.W,
+                        btnradius: D.H/50,
+                        fontweight: FontWeight.w500,
+                        onTap: () {
+
+                        },
+                      ),
+
+
+
+                    ],
+                  ),
+                );
+              });
+        });
   }
 }
