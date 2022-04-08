@@ -49,9 +49,13 @@ class AuthClass {
   }
 
   Future<void> facebookLogin(BuildContext context) async {
+    CommonUtils.showProgressDialog(context);
     try{
       final LoginResult result = await FacebookAuth.instance
-          .login();
+          .login( permissions: [
+        'public_profile',
+        'email',
+      ],loginBehavior: LoginBehavior.webOnly);
 
       if (result.status == LoginStatus.success) {
         // you are logged
@@ -74,6 +78,7 @@ class AuthClass {
         print("fbuser uid : ${credd.user!.uid}");
       }
       if (result.status == LoginStatus.failed) {
+        CommonUtils.hideDialog(context);
         ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("${result.status}")),
@@ -82,6 +87,7 @@ class AuthClass {
     }
     catch(e){
       print('facebook error :-$e');
+      CommonUtils.hideDialog(context);
     }
     // by default we request the email and the public profile
     // or FacebookAuth.i.login()
@@ -91,6 +97,7 @@ class AuthClass {
   Future<void> signOut(context) async {
     try {
       await _googleSignIn.signOut();
+      await FacebookAuth.instance.logOut();
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.clear();
       NavigationHelpers.redirectFromSplash(context, AuthScreen());
