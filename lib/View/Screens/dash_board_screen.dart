@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobber/Constants/color_constants.dart';
+import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
 
@@ -9,7 +10,7 @@ class DashBoardScreen extends StatefulWidget {
   int? _currentIndex=0;
   int? savePrevIndex;
 
-  DashboardScreen(_currentIndex) {
+  DashBoardScreen(_currentIndex) {
     this._currentIndex = _currentIndex;
 
   }
@@ -21,6 +22,7 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   final List<Widget> _children = [
     HomeScreen(),
+    ExploreScreen(),
     // ExploreScreen(
     //   isFromProfile: false,
     // ),
@@ -53,7 +55,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           Navigator.pop(context);
           AuthClass().signOut(context);},)),
       ),
-      body: HomeScreen(),
+      body: _children[widget._currentIndex!],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -114,7 +116,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       width: 25,
                       color: ColorConstants.primaryBlueColor,
                     ),
-                    label: "Connect"),
+                    label: "News"),
                 BottomNavigationBarItem(
                     icon: Image.asset(
                       'assets/images/homeicon3.png',

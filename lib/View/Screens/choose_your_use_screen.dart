@@ -132,7 +132,7 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
               btnradius: D.H / 50,
               fontweight: FontWeight.w500,
               onTap: () {
-                NavigationHelpers.redirect(context, DashBoardScreen());
+                NavigationHelpers.redirect(context, DashBoardScreen(0));
               },
             ),
           ],
