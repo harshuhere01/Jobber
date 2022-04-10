@@ -124,7 +124,9 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
               ],
             ),
             WelcomePageRoundedButton(
+              bordercolor: ColorConstants.primaryBlueColor,
               color: ColorConstants.primaryBlueColor,
+              textcolor: ColorConstants.whiteColor,
               text: 'Next',
               fontsize: 22,
               height: D.H / 15,

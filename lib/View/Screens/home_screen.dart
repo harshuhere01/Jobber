@@ -597,7 +597,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 18,),
                       WelcomePageRoundedButton(
+                        textcolor: ColorConstants.whiteColor,
                         color: ColorConstants.primaryBlueColor,
+                        bordercolor: ColorConstants.primaryBlueColor,
                         text: 'Apply Filters',
                         fontsize: 22,
                         height: D.H / 15,
