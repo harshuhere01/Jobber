@@ -5,6 +5,8 @@ import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
+import 'package:jobber/View/Screens/news_screen.dart';
+import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/drawer_listile.dart';
@@ -26,6 +28,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final List<Widget> _children = [
     HomeScreen(),
     ExploreScreen(),
+    NewsScreen()
     // ExploreScreen(
     //   isFromProfile: false,
     // ),
@@ -206,7 +209,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       width: 25,
                       color: ColorConstants.primaryBlueColor,
                     ),
-                    label: "News"),
+                    label: "Explore"),
                 BottomNavigationBarItem(
                     icon: Image.asset(
                       'assets/images/homeicon3.png',

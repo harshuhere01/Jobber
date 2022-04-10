@@ -46,6 +46,7 @@ dependencies:
   firebase_auth:
   firebase_core: ^1.6.0
   flutter_facebook_auth: ^4.1.2
+  syncfusion_flutter_sliders: ^20.1.47
   expandable_text: ^2.3.0
   readmore: ^2.1.0
 dev_dependencies:

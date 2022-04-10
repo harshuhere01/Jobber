@@ -12,5 +12,8 @@ class ColorConstants {
   static var blackColor = Color(0xFF070707);
   static var tabbtncolor = Color(0xFFC4C4C4);
   static var chooseusecardcolor = Color(0xFFF8F8F8);
+  static var lightBluecolor = Color(0xDEFBFBFB);
+  static var lightBlueecolor = Color(0xFF82CAFF);
+  static var greycolor = Color(0xFF9E9E9E);
 
 }

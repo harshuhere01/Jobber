@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Constants/color_constants.dart';
 import '../Utils/dimensions.dart';
@@ -26,7 +27,7 @@ class CustomBorderTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric( vertical: D.H / 60),
+      padding: EdgeInsets.symmetric( vertical: D.H / 150),
       child: SizedBox(
         height: 50,
         child: TextFormField(
@@ -36,6 +37,7 @@ class CustomBorderTextFormField extends StatelessWidget {
           onChanged: onChanged,
           maxLength: maxlength,
           cursorColor: ColorConstants.primaryBlueColor,
+          style: GoogleFonts.roboto(),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
             focusedBorder: OutlineInputBorder(
@@ -51,7 +53,7 @@ class CustomBorderTextFormField extends StatelessWidget {
             ),
             errorMaxLines: 1,
             hintText: hint,
-            labelStyle: const TextStyle(fontSize: 16.0, color: Colors.grey),
+            labelStyle: GoogleFonts.roboto(fontSize: 16.0, color: Colors.grey),
           ),
           keyboardType: keyboardTYPE,
         ),

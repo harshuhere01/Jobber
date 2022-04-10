@@ -10,7 +10,6 @@ import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';

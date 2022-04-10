@@ -47,7 +47,9 @@ class WelcomePage3 extends StatelessWidget {
               ),
             ),
             WelcomePageRoundedButton(
+              textcolor: ColorConstants.whiteColor,
               color: ColorConstants.primaryBlueColor,
+              bordercolor: ColorConstants.primaryBlueColor,
               text: 'Get Started',
               fontsize: 22,
               height: D.H / 15,
