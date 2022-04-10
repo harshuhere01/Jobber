@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(prefs.getBool("isLogin")??false){
       await Future.delayed(Duration(milliseconds: 3000), () {
-        NavigationHelpers.redirectFromSplash(context, DashBoardScreen());
+        NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
       });
     }else{
       await Future.delayed(Duration(milliseconds: 3000), () {

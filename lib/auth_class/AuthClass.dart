@@ -32,7 +32,7 @@ class AuthClass {
           prefs.setBool('isLogin', true);
           CommonUtils.showGreenToastMessage("Login Successfully");
           await Future.delayed(Duration(milliseconds: 500), () {
-            NavigationHelpers.redirectFromSplash(context, DashBoardScreen());
+            NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
             // CommonUtils.hideDialog(context);
           });
         } catch (e) {
@@ -71,7 +71,7 @@ class AuthClass {
           prefs.setBool('isLogin', true);
           CommonUtils.showGreenToastMessage("Login Successfully");
           await Future.delayed(Duration(milliseconds: 500), () {
-            NavigationHelpers.redirectFromSplash(context, DashBoardScreen());
+            NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
             // CommonUtils.hideDialog(context);
           });
         });

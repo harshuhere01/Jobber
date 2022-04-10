@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           prefs.setBool("isLogin", true);
                           await Future.delayed(Duration(milliseconds: 500), () {
                             NavigationHelpers.redirectFromSplash(
-                                context, DashBoardScreen());
+                                context, DashBoardScreen(0));
                             // CommonUtils.hideDialog(context);
                           });
                         } else {
