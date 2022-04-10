@@ -935,7 +935,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontweight: FontWeight.w500,
                     onTap: () {
                       Navigator.pop(context);
-                    },
+                    }, bordercolor: ColorConstants.primaryBlueColor,
+                    textcolor: ColorConstants.whiteColor,
                   ),
                 ],
               ),

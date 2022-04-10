@@ -52,6 +52,8 @@ class _JobAppliedScreenState extends State<JobAppliedScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: D.W / 8),
               child: WelcomePageRoundedButton(
+                bordercolor: ColorConstants.primaryBlueColor,
+                textcolor: ColorConstants.whiteColor,
                 color: ColorConstants.primaryBlueColor,
                 text: 'Watch Your Applications',
                 fontsize: 18,

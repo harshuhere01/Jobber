@@ -211,6 +211,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             WelcomePageRoundedButton(
+              bordercolor: ColorConstants.primaryBlueColor,
+              textcolor: ColorConstants.whiteColor,
               color: ColorConstants.primaryBlueColor,
               text: 'APPLY NOW',
               fontsize: 18,
@@ -224,6 +226,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             ),
             SizedBox(height: D.H/50,),
             WelcomePageRoundedButton(
+              bordercolor: Color(0xFF238841),
+              textcolor: ColorConstants.whiteColor,
               color: Color(0xFF238841),
               text: 'APPLIED',
               fontsize: 18,
