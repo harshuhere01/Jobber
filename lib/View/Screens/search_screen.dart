@@ -147,7 +147,10 @@ class _SearchScreenState extends State<SearchScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                       width: D.W / 9,
                       height: D.H / 19,
-                      child: Image.asset("assets/images/filtericon.png"),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: SvgPicture.asset("assets/images/filtericon.svg",color: ColorConstants.whiteColor),
+                      ),
                     )
                   ],
                 ),
