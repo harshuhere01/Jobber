@@ -57,7 +57,9 @@ class WelcomePage1 extends StatelessWidget {
               ),
             ),
             WelcomePageRoundedButton(
+              textcolor: ColorConstants.whiteColor,
               color: ColorConstants.primaryBlueColor,
+              bordercolor: ColorConstants.primaryBlueColor,
               text: 'Next',
               fontsize: 26,
               height: D.H / 10,

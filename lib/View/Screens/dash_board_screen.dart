@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobber/Constants/color_constants.dart';
+import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
+
 class DashBoardScreen extends StatefulWidget {
-  int? _currentIndex=0;
+  int? _currentIndex = 0;
   int? savePrevIndex;
 
   DashboardScreen(_currentIndex) {
     this._currentIndex = _currentIndex;
-
   }
 
   @override
@@ -28,30 +30,51 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     // ProfileScreen()
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(toolbarHeight: 100,
+      appBar: AppBar(
+        toolbarHeight: 100,
         backgroundColor: ColorConstants.whiteColor,
         elevation: 0,
         leading: InkWell(
-            onTap:   () => _scaffoldKey.currentState!.openDrawer(),child: Center(child: SvgPicture.asset("assets/images/maindrawericon.svg",height: D.H/15,width:D.W/8,))),
+            onTap: () => _scaffoldKey.currentState!.openDrawer(),
+            child: Center(
+                child: SvgPicture.asset(
+              "assets/images/maindrawericon.svg",
+              height: D.H / 15,
+              width: D.W / 8,
+            ))),
         centerTitle: true,
         title: Image.asset("assets/images/appbarlogo.png"),
         actions: [
-          Center(child: Container(
+          Center(
+              child: GestureDetector(
+                onTap: (){
+                },
+                child: Container(
             decoration: BoxDecoration(
-                color: ColorConstants.primaryBlueColor,
-              borderRadius: BorderRadius.all(
-                  Radius.circular(12))),height: D.H/15,width: D.W/8,child: Image.asset("assets/images/notiicon.png"),))
+                  color: ColorConstants.primaryBlueColor,
+                  borderRadius: BorderRadius.all(Radius.circular(12))),
+            height: D.H / 15,
+            width: D.W / 8,
+            child: Image.asset("assets/images/notiicon.png"),
+          ),
+              ))
         ],
       ),
       // body: _children[widget._currentIndex!],
       drawer: Drawer(
-        child: Center(child: ListTile(leading: Text("                        LogOut"),onTap: (){
-          Navigator.pop(context);
-          AuthClass().signOut(context);},)),
+        child: Center(
+            child: ListTile(
+          leading: Text("                        LogOut"),
+          onTap: () {
+            Navigator.pop(context);
+            AuthClass().signOut(context);
+          },
+        )),
       ),
       body: HomeScreen(),
       bottomNavigationBar: Container(
@@ -66,16 +89,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(25),
             topLeft: Radius.circular(25),
-
-
           ),
           child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor:ColorConstants.whiteColor,
-              selectedItemColor:ColorConstants.primaryBlueColor,
+              backgroundColor: ColorConstants.whiteColor,
+              selectedItemColor: ColorConstants.primaryBlueColor,
               unselectedItemColor: Colors.black,
-              selectedFontSize: D.H/50,
-              unselectedFontSize: D.H/60,
+              selectedFontSize: D.H / 50,
+              unselectedFontSize: D.H / 60,
               currentIndex: widget._currentIndex!,
               onTap: (value) {
                 print(value);
@@ -108,7 +129,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       width: 25,
                       color: Colors.black,
                     ),
-                    activeIcon:Image.asset(
+                    activeIcon: Image.asset(
                       'assets/images/homeicon2.png',
                       height: 25,
                       width: 25,
@@ -118,30 +139,30 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 BottomNavigationBarItem(
                     icon: Image.asset(
                       'assets/images/homeicon3.png',
-                      height:25,
+                      height: 25,
                       width: 25,
                       color: Colors.black,
                     ),
                     activeIcon: Image.asset(
                       'assets/images/homeicon3.png',
-                      height:25,
+                      height: 25,
                       width: 25,
-                      color:ColorConstants.primaryBlueColor,
+                      color: ColorConstants.primaryBlueColor,
                     ),
                     // label: Languages.of(context)!.labelCart
                     label: "News"),
                 BottomNavigationBarItem(
                     icon: Image.asset(
                       'assets/images/homeicon4.png',
-                      height:25,
+                      height: 25,
                       width: 25,
                       color: Colors.black,
                     ),
                     activeIcon: Image.asset(
                       'assets/images/homeicon4.png',
-                      height:25,
+                      height: 25,
                       width: 25,
-                      color:ColorConstants.primaryBlueColor,
+                      color: ColorConstants.primaryBlueColor,
                     ),
                     // label: Languages.of(context)!.labelCart
                     label: "Profile"),

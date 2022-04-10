@@ -56,7 +56,9 @@ Function onTap;
               ),
             ),
             WelcomePageRoundedButton(
+              textcolor: ColorConstants.whiteColor,
               color: ColorConstants.primaryBlueColor,
+              bordercolor: ColorConstants.primaryBlueColor,
               text: 'Next',
               fontsize: 26,
               height: D.H / 10,
