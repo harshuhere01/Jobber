@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
 import 'package:jobber/View/Screens/news_screen.dart';
@@ -10,6 +11,7 @@ import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/drawer_listile.dart';
+import 'account_screen.dart';
 import 'notification_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -28,7 +30,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final List<Widget> _children = [
     HomeScreen(),
     ExploreScreen(),
-    NewsScreen()
+    NewsScreen(),
+    AccountScreen(),
     // ExploreScreen(
     //   isFromProfile: false,
     // ),
@@ -119,30 +122,33 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               SizedBox(
                 height: D.H / 40,
               ),
-              DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red),
+              DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red,(){
+                Navigator.pop(context);
+                NavigationHelpers.redirect(context, CreateVisitingCardMainPage());
+              }),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawersettingicon.svg","Applied Job",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawersettingicon.svg","Applied Job",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Resume Builder",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","Resume Builder",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Digital CV",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","Digital CV",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","News",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","News",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","About Us",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","About Us",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Contact Us",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","Contact Us",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Feedback",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","Feedback",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Privacy Policy",Colors.deepOrangeAccent),
+              /*DrawerListTile("assets/images/drawerwatchicon.svg","Privacy Policy",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Terms & Condition",Colors.deepOrangeAccent),
+              DrawerListTile("assets/images/drawerwatchicon.svg","Terms & Condition",Colors.deepOrangeAccent,(){}),
               SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","LogOut",Colors.deepOrangeAccent),
-
+              DrawerListTile("assets/images/drawerwatchicon.svg","LogOut",Colors.deepOrangeAccent,(){}),
+*/
             ],
           ),
         ),
