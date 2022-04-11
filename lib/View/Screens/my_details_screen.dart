@@ -14,9 +14,11 @@ class MyDEtailScreen extends StatefulWidget {
 }
 
 class _MyDEtailScreenState extends State<MyDEtailScreen> {
+
+  TextEditingController controller=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller=TextEditingController();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
