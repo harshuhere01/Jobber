@@ -89,26 +89,32 @@ class _HomeScreenState extends State<HomeScreen> {
                         physics: BouncingScrollPhysics(),
                         itemCount: Constants.categoryTextList.length,
                         itemBuilder: (ctx, int) {
-                          return Padding(
-                            padding: EdgeInsets.only(right: D.W / 35.0),
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  Text(
-                                    Constants.categoryTextList[int].text
-                                        .toString(),
-                                    style: GoogleFonts.openSans(
-                                        color: Constants
-                                            .categoryTextList[int].color),
-                                  ),
-                                  SizedBox(
-                                    width: 3,
-                                  ),
-                                  Icon(
-                                    Icons.cancel,
-                                    color: Color(0xFFFF6C6C).withOpacity(0.5),
-                                  )
-                                ],
+                          return InkWell(
+                            onTap: (){
+                              NavigationHelpers.redirect(
+                                  context, JobDetailsScreen());
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(right: D.W / 35.0),
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      Constants.categoryTextList[int].text
+                                          .toString(),
+                                      style: GoogleFonts.openSans(
+                                          color: Constants
+                                              .categoryTextList[int].color),
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Icon(
+                                      Icons.cancel,
+                                      color: Color(0xFFFF6C6C).withOpacity(0.5),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -160,54 +166,60 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: Constants.categoryModelData.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFF0062FF).withOpacity(0.1),
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(25.0),
-                                    bottomRight: Radius.circular(25.0),
-                                    topLeft: Radius.circular(25.0),
-                                    bottomLeft: Radius.circular(25.0)),
-                              ),
-                              width: D.W / 2.5,
-                              alignment: Alignment.center,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      padding: EdgeInsets.all(18),
-                                      decoration: BoxDecoration(
+                          return InkWell(
+                            onTap: (){
+                              NavigationHelpers.redirect(
+                                  context, JobDetailsScreen());
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF0062FF).withOpacity(0.1),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(25.0),
+                                      bottomRight: Radius.circular(25.0),
+                                      topLeft: Radius.circular(25.0),
+                                      bottomLeft: Radius.circular(25.0)),
+                                ),
+                                width: D.W / 2.5,
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.all(18),
+                                        decoration: BoxDecoration(
+                                            color: Constants
+                                                .categoryModelData[index].color,
+                                            shape: BoxShape.circle),
+                                        child: SvgPicture.asset(
+                                          Constants.categoryModelData[index].icon
+                                              .toString(),
+                                          color: Colors.white,
+                                          height: 45,
+                                          width: 45,
+                                        )),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      Constants.categoryModelData[index].text1
+                                          .toString(),
+                                      style: GoogleFonts.openSans(
                                           color: Constants
                                               .categoryModelData[index].color,
-                                          shape: BoxShape.circle),
-                                      child: SvgPicture.asset(
-                                        Constants.categoryModelData[index].icon
-                                            .toString(),
-                                        color: Colors.white,
-                                        height: 45,
-                                        width: 45,
-                                      )),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    Constants.categoryModelData[index].text1
-                                        .toString(),
-                                    style: GoogleFonts.openSans(
-                                        color: Constants
-                                            .categoryModelData[index].color,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    Constants.categoryModelData[index].text2
-                                        .toString(),
-                                    style: GoogleFonts.openSans(
-                                        color: Color(0xFF4F4F4F),
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text(
+                                      Constants.categoryModelData[index].text2
+                                          .toString(),
+                                      style: GoogleFonts.openSans(
+                                          color: Color(0xFF4F4F4F),
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -251,110 +263,116 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: Constants.popularjobs.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 300,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 15, right: 15, top: 15),
-                                          child: Container(
-                                            height: D.H / 18,
-                                            width: D.W / 9,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xFFE9F4FF),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8))),
-                                            child: Center(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SvgPicture.asset(Constants
-                                                  .popularjobs[index].icon
-                                                  .toString()),
-                                            )),
+                          return InkWell(
+                            onTap: (){
+                              NavigationHelpers.redirect(
+                                  context, JobDetailsScreen());
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 300,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 15, right: 15, top: 15),
+                                            child: Container(
+                                              height: D.H / 18,
+                                              width: D.W / 9,
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xFFE9F4FF),
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(8))),
+                                              child: Center(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: SvgPicture.asset(Constants
+                                                    .popularjobs[index].icon
+                                                    .toString()),
+                                              )),
+                                            ),
                                           ),
-                                        ),
-                                        Expanded(child: Container()),
-                                        Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
-                                        ),
-                                        SizedBox(
-                                          width: 16,
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsets.only(left: 15, top: 4),
-                                          child: Text(
-                                            Constants.popularjobs[index].text3
-                                                .toString(),
-                                            style: GoogleFonts.openSans(
-                                                color: Colors.grey,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600),
+                                          Expanded(child: Container()),
+                                          Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 15),
-                                          child: Text(
-                                            Constants.popularjobs[index].text1
-                                                .toString(),
-                                            style: GoogleFonts.openSans(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
+                                          SizedBox(
+                                            width: 16,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 15),
-                                          child: Text(
-                                            Constants.popularjobs[index].text2
-                                                .toString(),
-                                            style: GoogleFonts.openSans(
-                                                fontSize: 12,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 15, top: 4),
+                                            child: Text(
+                                              Constants.popularjobs[index].text3
+                                                  .toString(),
+                                              style: GoogleFonts.openSans(
+                                                  color: Colors.grey,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            'Toronto, Canada',
-                                            style: GoogleFonts.openSans(
-                                                fontSize: 12,
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.w600),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 15),
+                                            child: Text(
+                                              Constants.popularjobs[index].text1
+                                                  .toString(),
+                                              style: GoogleFonts.openSans(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 15),
+                                            child: Text(
+                                              Constants.popularjobs[index].text2
+                                                  .toString(),
+                                              style: GoogleFonts.openSans(
+                                                  fontSize: 12,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 8),
+                                            child: Text(
+                                              'Toronto, Canada',
+                                              style: GoogleFonts.openSans(
+                                                  fontSize: 12,
+                                                  color: Colors.grey,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
