@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../Constants/color_constants.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';

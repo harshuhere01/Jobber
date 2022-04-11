@@ -1,4 +1,3 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +15,9 @@ class MyDEtailScreen extends StatefulWidget {
 }
 
 class _MyDEtailScreenState extends State<MyDEtailScreen> {
+
+  TextEditingController controller=TextEditingController();
+
   final _formkey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
