@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
-
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
 import '../../Utils/dimensions.dart';
 import 'job_applied_screen.dart';
