@@ -50,6 +50,7 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: ColorConstants.whiteColor,
       body: SafeArea(
         child: Padding(

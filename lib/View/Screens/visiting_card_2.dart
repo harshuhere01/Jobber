@@ -89,19 +89,19 @@ class _VisitingCard2State extends State<VisitingCard2> {
           CustomBorderTextFormField(
               controller: jobtitlecontroller,
               readOnly: false,
-              hint: "Name",
+              hint: "Total work experience",
               validators: (e) {},
               keyboardTYPE: TextInputType.name),
           CustomBorderTextFormField(
               controller: experiencecontroller,
               readOnly: false,
-              hint: "Job City",
+              hint: "Job title",
               validators: (e) {},
               keyboardTYPE: TextInputType.name),
           CustomBorderTextFormField(
               controller: companynamecontroller,
               readOnly: false,
-              hint: "Job City",
+              hint: "Company Name",
               validators: (e) {},
               keyboardTYPE: TextInputType.name),
           Padding(

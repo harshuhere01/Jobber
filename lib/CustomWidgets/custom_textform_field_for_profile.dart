@@ -54,7 +54,8 @@ class _CustomTextFormFieldForProfileState extends State<CustomTextFormFieldForPr
       child: Column(
         children: [
           Row(children: [
-            Text(widget.headerText,style: GoogleFonts.roboto(fontSize: 14,color: Colors.black.withOpacity(0.6)),),
+            SizedBox(width: 6,),
+            Text(widget.headerText,style: GoogleFonts.roboto(fontSize: 14,color: Colors.black.withOpacity(0.6),fontWeight: FontWeight.bold),),
             Text("*",style: GoogleFonts.roboto(fontSize: 12,color: Colors.red),),
           ],),
           SizedBox(height: 4,),

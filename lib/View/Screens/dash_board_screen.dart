@@ -90,66 +90,67 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       drawer: Drawer(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: D.W / 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: D.H / 20,
-              ),
-              Container(
-                height: D.H / 10,
-                width: D.W / 5,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
-                    fit: BoxFit.cover,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: D.H / 20,
+                ),
+                Container(
+                  height: D.H / 10,
+                  width: D.W / 5,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.network(
+                      "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                "Adom Shafi",
-                style: GoogleFonts.roboto(
-                    fontSize: 26, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                "hellobesnik@gmail.com",
-                style: GoogleFonts.roboto(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black.withOpacity(0.5)),
-              ),
-              SizedBox(
-                height: D.H / 40,
-              ),
-              DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red,(){
-                Navigator.pop(context);
-                NavigationHelpers.redirect(context, CreateVisitingCardMainPage());
-              }),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawersettingicon.svg","Applied Job",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Resume Builder",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Digital CV",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","News",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","About Us",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Contact Us",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Feedback",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              /*DrawerListTile("assets/images/drawerwatchicon.svg","Privacy Policy",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","Terms & Condition",Colors.deepOrangeAccent,(){}),
-              SizedBox(height: D.H/60,),
-              DrawerListTile("assets/images/drawerwatchicon.svg","LogOut",Colors.deepOrangeAccent,(){}),
-*/
-            ],
+                Text(
+                  "Adom Shafi",
+                  style: GoogleFonts.roboto(
+                      fontSize: 26, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  "hellobesnik@gmail.com",
+                  style: GoogleFonts.roboto(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black.withOpacity(0.5)),
+                ),
+                SizedBox(
+                  height: D.H / 40,
+                ),
+                DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context, CreateVisitingCardMainPage());
+                }),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/appliedjob.svg","Applied Job",Colors.green,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/resume.svg","Resume Builder",Colors.pink,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/cv.svg","Digital CV",ColorConstants.primaryBlueColor,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/news.svg","News",Colors.black,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/aboutus.svg","About Us",Colors.blueGrey,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/contactus.svg","Contact Us",Colors.green,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/feedback.svg","Feedback",Colors.pinkAccent,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/privacy.svg","Privacy Policy",Colors.black,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/terms.svg","Terms & Condition",Colors.grey,(){}),
+                SizedBox(height: D.H/60,),
+                DrawerListTile("assets/images/logout.svg","LogOut",Colors.red,(){}),
+              ],
+            ),
           ),
         ),
         /*child: Center(child: ListTile(leading: Text("                        LogOut"),onTap: (){
