@@ -227,7 +227,17 @@ class _MyResumeScreenState extends State<MyResumeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: D.H / 20),
+                    SizedBox(height: D.H / 40),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                          width: D.W / 2,
+                          child: Divider(
+                            color: ColorConstants.greycolor,
+                            thickness: 2,
+                          )),
+                    ),
+                    SizedBox(height: D.H / 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

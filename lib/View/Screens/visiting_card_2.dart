@@ -25,7 +25,7 @@ class _VisitingCard2State extends State<VisitingCard2> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: D.H / 50, vertical: D.H / 150),
+      padding: EdgeInsets.symmetric(horizontal: D.H / 50, vertical: D.H / 200),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class _VisitingCard2State extends State<VisitingCard2> {
             ),
           ),
           SizedBox(
-            height: D.H / 150,
+            height: D.H / 200,
           ),Center(
             child: Text(
               'Do you have any experience?',
@@ -53,7 +53,7 @@ class _VisitingCard2State extends State<VisitingCard2> {
             ),
           ),
           SizedBox(
-            height: D.H / 150,
+            height: D.H / 200,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: [
             WelcomePageRoundedButton(
@@ -84,7 +84,7 @@ class _VisitingCard2State extends State<VisitingCard2> {
               ),
             ],),
           SizedBox(
-            height: D.H / 102,
+            height: D.H / 110,
           ),
           CustomBorderTextFormField(
               controller: jobtitlecontroller,

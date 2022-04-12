@@ -301,9 +301,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Expanded(child: Container()),
-                                          Icon(
-                                            Icons.favorite,
+                                          Constants.popularjobs[index].isLiked==true?IconButton(icon: Icon(Icons.favorite),
                                             color: Colors.red,
+                                            onPressed: () {
+                                              Constants.popularjobs[index].isLiked=false;
+                                              setState(() {
+
+                                              });
+                                            },
+                                          ):IconButton(icon: Icon(Icons.favorite),
+                                            color: Colors.grey.withOpacity(0.5),
+                                            onPressed: () {
+                                              Constants.popularjobs[index].isLiked=true;
+                                              setState(() {
+
+                                              });
+                                            },
                                           ),
                                           SizedBox(
                                             width: 16,

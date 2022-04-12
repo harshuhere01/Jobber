@@ -3,16 +3,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobber/Constants/color_constants.dart';
-import 'package:jobber/Utils/dimensions.dart';
 
-class FavouriteJobs extends StatefulWidget {
-  const FavouriteJobs({Key? key}) : super(key: key);
+import '../../Utils/dimensions.dart';
+
+class FollowingScreen extends StatefulWidget {
+  const FollowingScreen({Key? key}) : super(key: key);
 
   @override
-  State<FavouriteJobs> createState() => _FavouriteJobsState();
+  _FollowingScreenState createState() => _FollowingScreenState();
 }
 
-class _FavouriteJobsState extends State<FavouriteJobs> {
+class _FollowingScreenState extends State<FollowingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,7 @@ class _FavouriteJobsState extends State<FavouriteJobs> {
                 child: Row(
                   children: [
                     Text(
-                      "Favourite Jobs",
+                      "Followings",
                       style: GoogleFonts.roboto(
                           color: Colors.black,
                           fontSize: D.H / 50,
@@ -58,17 +59,34 @@ class _FavouriteJobsState extends State<FavouriteJobs> {
             Row(
               children: [
                 Text(
-                  "JOB TITLE",
+                  "NAME",
                   style: GoogleFonts.roboto(
                       color: ColorConstants.greycolor,
                       fontSize: D.H / 80,
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
-                  width: D.W / 3,
+                  width: D.W / 2.3,
+                ),
+                Icon(
+                  Icons.keyboard_arrow_up,
+                  color: ColorConstants.greycolor,
+                ),
+                SizedBox(
+                  width: D.W / 40,
                 ),
                 Text(
-                  'NAME',
+                  'OFFICES',
+                  style: GoogleFonts.roboto(
+                      color: ColorConstants.greycolor,
+                      fontSize: D.H / 80,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  width: D.W / 9.5,
+                ),
+                Text(
+                  'PHONE',
                   style: GoogleFonts.roboto(
                       color: ColorConstants.greycolor,
                       fontSize: D.H / 80,
@@ -87,64 +105,22 @@ class _FavouriteJobsState extends State<FavouriteJobs> {
             ),
             _buildRow(
               'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-              'php developer',
-              'Atop Technology',
-              'employer@gmail.com',
-            ),
-            SizedBox(
-              height: D.H / 50,
-            ),
-            DottedLine(
-                direction: Axis.horizontal,
-                dashColor: ColorConstants.greycolor),
-            SizedBox(
-              height: D.H / 50,
-            ),
-            _buildRow(
-              'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-              'PHP Programmer',
-              'Atop Technology',
-              'employer@gmail.com',
-            ),
-            SizedBox(
-              height: D.H / 50,
-            ),
-            DottedLine(
-                direction: Axis.horizontal,
-                dashColor: ColorConstants.greycolor),
-            SizedBox(
-              height: D.H / 50,
-            ),
-            _buildRow(
-              'https://images.unsplash.com/photo-1540174401473-df5f1c06c716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60',
-              'Qui in libero ipsam',
-              'Dale',
-              'ali@gmail.com',
-            ),
-            SizedBox(
-              height: D.H / 50,
-            ),
-            DottedLine(
-                direction: Axis.horizontal,
-                dashColor: ColorConstants.greycolor),
-            SizedBox(
-              height: D.H / 50,
-            ),
-            _buildRow(
-              'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
-              'test two',
-              'Atop Technology',
-              'employer@gmail.com',
+              'JC consulting',
+              'jcconsulting@jconsolting.com',
             ),
             SizedBox(
               height: D.H / 50,
             ),
             SizedBox(
-                width: D.W / 2,
+                width: D.W / 1.6,
                 child: Divider(
                   color: ColorConstants.greycolor,
                   thickness: 2,
                 )),
+            SizedBox(
+              height: D.H / 50,
+            ),
+            _buildSecondLastRow(),
             SizedBox(
               height: D.H / 50,
             ),
@@ -155,7 +131,77 @@ class _FavouriteJobsState extends State<FavouriteJobs> {
     );
   }
 
-  Row _buildLastRow() {
+  Row _buildRow(
+      String imageURL, String maintext2, String subtext) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.network(
+                  imageURL,
+                  height: D.H / 15,
+                  width: D.H / 15,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              SizedBox(
+                width: D.W / 60,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    maintext2,
+                    style: GoogleFonts.roboto(
+                        color: Colors.blue,
+                        fontSize: D.H / 70,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: D.H / 200,
+                  ),
+                  Text(
+                    subtext,
+                    style: GoogleFonts.roboto(
+                        color: ColorConstants.greycolor,
+                        fontSize: D.H / 80,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: D.W / 9,
+              ),
+              Text(
+                '2',
+                style: GoogleFonts.roboto(
+                    color: ColorConstants.greycolor,
+                    fontSize: D.H / 60,
+                    fontWeight: FontWeight.w500),
+              ),
+               SizedBox(
+                width: D.W / 6.5,
+              ),
+              Text(
+                '943\n243\n2428',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                    color: ColorConstants.greycolor,
+                    fontSize: D.H / 60,
+                    fontWeight: FontWeight.w500),
+              ),
+
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+  Row _buildSecondLastRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -198,7 +244,7 @@ class _FavouriteJobsState extends State<FavouriteJobs> {
         ),
         SizedBox(width: D.H/50,),
         Text(
-          'Showing 1 to 4 of 4 entries',
+          'Showing 1 to 1 of 1 entries',
           style: GoogleFonts.roboto(
               color: ColorConstants.blackColor,
               fontSize: D.H / 70,
@@ -207,61 +253,46 @@ class _FavouriteJobsState extends State<FavouriteJobs> {
       ],
     );
   }
-
-  Row _buildRow(
-      String imageURL, String maintext1, String maintext2, String subtext) {
+  Row _buildLastRow() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          flex: 2,
-          child: Text(
-            maintext1,
-            style: GoogleFonts.roboto(
-                color: Colors.blue,
-                fontSize: D.H / 50,
-                fontWeight: FontWeight.w500),
+        Text(
+          'Previous  ',
+          style: GoogleFonts.roboto(
+              color: ColorConstants.greycolor,
+              fontSize: D.H / 70,
+              fontWeight: FontWeight.w400),
+        ),
+        Container(
+
+          padding: EdgeInsets.symmetric(horizontal: D.H/70,vertical: D.H/100),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              '1',
+              style: GoogleFonts.roboto(
+                  color: ColorConstants.whiteColor,
+                  fontSize: D.H / 70,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
         ),
-        Expanded(
-          flex: 2,
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.network(
-                  imageURL,
-                  height: D.H / 20,
-                  width: D.H / 20,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              SizedBox(
-                width: D.W / 60,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    maintext2,
-                    style: GoogleFonts.roboto(
-                        color: Colors.blue,
-                        fontSize: D.H / 80,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: D.H/200,),
-                  Text(
-                    subtext,
-                    style: GoogleFonts.roboto(
-                        color: ColorConstants.greycolor,
-                        fontSize: D.H / 80,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            ],
-          ),
+        Text(
+          '  Next ',
+          style: GoogleFonts.roboto(
+              color: ColorConstants.greycolor,
+              fontSize: D.H / 70,
+              fontWeight: FontWeight.w400),
         ),
       ],
     );
   }
+
+
 }

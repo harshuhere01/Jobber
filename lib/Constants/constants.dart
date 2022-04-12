@@ -5,10 +5,10 @@ import '../Model/model.dart';
 
 class Constants{
   static List<CategortTextModel> categoryTextList = <CategortTextModel>[
-    CategortTextModel(color:Color(0xFF0062FF) ,text: "Software Engineer"),
-    CategortTextModel(color:Colors.pink ,text: "UX Designer"),
-    CategortTextModel(color:ColorConstants.primaryBlueColor ,text: "Content Manager"),
-    CategortTextModel(color:Colors.black ,text: "Product Manager"),
+    CategortTextModel(color:Color(0xFF0062FF) ,text: "Software Engineer", isFavourite: true),
+    CategortTextModel(color:Colors.pink ,text: "UX Designer", isFavourite: true),
+    CategortTextModel(color:ColorConstants.primaryBlueColor ,text: "Content Manager", isFavourite: true),
+    CategortTextModel(color:Colors.black ,text: "Product Manager", isFavourite: true),
 
   ];
   static List<CategoryModelData> categoryModelData = <CategoryModelData>[
@@ -22,8 +22,8 @@ class Constants{
   static List<PopularJobModelData> popularjobs = <PopularJobModelData>[
     PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: true ,text1: "Product Manager",text2: '\$2500/m',text3: "Google"),
     PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: true ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify"),
-    PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: true ,text1: "Product Manager",text2: '\$2500/m',text3: "Google"),
-    PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: true ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify"),
+    PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: false ,text1: "Product Manager",text2: '\$2500/m',text3: "Google"),
+    PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: false ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify"),
 
 
 

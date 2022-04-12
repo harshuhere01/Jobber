@@ -4,6 +4,7 @@ import 'package:jobber/View/Screens/applied_job_screen.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/digital_cv_page.dart';
 import 'package:jobber/View/Screens/favourite_jobs_page.dart';
+import 'package:jobber/View/Screens/following_screen.dart';
 
 import '../../Utils/dimensions.dart';
 import 'change_password_screen.dart';
@@ -232,17 +233,20 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),),
               ),
               SizedBox(height: 8,),
-              Container(
-                decoration: BoxDecoration(
-                    color:Color(0xFFEEEEEE),
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(10))),
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Row(children: [
-                    Text("Followings",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),)
-                  ],),
-                ),),
+              InkWell(
+                onTap: (){NavigationHelpers.redirect(context, FollowingScreen());},
+                child: Container(
+                  decoration: BoxDecoration(
+                      color:Color(0xFFEEEEEE),
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(10))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: Row(children: [
+                      Text("Followings",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),)
+                    ],),
+                  ),),
+              ),
               SizedBox(height: 8,),
               InkWell(
                 onTap: (){

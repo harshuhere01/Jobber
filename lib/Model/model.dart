@@ -2,14 +2,16 @@ import 'dart:ui';
 
 class CategortTextModel {
   String? text;
+  bool? isFavourite;
   Color? color;
 
 
-  CategortTextModel({required this.text, required this.color});
+  CategortTextModel({required this.text, required this.color,required this.isFavourite});
 
   CategortTextModel.fromJson(Map<String, dynamic> json) {
     text = json['text'];
     color = json['color'];
+    isFavourite = json['isFavourite'];
 
   }
 
@@ -17,6 +19,7 @@ class CategortTextModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['text'] = this.text;
     data['color'] = this.color;
+    data['isFavourite'] = this.isFavourite;
     return data;
   }
 }

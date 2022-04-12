@@ -125,14 +125,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ),
                 DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red,(){
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context, CreateVisitingCardMainPage());
+                  NavigationHelpers.redirect(context, DashBoardScreen(3));
                 }),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){}),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/appliedjob.svg","Applied Job",Colors.green,(){}),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/resume.svg","Resume Builder",Colors.pink,(){}),
+                DrawerListTile("assets/images/resume.svg","Resume Builder",Colors.pink,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,CreateVisitingCardMainPage());
+                }),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/cv.svg","Digital CV",ColorConstants.primaryBlueColor,(){}),
                 SizedBox(height: D.H/60,),
@@ -148,7 +151,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/terms.svg","Terms & Condition",Colors.grey,(){}),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/logout.svg","LogOut",Colors.red,(){}),
+                DrawerListTile("assets/images/logout.svg","LogOut",Colors.red,(){
+                  Navigator.pop(context);
+                  AuthClass().signOut(context);
+                }),
               ],
             ),
           ),

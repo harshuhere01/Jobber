@@ -50,137 +50,143 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+
       backgroundColor: ColorConstants.whiteColor,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: D.H / 50),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 4,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: D.H / 50,
-                    ),
-                    Center(
-                      child: Container(
-                        height: D.H / 11,
-                        width: D.H / 6,
-                        child: Image.asset("assets/images/splashimage.png"),
-                      ),
-                    ),
-                    SizedBox(
-                      height: D.H / 51,
-                    ),
-                    TextMedium500(
-                      text: 'Let\’s make your visiting card',
-                      fontSize: D.H / 35,
-                      textColor: ColorConstants.blackColor,
-                    ),
-                    SizedBox(
-                      height: D.H / 50,
-                    ),
-                    Image.asset('assets/images/demo_visiting_card.png'),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+        child: SingleChildScrollView(
+physics: BouncingScrollPhysics(),
+          child: SizedBox(
+            height: D.H/1.05,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: D.H / 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    child: Stack(
+                  Expanded(
+                    flex: 7,
+                    child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: D.H/50),
-                          child: Stack(
-                            children: [
-                              Line(),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TabButton(
-                               text: '1',
-                                    pageNumber: 0,
-                                    selectedPage: _selectedPage,
-                                    onPressed: () {
-                                      _changePage(0);
-                                    },
-                                    color: _selectedPage >= 0
-                                        ? ColorConstants.primaryGreenColor
-                                        : ColorConstants.whiteColor,
-                                    borderColor: ColorConstants.primaryBlueColor,
-                                  ),
-                                  TabButton(
-                                    text: '2',
-                                    pageNumber: 1,
-                                    selectedPage: _selectedPage,
-                                    onPressed: () {
-                                      _changePage(1);
-                                    },
-                                    color: _selectedPage >= 1
-                                        ? ColorConstants.primaryGreenColor
-                                        : ColorConstants.whiteColor,
-                                    borderColor: ColorConstants.primaryBlueColor,
-                                  ),
-                                  TabButton(
-                                    text: '3',
-                                    pageNumber: 2,
-                                    selectedPage: _selectedPage,
-                                    onPressed: () {
-                                      _changePage(2);
-                                    },
-                                    color: _selectedPage >= 2
-                                        ? ColorConstants.primaryGreenColor
-                                        : ColorConstants.whiteColor,
-                                    borderColor: ColorConstants.primaryBlueColor,
-                                  ),
-                                  TabButton(
-                                   text: '4',
-                                    pageNumber: 3,
-                                    selectedPage: _selectedPage,
-                                    onPressed: () {
-                                      _changePage(3);
-                                    },
-                                    color: _selectedPage >= 3
-                                        ? ColorConstants.primaryGreenColor
-                                        : ColorConstants.whiteColor,
-                                    borderColor: ColorConstants.primaryBlueColor,
-                                  ),
-                                ],
-                              ),
-                            ],
+                        SizedBox(
+                          height: D.H / 62,
+                        ),
+                        Center(
+                          child: Container(
+                            height: D.H / 12,
+                            width: D.H / 6,
+                            child: Image.asset("assets/images/splashimage.png"),
                           ),
                         ),
+                        SizedBox(
+                          height: D.H / 62,
+                        ),
+                        TextMedium500(
+                          text: 'Let\’s make your visiting card',
+                          fontSize: D.H / 35,
+                          textColor: ColorConstants.blackColor,
+                        ),
+                        SizedBox(
+                          height: D.H / 62,
+                        ),
+                        Image.asset('assets/images/demo_visiting_card.png'),
                       ],
                     ),
                   ),
                   Expanded(
-                    child: PageView(
-                      physics: NeverScrollableScrollPhysics(),
-                      onPageChanged: (int page) {
-                        setState(() {
-                          _selectedPage = page;
-                        });
-                      },
-                      controller: _pageController,
-                      children: [
-                        VisitingCard1(onTap: (){_changePage(1);}),
-                        VisitingCard2(onTap: (){_changePage(2);}),
-                        VisitingCard3(onTap: (){_changePage(3);}),
-                        VisitingCard4(onTap: (){_changePage(4);}),
-                      ],
-                    ),
-                  ),
+                    flex: 9,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: D.H/50),
+                              child: Stack(
+                                children: [
+                                  Line(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TabButton(
+                                   text: '1',
+                                        pageNumber: 0,
+                                        selectedPage: _selectedPage,
+                                        onPressed: () {
+                                          _changePage(0);
+                                        },
+                                        color: _selectedPage >= 0
+                                            ? ColorConstants.primaryGreenColor
+                                            : ColorConstants.whiteColor,
+                                        borderColor: ColorConstants.primaryBlueColor,
+                                      ),
+                                      TabButton(
+                                        text: '2',
+                                        pageNumber: 1,
+                                        selectedPage: _selectedPage,
+                                        onPressed: () {
+                                          _changePage(1);
+                                        },
+                                        color: _selectedPage >= 1
+                                            ? ColorConstants.primaryGreenColor
+                                            : ColorConstants.whiteColor,
+                                        borderColor: ColorConstants.primaryBlueColor,
+                                      ),
+                                      TabButton(
+                                        text: '3',
+                                        pageNumber: 2,
+                                        selectedPage: _selectedPage,
+                                        onPressed: () {
+                                          _changePage(2);
+                                        },
+                                        color: _selectedPage >= 2
+                                            ? ColorConstants.primaryGreenColor
+                                            : ColorConstants.whiteColor,
+                                        borderColor: ColorConstants.primaryBlueColor,
+                                      ),
+                                      TabButton(
+                                       text: '4',
+                                        pageNumber: 3,
+                                        selectedPage: _selectedPage,
+                                        onPressed: () {
+                                          _changePage(3);
+                                        },
+                                        color: _selectedPage >= 3
+                                            ? ColorConstants.primaryGreenColor
+                                            : ColorConstants.whiteColor,
+                                        borderColor: ColorConstants.primaryBlueColor,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: PageView(
+                          physics: NeverScrollableScrollPhysics(),
+                          onPageChanged: (int page) {
+                            setState(() {
+                              _selectedPage = page;
+                            });
+                          },
+                          controller: _pageController,
+                          children: [
+                            VisitingCard1(onTap: (){_changePage(1);}),
+                            VisitingCard2(onTap: (){_changePage(2);}),
+                            VisitingCard3(onTap: (){_changePage(3);}),
+                            VisitingCard4(onTap: (){_changePage(4);}),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ))
                 ],
-              ))
-            ],
+              ),
+            ),
           ),
         ),
       ),
