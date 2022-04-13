@@ -17,60 +17,82 @@ class _VisitingCard3State extends State<VisitingCard3> {
   TextEditingController educationcontroller = TextEditingController();
   TextEditingController degreecontroller = TextEditingController();
   TextEditingController universcitycontroller = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: D.H / 50, vertical: D.H / 150),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Education Details',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.roboto(
-              color: ColorConstants.blackColor,
-              fontSize: D.H / 50,
-              fontWeight: FontWeight.w400,
+      child: Form(
+        key: _formkey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Education Details',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.roboto(
+                color: ColorConstants.blackColor,
+                fontSize: D.H / 50,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-          SizedBox(
-            height: D.H / 100,
-          ),
-          CustomBorderTextFormField(
-              controller: educationcontroller,
-              readOnly: false,
-              hint: "Education",
-              validators: (e) {},
-              keyboardTYPE: TextInputType.name),
-          CustomBorderTextFormField(
-              controller: degreecontroller,
-              readOnly: false,
-              hint: "Degree / Specialization",
-              validators: (e) {},
-              keyboardTYPE: TextInputType.name),
-          CustomBorderTextFormField(
-              controller: universcitycontroller,
-              readOnly: false,
-              hint: "University / Institute",
-              validators: (e) {},
-              keyboardTYPE: TextInputType.name),
+            SizedBox(
+              height: D.H / 100,
+            ),
+            CustomBorderTextFormField(
+                controller: educationcontroller,
+                readOnly: false,
+                hint: "Education",
+                validators: (e) {
+                  if (educationcontroller.text == null ||
+                      educationcontroller.text == '') {
+                    return '*Please enter Education';
+                  }
+                },
+                keyboardTYPE: TextInputType.name),
+            CustomBorderTextFormField(
+                controller: degreecontroller,
+                readOnly: false,
+                hint: "Degree / Specialization",
+                validators: (e) {
+                  if (degreecontroller.text == null ||
+                      degreecontroller.text == '') {
+                    return '*Please enter Degree';
+                  }
+                },
+                keyboardTYPE: TextInputType.name),
+            CustomBorderTextFormField(
+                controller: universcitycontroller,
+                readOnly: false,
+                hint: "University / Institute",
+                validators: (e) {
+                  if (universcitycontroller.text == null ||
+                      universcitycontroller.text == '') {
+                    return '*Please enter University';
+                  }
+                },
+                keyboardTYPE: TextInputType.name),
 
-          Expanded(child: SizedBox()),
-          VisitingCardButton(
-            color: ColorConstants.primaryBlueColor,
-            text: 'Next',
-            fontsize: 22,
-            height: D.H / 20,
-            width: D.W,
-            btnradius: D.H/100,
-            fontweight: FontWeight.w900,
-            onTap: () {
-              widget.onTap();
-            },
-          ),
-        ],
+            Expanded(child: SizedBox()),
+            VisitingCardButton(
+              color: ColorConstants.primaryBlueColor,
+              text: 'Next',
+              fontsize: 22,
+              height: D.H / 20,
+              width: D.W,
+              btnradius: D.H/100,
+              fontweight: FontWeight.w900,
+              onTap: () {
+                if (_formkey.currentState!.validate()) {
+                  widget.onTap();
+                }
+                setState(() {});
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

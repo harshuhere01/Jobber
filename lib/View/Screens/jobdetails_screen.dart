@@ -8,7 +8,8 @@ import '../../CustomWidgets/welcome_page_rounded_button.dart';
 import '../../Utils/dimensions.dart';
 import 'job_applied_screen.dart';
 class JobDetailsScreen extends StatefulWidget {
-  const JobDetailsScreen({Key? key}) : super(key: key);
+  String iconpath;
+   JobDetailsScreen({required this.iconpath});
 
   @override
   _JobDetailsScreenState createState() => _JobDetailsScreenState();
@@ -35,7 +36,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           child: Column(children: [
             Row(
               children: [
-                Image.asset("assets/images/topazicon.png"),
+                Container(
+                    height: 60,width: 60,
+                    child: Image.asset(widget.iconpath,fit: BoxFit.cover,)),
               ],
             ),
             SizedBox(height: D.H/50,),

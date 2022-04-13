@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/visiting_card_bottom_button.dart';
 import 'package:jobber/CustomWidgets/welcome_page_rounded_button.dart';
 import 'package:jobber/Utils/dimensions.dart';
+import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/View/Screens/dash_board_screen.dart';
 
 class VisitingCard4 extends StatefulWidget {
   VisitingCard4({Key? key, required this.onTap}) : super(key: key);
@@ -60,6 +63,7 @@ class _VisitingCard4State extends State<VisitingCard4> {
             btnradius: D.H/100,
             fontweight: FontWeight.w900,
             onTap: () {
+              _getFromGallery();
             },
           ),
           SizedBox(
@@ -75,24 +79,55 @@ class _VisitingCard4State extends State<VisitingCard4> {
             width: D.H,
             btnradius: D.H / 100,
             fontweight: FontWeight.w900,
-            onTap: () {},
+            onTap: () {
+              _getFromCamera();
+            },
           ),
           SizedBox(
             height: D.H / 50,
           ),
-          Center(
-            child: Text(
-              'Skip for now',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                color: ColorConstants.primaryBlueColor,
-                fontSize: D.H / 50,
-                fontWeight: FontWeight.w500,
+          InkWell(
+            onTap: (){
+              NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
+            },
+            child: Center(
+              child: Text(
+                'Skip for now',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  color: ColorConstants.primaryBlueColor,
+                  fontSize: D.H / 50,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),
         ],
       ),
     );
+  }
+  _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      // imageFile = File(pickedFile.path);
+      setState(() {
+      });
+    }
+  }
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      // imageFile = File(pickedFile.path);
+      setState(() {
+      });
+    }
   }
 }

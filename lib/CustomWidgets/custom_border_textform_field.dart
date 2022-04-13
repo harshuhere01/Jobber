@@ -28,35 +28,38 @@ class CustomBorderTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric( vertical: D.H / 150),
-      child: SizedBox(
-        height: 50,
-        child: TextFormField(
-          readOnly: readOnly,
-          controller:controller,
-          validator: validators,
-          onChanged: onChanged,
-          maxLength: maxlength,
-          cursorColor: ColorConstants.primaryBlueColor,
-          style: GoogleFonts.roboto(),
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            counterText: "",
-            border: OutlineInputBorder(
-              borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            errorMaxLines: 1,
-            hintText: hint,
-            labelStyle: GoogleFonts.roboto(fontSize: 16.0, color: Colors.grey),
+      child: TextFormField(
+        readOnly: readOnly,
+        controller:controller,
+        validator: validators,
+        onChanged: onChanged,
+        maxLength: maxlength,
+        cursorColor: ColorConstants.primaryBlueColor,
+        style: GoogleFonts.roboto(),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: D.W / 40, vertical: D.H / 60),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+            borderRadius: BorderRadius.circular(12),
           ),
-          keyboardType: keyboardTYPE,
+          errorBorder:OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          counterText: "",
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xFFD7D7D7), width: 1.0),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          errorMaxLines: 1,
+          hintText: hint,
+          labelStyle: GoogleFonts.roboto(fontSize: 16.0, color: Colors.grey),
         ),
+        keyboardType: keyboardTYPE,
       ),
     );
   }

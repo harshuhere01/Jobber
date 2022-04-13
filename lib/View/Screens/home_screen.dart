@@ -23,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController controller = TextEditingController();
+  String selcetedFilter="Full Time";
 
 
   @override
@@ -91,8 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (ctx, int) {
                           return InkWell(
                             onTap: (){
-                              NavigationHelpers.redirect(
-                                  context, JobDetailsScreen());
                             },
                             child: Padding(
                               padding: EdgeInsets.only(right: D.W / 35.0),
@@ -169,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return InkWell(
                             onTap: (){
                               NavigationHelpers.redirect(
-                                  context, JobDetailsScreen());
+                                  context, JobDetailsScreen(iconpath: "assets/images/topazicon.png",));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -266,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return InkWell(
                             onTap: (){
                               NavigationHelpers.redirect(
-                                  context, JobDetailsScreen());
+                                  context, JobDetailsScreen(iconpath: "assets/images/searchicontwo.png",));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -440,7 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     NavigationHelpers.redirect(
-                                        context, JobDetailsScreen());
+                                        context, JobDetailsScreen(iconpath: "assets/images/searchiconfour.png",));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -533,6 +532,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   showFilterBottomSheet() {
+
     showModalBottomSheet<void>(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -802,23 +802,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          // isfirstTabSelected=true;
-                          // isSecondTabSelected=false;
-                          setState(() {});
+                          selcetedFilter="Full Time";
+                          state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorConstants.primaryBlueColor,
+                                color: selcetedFilter=="Full Time"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
-                            height: 50,
+                            height: 45,
                             child: Center(
                                 child: Text(
                               "Full Time",
                               style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color:  selcetedFilter=="Full Time"?Colors.white:ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: D.H / 60),
+                                  fontSize: D.H / 70),
                             ))),
                       )),
                       SizedBox(
@@ -827,23 +826,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          // isfirstTabSelected=true;
-                          // isSecondTabSelected=false;
-                          setState(() {});
+                          selcetedFilter="Part Time";
+                          state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorConstants.primaryBlueColor,
+                                color: selcetedFilter=="Part Time"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
-                            height: 50,
+                            height: 45,
                             child: Center(
                                 child: Text(
                               "Part Time",
                               style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color:  selcetedFilter=="Part Time"?Colors.white:ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: D.H / 60),
+                                  fontSize: D.H / 70),
                             ))),
                       )),
                       SizedBox(
@@ -852,23 +850,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          // isfirstTabSelected=true;
-                          // isSecondTabSelected=false;
-                          setState(() {});
+                          selcetedFilter="Contract";
+                          state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorConstants.primaryBlueColor,
+                                color: selcetedFilter=="Contract"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
-                            height: 50,
+                            height: 45,
                             child: Center(
                                 child: Text(
                               "Contract",
                               style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color:  selcetedFilter=="Contract"?Colors.white:ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: D.H / 60),
+                                  fontSize: D.H / 70),
                             ))),
                       )),
                     ],
@@ -882,23 +879,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          // isfirstTabSelected=true;
-                          // isSecondTabSelected=false;
-                          setState(() {});
+                          selcetedFilter="Freelance";
+                          state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorConstants.primaryBlueColor,
+                                color: selcetedFilter=="Freelance"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
-                            height: 50,
+                            height: 45,
                             child: Center(
                                 child: Text(
                               "Freelance",
                               style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color:  selcetedFilter=="Freelance"?Colors.white:ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: D.H / 60),
+                                  fontSize: D.H / 70),
                             ))),
                       )),
                       SizedBox(
@@ -907,23 +903,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          // isfirstTabSelected=true;
-                          // isSecondTabSelected=false;
-                          setState(() {});
+                          selcetedFilter="Remote";
+
+                          state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorConstants.primaryBlueColor,
+                                color: selcetedFilter=="Remote"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
-                            height: 50,
+                            height: 45,
                             child: Center(
                                 child: Text(
                               "Remote",
                               style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color:  selcetedFilter=="Remote"?Colors.white:ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: D.H / 60),
+                                  fontSize: D.H / 70),
                             ))),
                       )),
                       SizedBox(
@@ -932,23 +929,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          // isfirstTabSelected=true;
-                          // isSecondTabSelected=false;
-                          setState(() {});
+                          selcetedFilter="Show All Type";
+                          state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: ColorConstants.primaryBlueColor,
+                                color: selcetedFilter=="Show All Type"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
-                            height: 50,
+                            height: 45,
                             child: Center(
                                 child: Text(
                               "Show All Type",
                               style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color:  selcetedFilter=="Show All Type"?Colors.white:ColorConstants.blackColor,
+
                                   fontWeight: FontWeight.w400,
-                                  fontSize: D.H / 60),
+                                  fontSize: D.H / 70),
                             ))),
                       )),
                     ],
@@ -959,7 +957,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   WelcomePageRoundedButton(
                     color: ColorConstants.primaryBlueColor,
                     text: 'Apply Filters',
-                    fontsize: 22,
+                    fontsize: 18,
                     height: D.H / 15,
                     width: D.W,
                     btnradius: D.H / 50,

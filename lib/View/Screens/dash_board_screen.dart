@@ -7,11 +7,13 @@ import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
 import 'package:jobber/View/Screens/news_screen.dart';
+import 'package:jobber/View/Screens/search_screen.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/drawer_listile.dart';
 import 'account_screen.dart';
+import 'job_screen.dart';
 import 'notification_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -29,6 +31,7 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   final List<Widget> _children = [
     HomeScreen(),
+    JobScreen(),
     ExploreScreen(),
     NewsScreen(),
     AccountScreen(),
@@ -125,7 +128,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ),
                 DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red,(){
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context, DashBoardScreen(3));
+                  NavigationHelpers.redirect(context, DashBoardScreen(4));
                 }),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){}),
@@ -195,6 +198,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image.asset(
+                    'assets/images/homeicon.png',
+                    height: 25,
+                    width: 25,
+                    color: Colors.black,
+                  ),
+                  activeIcon: Image.asset(
+                    'assets/images/homeicon.png',
+                    height: 25,
+                    width: 25,
+                    color: ColorConstants.primaryBlueColor,
+                  ),
+                  // label: Languages.of(context)!.labelHome,
+                  label: "Home",
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(
                     'assets/images/home1image.png',
                     height: 25,
                     width: 25,
@@ -207,7 +226,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     color: ColorConstants.primaryBlueColor,
                   ),
                   // label: Languages.of(context)!.labelHome,
-                  label: "Home",
+                  label: "Job",
                 ),
                 BottomNavigationBarItem(
                     icon: Image.asset(

@@ -50,16 +50,22 @@ class _NewsScreenState extends State<NewsScreen> {
                 Text("No data available",style: GoogleFonts.roboto(color:Colors.grey[500],fontWeight: FontWeight.normal,fontSize: D.H/55)),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top:D.H / 150.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width-D.W/6.0,
-                    child: Text("We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail",
-                        style: GoogleFonts.roboto(color:ColorConstants.tabbtncolor,fontWeight: FontWeight.normal,fontSize: D.H/60,height: 2)),
+            Container(
+              height: 350,
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(top:D.H / 150.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width-D.W/6.0,
+                        child: Text("We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail We often hear the term motivation.We all are human and that's why we all have emotions and motivation is the driving force behind our behavior.Let's discuss this in detail",
+                            style: GoogleFonts.roboto(color:ColorConstants.tabbtncolor,fontWeight: FontWeight.normal,fontSize: D.H/60,height: 2)),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ],
