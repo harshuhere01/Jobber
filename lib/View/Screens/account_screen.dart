@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/View/Screens/applied_job_screen.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/digital_cv_page.dart';
@@ -32,7 +33,14 @@ class _AccountScreenState extends State<AccountScreen> {
 
               Container(
                 height:D.H/4,width:D.W,decoration: BoxDecoration(
-                  color:Colors.grey.withOpacity(0.5),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  ColorConstants.primaryBlueColor.withOpacity(0.4),
+                  Color(0xFF2193b0)
+                ],
+              ),
                   borderRadius:
                   BorderRadius.all(Radius.circular(25))),
               child: Column(children: [

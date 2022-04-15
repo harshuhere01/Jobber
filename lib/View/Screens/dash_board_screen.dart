@@ -12,7 +12,10 @@ import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
 import '../../Utils/drawer_listile.dart';
+import 'about_us_screen.dart';
 import 'account_screen.dart';
+import 'contact_us_screen.dart';
+import 'feedback_screen.dart';
 import 'job_screen.dart';
 import 'notification_screen.dart';
 
@@ -131,24 +134,45 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   NavigationHelpers.redirect(context, DashBoardScreen(4));
                 }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){}),
+                DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context, DashBoardScreen(4));
+                }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/appliedjob.svg","Applied Job",Colors.green,(){}),
+                DrawerListTile("assets/images/appliedjob.svg","Applied Job",Colors.green,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context, DashBoardScreen(1));
+                }),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/resume.svg","Resume Builder",Colors.pink,(){
                   Navigator.pop(context);
                   NavigationHelpers.redirect(context,CreateVisitingCardMainPage());
                 }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/cv.svg","Digital CV",ColorConstants.primaryBlueColor,(){}),
+                DrawerListTile("assets/images/cv.svg","Digital CV",ColorConstants.primaryBlueColor,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,CreateVisitingCardMainPage());
+                }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/news.svg","News",Colors.black,(){}),
+                DrawerListTile("assets/images/news.svg","News",Colors.black,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,DashBoardScreen(3));
+                }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/aboutus.svg","About Us",Colors.blueGrey,(){}),
+                DrawerListTile("assets/images/aboutus.svg","About Us",Colors.blueGrey,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,AboutUsScreen());
+                }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/contactus.svg","Contact Us",Colors.green,(){}),
+                DrawerListTile("assets/images/contactus.svg","Contact Us",Colors.green,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,ContactUsScreen());
+                }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/feedback.svg","Feedback",Colors.pinkAccent,(){}),
+                DrawerListTile("assets/images/feedback.svg","Feedback",Colors.pinkAccent,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,FeedBackScreen());
+                }),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/privacy.svg","Privacy Policy",Colors.black,(){}),
                 SizedBox(height: D.H/60,),
