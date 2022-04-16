@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../Constants/color_constants.dart';
 import '../../Utils/dimensions.dart';
@@ -99,9 +100,9 @@ class Choice {
 
 List<Choice> choices = <Choice>[
   Choice(imgUrl: 'https://images.pexels.com/photos/3671083/pexels-photo-3671083.jpeg', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1576828831022-ca41d3905fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=723&q=80', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893629034-7a948592ce75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80', name: 'Mary M', post: "Business Ownwer",matual:"2 mutual connections",location:"Ahmedabad"),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1576828831022-ca41d3905fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=723&q=80', name: 'Mary M', post: "Designer",matual:"2 mutual connections",location:"Ahmedabad"),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893629034-7a948592ce75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80', name: 'Mary M', post: "Project Manager",matual:"2 mutual connections",location:"Ahmedabad"),
   Choice(imgUrl: 'https://images.unsplash.com/photo-1540174401473-df5f1c06c716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
   Choice(imgUrl: 'https://images.unsplash.com/photo-1615892376613-4ee6dbe6ceef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
   Choice(imgUrl: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
@@ -125,34 +126,64 @@ class _SelectCardState extends State<SelectCard> {
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey.withOpacity(0.1),
           border: Border.all(color:Colors.grey.shade200,),
-          borderRadius: BorderRadius.circular(D.H/50),
+          borderRadius: BorderRadius.circular(D.H/70),
         ),
         child: Center(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top:D.H/90),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                      widget.choice.imgUrl,
-                      height: D.H/8,
-                      width: D.H/8,
-                      fit: BoxFit.fill,
+                Stack(
+                  children: [
+                    Container(height: D.H/12,decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(10.0),
+                topLeft: Radius.circular(10.0),
+              ),
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          ColorConstants.primaryBlueColor.withOpacity(0.4),
+                          Color(0xFF2193b0)
+                        ],
+                      ),
+                    ),),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top:D.H/90),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: FadeInImage(
+
+                            height: D.H/8,
+                            width: D.H/8,
+                            fit: BoxFit.fill, image: NetworkImage( widget.choice.imgUrl), placeholder:AssetImage("assets/images/placeholder.png") ,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      right: 0,top: 0,
+                        child: Icon(Icons.cancel,color: Colors.black,))
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top:D.H/100),
-                  child: Text(widget.choice.name,style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.normal,fontSize: D.H/50)),
+                  child: Text(widget.choice.name,style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.w500,fontSize: D.H/50)),
                 ),
+                SizedBox(height: D.H/500),
+                Text(widget.choice.post,style: GoogleFonts.roboto(color: Colors.black.withOpacity(0.5),fontWeight: FontWeight.normal,fontSize: D.H/65)),
                 SizedBox(height: D.H/125),
-                Text(widget.choice.post,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
-                SizedBox(height: D.H/125),
-                Text(widget.choice.matual,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("assets/images/connect.svg",height: 12,width: 12,color: ColorConstants.primaryBlueColor,),
+                    SizedBox(width: 4,),
+                    Text(widget.choice.matual,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                  ],
+                ),
                 SizedBox(height: D.H/125),
                 Text(widget.choice.location,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
                 Padding(
@@ -173,7 +204,7 @@ class _SelectCardState extends State<SelectCard> {
                           child: Text(
                             "Connect",
                             style: TextStyle(
-                                fontSize: D.H/40,color:ColorConstants.primaryBlueColor,fontWeight: FontWeight.bold),
+                                fontSize: D.H/55,color:ColorConstants.primaryBlueColor,fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
