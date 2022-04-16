@@ -28,30 +28,34 @@ class _ExploreScreenState extends State<ExploreScreen> {
              ),
            ),
            Padding(
-             padding:  EdgeInsets.only(left: D.H/90,right: D.H/90, top: D.H/60),
+             padding:  EdgeInsets.only(left: D.H/70,right: D.H/70, top: D.H/60),
              child: Column(
                children: [
-                 Container(
-                   height: D.H/27,
-                   width: MediaQuery.of(context).size.width,
-                   decoration: BoxDecoration(
-                     border: Border.all(
-                       width: 1,
-                         color:Colors.grey.shade200
-                     ),
-                   ),
+                 Padding(
+                   padding:  EdgeInsets.only(left: D.H/110,right: D.H/110),
                    child: Container(
-                     child: Row(
-                       children: [
-                         Padding(
-                           padding:  EdgeInsets.only(left:D.H/80),
-                           child: Text(
-                             "Recommended for you",
-                             style: TextStyle(
-                                 fontSize: D.H/65 ,color:Colors.grey,fontWeight: FontWeight.bold),
+                     height: D.H/27,
+                     width: MediaQuery.of(context).size.width,
+                     decoration: BoxDecoration(
+                       border: Border.all(
+                         width: 1,
+                           color:Colors.grey.shade200
+                       ),
+                       borderRadius: BorderRadius.circular(D.H/80),
+                     ),
+                     child: Container(
+                       child: Row(
+                         children: [
+                           Padding(
+                             padding:  EdgeInsets.only(left:D.H/80),
+                             child: Text(
+                               "Recommended for you",
+                               style: TextStyle(
+                                   fontSize: D.H/65 ,color:Colors.grey,fontWeight: FontWeight.bold),
+                             ),
                            ),
-                         ),
-                       ],
+                         ],
+                       ),
                      ),
                    ),
                  ),
@@ -59,14 +63,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                    physics: NeverScrollableScrollPhysics(),
                    shrinkWrap: true,
                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                     crossAxisCount: 3,
-                     childAspectRatio: 0.68,
+                     crossAxisCount: 2,
+                     childAspectRatio: 0.65,
                    ),
                    itemCount: choices.length,
                    itemBuilder: (context, index) {
                      return  Center(
-                       child: SelectCard(
-                         choice: choices[index],
+                       child: Padding(
+                         padding:  EdgeInsets.only(left: D.H/120,right: D.H/110,top: D.H/70),
+                         child: SelectCard(
+                           choice: choices[index],
+                         ),
                        ),
                      );
                    },
@@ -120,6 +127,7 @@ class _SelectCardState extends State<SelectCard> {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color:Colors.grey.shade200,),
+          borderRadius: BorderRadius.circular(D.H/50),
         ),
         child: Center(
           child: Column(
@@ -131,37 +139,41 @@ class _SelectCardState extends State<SelectCard> {
                     borderRadius: BorderRadius.circular(100),
                     child: Image.network(
                       widget.choice.imgUrl,
-                      height: D.H/12,
-                      width: D.H/12,
+                      height: D.H/8,
+                      width: D.H/8,
                       fit: BoxFit.fill,
                     ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top:D.H/100),
-                  child: Text(widget.choice.name,style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.normal,fontSize: D.H/60)),
+                  child: Text(widget.choice.name,style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.normal,fontSize: D.H/50)),
                 ),
-                Text(widget.choice.post,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/80)),
-                Text(widget.choice.matual,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/80)),
-                Text(widget.choice.location,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/80)),
+                SizedBox(height: D.H/125),
+                Text(widget.choice.post,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                SizedBox(height: D.H/125),
+                Text(widget.choice.matual,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                SizedBox(height: D.H/125),
+                Text(widget.choice.location,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
                 Padding(
                   padding: EdgeInsets.only(top: D.H/100),
                   child: GestureDetector(
                     child: Container(
-                      height: D.H/45,
-                      width: D.W/6,
+                      height: D.H/24,
+                      width: D.W/3.2,
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
                           color:ColorConstants.primaryBlueColor,
                         ),
+                        borderRadius: BorderRadius.circular(D.H/50),
                       ),
                       child: Container(
                         child: Center(
                           child: Text(
                             "Connect",
                             style: TextStyle(
-                                fontSize: D.H/80,color:ColorConstants.primaryBlueColor,fontWeight: FontWeight.bold),
+                                fontSize: D.H/40,color:ColorConstants.primaryBlueColor,fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
