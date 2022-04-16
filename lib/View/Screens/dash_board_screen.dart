@@ -7,7 +7,9 @@ import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
 import 'package:jobber/View/Screens/news_screen.dart';
+import 'package:jobber/View/Screens/privacy_policy_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
+import 'package:jobber/View/Screens/terms_and_condition_screen.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
 
 import '../../Utils/dimensions.dart';
@@ -134,11 +136,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   NavigationHelpers.redirect(context, DashBoardScreen(4));
                 }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/drawerwatchicon.svg","My Account",Colors.deepOrangeAccent,(){
-                  Navigator.pop(context);
-                  NavigationHelpers.redirect(context, DashBoardScreen(4));
-                }),
-                SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/appliedjob.svg","Applied Job",Colors.green,(){
                   Navigator.pop(context);
                   NavigationHelpers.redirect(context, DashBoardScreen(1));
@@ -174,9 +171,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   NavigationHelpers.redirect(context,FeedBackScreen());
                 }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/privacy.svg","Privacy Policy",Colors.black,(){}),
+                DrawerListTile("assets/images/privacy.svg","Privacy Policy",Colors.black,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,PrivacyPolicyScreen());
+                }),
                 SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/terms.svg","Terms & Condition",Colors.grey,(){}),
+                DrawerListTile("assets/images/terms.svg","Terms & Condition",Colors.grey,(){
+                  Navigator.pop(context);
+                  NavigationHelpers.redirect(context,TermsAndConditioScreen());
+                }),
                 SizedBox(height: D.H/60,),
                 DrawerListTile("assets/images/logout.svg","LogOut",Colors.red,(){
                   Navigator.pop(context);
