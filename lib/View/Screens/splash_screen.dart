@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
 import 'auth_screen.dart';
+import 'package:video_player/video_player.dart';
 class SplashScreen extends StatefulWidget {
 
   @override
@@ -16,8 +19,27 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  VideoPlayerController? _controller;
+  bool _visible = false;
+
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
+    _controller = VideoPlayerController.asset("assets/splash.mp4");
+    _controller?.initialize().then((_) {
+      _controller?.setLooping(false);
+      _controller?.setVolume(0.0);
+      Timer(Duration(milliseconds: 100), () {
+        setState(() {
+          _controller?.play();
+          _visible = true;
+        });
+      });
+    });
     changeRoute();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.white,
@@ -25,18 +47,36 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
     super.initState();
   }
+  _getVideoBackground() {
+    return AnimatedOpacity(
+      opacity: _visible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 1000),
+      child: VideoPlayer(_controller!),
+    );
+  }
+
+  _getBackgroundColor() {
+    return Container(color: Colors.transparent //.withAlpha(120),
+    );
+  }
+
+  _getContent() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+    );
+  }
   Future changeRoute() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(prefs.getBool("isLogin")??false){
-      await Future.delayed(Duration(milliseconds: 3000), () {
+      await Future.delayed(Duration(milliseconds: 7000), () {
         NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
       });
     }else{
-      await Future.delayed(Duration(milliseconds: 3000), () {
+      await Future.delayed(Duration(milliseconds: 7000), () {
         NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
       });
     }
-
   }
 
   @override
@@ -47,8 +87,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorConstants.whiteColor,
-        body: Center(child: Container(child: Image.asset("assets/images/splashimage.png"),)),
+        backgroundColor: Color(0xffa9abc5),
+        body: Center(
+          child: Container(
+              height: 200,
+              child: Center(child: Stack(children: <Widget>[_getVideoBackground(),]))),
+        ),
       ),
     );
   }
