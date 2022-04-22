@@ -69,11 +69,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Future changeRoute() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(prefs.getBool("isLogin")??false){
-      await Future.delayed(Duration(milliseconds: 7000), () {
+      await Future.delayed(Duration(milliseconds: 6500), () {
         NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
       });
     }else{
-      await Future.delayed(Duration(milliseconds: 7000), () {
+      await Future.delayed(Duration(milliseconds: 6500), () {
         NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
       });
     }
@@ -90,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Color(0xffa9abc5),
         body: Center(
           child: Container(
-              height: 200,
+              height: 250,
               child: Center(child: Stack(children: <Widget>[_getVideoBackground(),]))),
         ),
       ),
