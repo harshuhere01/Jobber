@@ -14,6 +14,11 @@ class NavigationHelpers {
       type: PageTransitionType.rightToLeft,duration: const Duration(milliseconds: 400), child: c,),(route) => false,);
     return result;
   }
+  static Future<dynamic> redirectto(BuildContext context,Widget c) async {
+    var result = Navigator.of(context).pushAndRemoveUntil(PageTransition(
+      type: PageTransitionType.rightToLeft,duration: const Duration(milliseconds: 400), child: c,),(route) => false,);
+    return result;
+  }
 
 
 }

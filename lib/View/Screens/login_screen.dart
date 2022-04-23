@@ -1,15 +1,21 @@
+import 'dart:convert';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
-import 'package:jobber/View/Screens/dash_board_screen.dart';
+import 'package:jobber/Model/API%20Models/login_model.dart';
+import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
+import 'package:jobber/View/Screens/visiting_card_main.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Constants/api_endpoint.dart';
 import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -118,40 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 bordercolor: ColorConstants.primaryBlueColor,
                 onTap: () async {
                   if (_formkey.currentState!.validate()) {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    CommonUtils.showProgressDialog(context);
-                    Future.delayed(const Duration(milliseconds: 2500),
-                        () async {
-                      // setState(() {
-                      var credential = prefs.getString(
-                        emailController.text,
-                      );
-                      if (credential == null) {
-                        CommonUtils.hideDialog(context);
-                        CommonUtils.showRedToastMessage(
-                            "Please Register to Login");
-                      } else {
-                        if (passwordController.text == credential) {
-                          CommonUtils.showGreenToastMessage(
-                              "User LoggedIn Successfully");
-                          prefs.setBool("isLogin", true);
-                          await Future.delayed(Duration(milliseconds: 500), () {
-                            NavigationHelpers.redirectFromSplash(
-                                context, DashBoardScreen(0));
-                            // CommonUtils.hideDialog(context);
-                          });
-                        } else {
-                          CommonUtils.hideDialog(context);
-                          CommonUtils.showRedToastMessage(
-                              "You Have Entered Wrong Password");
-                        }
-                        ;
-                      }
-                      ;
-
-                      // });
-                    });
+                    await signIn(emailController.text, passwordController.text);
                   }
                 }),
             SizedBox(
@@ -216,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap:(){
+                    onTap: () {
                       CommonUtils.showProgressDialog(context);
                       AuthClass().googleSignin(context);
                     },
@@ -276,5 +249,43 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> signIn(
+    String email,
+    String password,
+  ) async {
+    CommonUtils.showProgressDialog(context);
+    final uri = ApiEndPoint.login;
+    final headers = {'Content-Type': 'application/json'};
+    Map<String, dynamic> body = {
+      "email": email,
+      "password": password,
+    };
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+
+    Response response = await post(
+      uri,
+      headers: headers,
+      body: jsonBody,
+      encoding: encoding,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+      LoginModel responsee = LoginModel.fromJson(res);
+      PreferenceUtils.putObject("LoginResponse", responsee);
+      var rr=PreferenceUtils.getObject("LoginResponse");
+      var hh=LoginModel.fromJson();
+
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showGreenToastMessage("Login Successfullyu");
+      NavigationHelpers.redirectto(context, VisitingCardMain());
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage("Something went wrong");
+    }
   }
 }

@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jobber/View/Screens/splash_screen.dart';
 
+import 'Utils/preferences.dart';
+
 void main () async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await PreferenceUtils.init();
   runApp(const MyApp());
 }
 

@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:jobber/Constants/api_endpoint.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
@@ -133,22 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (_formkey.currentState!.validate()) {
                       if (passwordController.text ==
                           confirmPasswordController.text) {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        CommonUtils.showProgressDialog(context);
-                        Future.delayed(const Duration(milliseconds: 2500), () async {
-                          // setState(() {
-                            prefs.setString(
-                                emailController.text, passwordController.text);
-                            CommonUtils.hideDialog(context);
-                            CommonUtils.showGreenToastMessage(
-                                "User Registered Successfully");
-                            await Future.delayed(Duration(milliseconds: 500), () {
-                              NavigationHelpers.redirectFromSplash(
-                                  context, LoginScreen());
-                            });
-                          // });
-                        });
+                        await signup("Test", "Test Last", emailController.text, passwordController.text,);
 
                       } else {
                         Fluttertoast.showToast(
@@ -267,4 +256,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+  Future<void> signup(
+      String fname,
+      String lname,
+      String email,
+      String password,
+      ) async {
+    CommonUtils.showProgressDialog(context);
+    final uri = ApiEndPoint.REGISTER;
+    final headers = {'Content-Type': 'application/json'};
+    Map<String, dynamic> body = {
+      "first_name": fname,
+      "last_name": lname,
+      "email": email,
+      "password": password,
+      "type": "2",
+    };
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+
+    Response response = await post(
+      uri,
+      headers: headers,
+      body: jsonBody,
+      encoding: encoding,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showGreenToastMessage(res["message"]);
+      NavigationHelpers.redirectto(context, LoginScreen());
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage(res["message"]);
+    }
+  }
+
+
 }
