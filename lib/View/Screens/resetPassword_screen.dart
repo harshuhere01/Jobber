@@ -1,14 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
+import '../../Constants/api_endpoint.dart';
 import '../../CustomWidgets/custom_border_textform_field.dart';
 import '../../CustomWidgets/custom_squre_button.dart';
+import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
+import 'login_screen.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key}) : super(key: key);
@@ -53,10 +59,44 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
             CustomBorderTextFormField(controller: controller, readOnly: false, hint: "Enter Email",  validators: (e) {}, keyboardTYPE: TextInputType.emailAddress),
             SizedBox(height: D.H/45,),
-            CustomSqureButton(text: "Send", color: ColorConstants.primaryBlueColor, textColor: ColorConstants.whiteColor, bordercolor: ColorConstants.primaryBlueColor, onTap: (){}),
+            CustomSqureButton(text: "Send", color: ColorConstants.primaryBlueColor, textColor: ColorConstants.whiteColor, bordercolor: ColorConstants.primaryBlueColor,
+                onTap: () async {
+              await forgetPassword(controller.text);
+            }),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> forgetPassword(
+      String email,
+      ) async {
+    CommonUtils.showProgressDialog(context);
+    final uri = ApiEndPoint.ForgetPassword;
+    final headers = {'Content-Type': 'application/json'};
+    Map<String, dynamic> body = {
+      "email": email,
+    };
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+
+    Response response = await post(
+      uri,
+      headers: headers,
+      body: jsonBody,
+      encoding: encoding,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (res["success"]) {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showGreenToastMessage(res["message"]);
+      NavigationHelpers.redirectto(context, LoginScreen());
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage(res["message"]);
+    }
   }
 }

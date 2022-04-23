@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:jobber/Model/API%20Models/login_model.dart';
+import 'package:jobber/Model/API%20Models/social_login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferenceUtils{
-  static Future<SharedPreferences> get _instance async => _prefsInstance ??= await SharedPreferences.getInstance();
+class PreferenceUtils {
+  static Future<SharedPreferences> get _instance async =>
+      _prefsInstance ??= await SharedPreferences.getInstance();
   static SharedPreferences? _prefsInstance;
 
   // call this method from iniState() function of mainApp().
@@ -21,6 +23,7 @@ class PreferenceUtils{
     var prefs = await _instance;
     return prefs.setString(key, value);
   }
+
   static Future<bool?>? putObject(String key, Object value) async {
     var prefs = await _instance;
 
@@ -28,17 +31,21 @@ class PreferenceUtils{
     return prefs.setString(key, json.encode(value));
   }
 
-  static Future<LoginModel?> getLoginObject(String key) async{
+  static Future<LoginModel?> getLoginObject(String key) async {
     var prefs = await _instance;
     String? _data = prefs.getString(key);
-    return (_data == null || _data.isEmpty) ? null : LoginModel.fromJson(json.decode(_data));
+    return (_data == null || _data.isEmpty) ? null : LoginModel.fromJson(jsonDecode(_data));
   }
 
+  static Future<SocialSignUpModel?> getSocialLoginObject(String key) async {
+    var prefs = await _instance;
+    String? _data = prefs.getString(key);
+    return (_data == null || _data.isEmpty) ? null : SocialSignUpModel.fromJson(jsonDecode(_data));
+  }
 
   ///clear
   static Future<bool>? clear() {
     if (_prefsInstance == null) return null;
     return _prefsInstance!.clear();
   }
-
 }

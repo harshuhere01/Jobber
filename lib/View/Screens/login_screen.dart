@@ -10,6 +10,7 @@ import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/CustomWidgets/custom_button.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field.dart';
 import 'package:jobber/Model/API%20Models/login_model.dart';
+import 'package:jobber/Model/API%20Models/social_login_model.dart';
 import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
 import 'package:jobber/View/Screens/visiting_card_main.dart';
@@ -277,12 +278,16 @@ class _LoginScreenState extends State<LoginScreen> {
     if (statusCode == 200 && res["success"]) {
       LoginModel responsee = LoginModel.fromJson(res);
       PreferenceUtils.putObject("LoginResponse", responsee);
+      LoginModel? rr = await PreferenceUtils.getLoginObject("LoginResponse");
+
       CommonUtils.hideProgressDialog(context);
-      CommonUtils.showGreenToastMessage("Login Successfully");
+      CommonUtils.showGreenToastMessage("Login Successfullyu");
       NavigationHelpers.redirectto(context, VisitingCardMain());
     } else {
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showRedToastMessage("Something went wrong");
     }
   }
+
+
 }
