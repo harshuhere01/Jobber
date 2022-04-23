@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:jobber/Model/API%20Models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenceUtils{
@@ -27,10 +28,10 @@ class PreferenceUtils{
     return prefs.setString(key, json.encode(value));
   }
 
-  static Map<String, dynamic> getObject(String key) async{
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    String? _data = pref.getString(key);
-    return (_data == null || _data.isEmpty) ? null :await  json.decode(_data);
+  static Future<LoginModel> getLoginObject(String key) async{
+    var prefs = await _instance;
+    String? _data = prefs.getString(key);
+    return (_data == null || _data.isEmpty) ? null : json.decode(_data);
   }
 
 

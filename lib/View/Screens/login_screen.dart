@@ -277,8 +277,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (statusCode == 200 && res["success"]) {
       LoginModel responsee = LoginModel.fromJson(res);
       PreferenceUtils.putObject("LoginResponse", responsee);
-      var rr=PreferenceUtils.getObject("LoginResponse");
-      var hh=LoginModel.fromJson();
+      LoginModel rr=await PreferenceUtils.getLoginObject("LoginResponse");
+
 
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showGreenToastMessage("Login Successfullyu");
