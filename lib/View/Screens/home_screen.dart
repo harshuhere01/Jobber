@@ -41,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
   Future<void> getJobCategory() async {
-    CommonUtils.showProgressDialog(context);
     LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
     final token = loginModel!.token;
     final uri = ApiEndPoint.getJobCategory;
@@ -61,9 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
       responsee.data!.forEach((element) {
         categoryModelData.add(CategoryModelData(icon: element.imageUrl, text1: element.name, text2: element.jobsCount.toString(), color: Color(0xFF0062FF)));
       });
-      setState(() {
+setState(() {
 
-      });
+});
       
       CommonUtils.hideProgressDialog(context);
       
