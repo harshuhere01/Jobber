@@ -279,7 +279,6 @@ class _LoginScreenState extends State<LoginScreen> {
       PreferenceUtils.putObject("LoginResponse", responsee);
       LoginModel rr=await PreferenceUtils.getLoginObject("LoginResponse");
 
-
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showGreenToastMessage("Login Successfullyu");
       NavigationHelpers.redirectto(context, VisitingCardMain());
