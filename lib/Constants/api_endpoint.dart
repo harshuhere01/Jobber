@@ -6,6 +6,7 @@ class ApiEndPoint {
 
   static Uri REGISTER = Uri.parse(BASE_URL + "register");
   static Uri login = Uri.parse(BASE_URL + "login");
+  static Uri socialmediasignup = Uri.parse(BASE_URL + "social-media-signup");
   // static Uri LOGIN = Uri.parse(BASE_URL + "/auth/login");
 
 
