@@ -1,8 +1,12 @@
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:jobber/Constants/api_endpoint.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Constants/constants.dart';
 import 'package:jobber/CustomWidgets/search_bar_widget.dart';
@@ -11,7 +15,12 @@ import 'package:jobber/View/Screens/category_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
 
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
+import '../../Model/API Models/get_job_response_model.dart';
+import '../../Model/API Models/login_model.dart';
+import '../../Model/model.dart';
+import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
+import '../../Utils/preferences.dart';
 import 'jobdetails_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +33,45 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController controller = TextEditingController();
   String selcetedFilter="Full Time";
+  static List<CategoryModelData> categoryModelData = <CategoryModelData>[
+  ];
+@override
+  void initState() {
+   getJobCategory();
+    super.initState();
+  }
+  Future<void> getJobCategory() async {
+    CommonUtils.showProgressDialog(context);
+    LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
+    final token = loginModel!.token;
+    final uri = ApiEndPoint.getJobCategory;
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + token!
+    };
+    Response response = await get(
+      uri,
+      headers: headers,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+      GetJobResponseModel responsee = GetJobResponseModel.fromJson(res);
+      responsee.data!.forEach((element) {
+        categoryModelData.add(CategoryModelData(icon: element.imageUrl, text1: element.name, text2: element.jobsCount.toString(), color: Color(0xFF0062FF)));
+      });
+      setState(() {
 
+      });
+      
+      CommonUtils.hideProgressDialog(context);
+      
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage("Something went wrong for getting category");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: D.H / 4.5,
                       child: ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: Constants.categoryModelData.length,
+                        itemCount: categoryModelData.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
@@ -189,30 +236,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Container(
                                         padding: EdgeInsets.all(18),
                                         decoration: BoxDecoration(
-                                            color: Constants
-                                                .categoryModelData[index].color,
+                                            color: categoryModelData[index].color,
                                             shape: BoxShape.circle),
-                                        child: SvgPicture.asset(
-                                          Constants.categoryModelData[index].icon
+                                        child: Image.network(
+                                        categoryModelData[index].icon
                                               .toString(),
-                                          color: Colors.white,
                                           height: 45,
                                           width: 45,
                                         )),
                                     SizedBox(
                                       height: 8,
                                     ),
-                                    Text(
-                                      Constants.categoryModelData[index].text1
-                                          .toString(),
-                                      style: GoogleFonts.openSans(
-                                          color: Constants
-                                              .categoryModelData[index].color,
-                                          fontWeight: FontWeight.w600),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            categoryModelData[index].text1
+                                                .toString(),
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.openSans(
+                                                color:categoryModelData[index].color,
+                                                fontWeight: FontWeight.w600,fontSize: 12),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     Text(
-                                      Constants.categoryModelData[index].text2
-                                          .toString(),
+                                      categoryModelData[index].text2
+                                          .toString()+" Jobs",
                                       style: GoogleFonts.openSans(
                                           color: Color(0xFF4F4F4F),
                                           fontWeight: FontWeight.w600),

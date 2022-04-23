@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobber/Constants/color_constants.dart';
+import 'package:jobber/Model/API%20Models/login_model.dart';
+import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/welcome_page_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,8 +69,8 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
   Future changeRoute() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getBool("isLogin")??false){
+    LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
+    if(loginModel!=null && loginModel.token!.isNotEmpty){
       await Future.delayed(Duration(milliseconds: 6500), () {
         NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
       });
@@ -77,6 +79,17 @@ class _SplashScreenState extends State<SplashScreen> {
         NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
       });
     }
+
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // if(prefs.getBool("isLogin")??false){
+    //   await Future.delayed(Duration(milliseconds: 6500), () {
+    //     NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
+    //   });
+    // }else{
+    //   await Future.delayed(Duration(milliseconds: 6500), () {
+    //     NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
+    //   });
+    // }
   }
 
   @override

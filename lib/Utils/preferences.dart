@@ -28,10 +28,10 @@ class PreferenceUtils{
     return prefs.setString(key, json.encode(value));
   }
 
-  static Future<LoginModel> getLoginObject(String key) async{
+  static Future<LoginModel?> getLoginObject(String key) async{
     var prefs = await _instance;
     String? _data = prefs.getString(key);
-    return (_data == null || _data.isEmpty) ? null : json.decode(_data);
+    return (_data == null || _data.isEmpty) ? null : LoginModel.fromJson(json.decode(_data));
   }
 
 
