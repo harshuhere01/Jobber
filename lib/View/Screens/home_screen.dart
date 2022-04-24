@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -13,7 +12,6 @@ import 'package:jobber/CustomWidgets/search_bar_widget.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/category_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
-
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
 import '../../Model/API Models/get_job_response_model.dart';
 import '../../Model/API Models/login_model.dart';
@@ -32,16 +30,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController controller = TextEditingController();
-  String selcetedFilter="Full Time";
-  static List<CategoryModelData> categoryModelData = <CategoryModelData>[
-  ];
-@override
+  String selcetedFilter = "Full Time";
+  static List<CategoryModelData> categoryModelData = <CategoryModelData>[];
+
+  @override
   void initState() {
-   getJobCategory();
+    getJobCategory();
     super.initState();
   }
+
   Future<void> getJobCategory() async {
-    LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
+    LoginModel? loginModel =
+        await PreferenceUtils.getLoginObject("LoginResponse");
     final token = loginModel!.token;
     final uri = ApiEndPoint.getJobCategory;
     final headers = {
@@ -58,17 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
     if (statusCode == 200 && res["success"]) {
       GetJobResponseModel responsee = GetJobResponseModel.fromJson(res);
       responsee.data!.forEach((element) {
-        categoryModelData.add(CategoryModelData(icon: element.imageUrl, text1: element.name, text2: element.jobsCount.toString(), color: Color(0xFF0062FF)));
+        categoryModelData.add(CategoryModelData(
+            icon: element.imageUrl,
+            text1: element.name,
+            text2: element.jobsCount.toString(),
+            color: Color(0xFF0062FF)));
       });
-setState(() {
+      setState(() {});
 
-});
-      
       CommonUtils.hideProgressDialog(context);
-      
     } else {
       CommonUtils.hideProgressDialog(context);
-      CommonUtils.showRedToastMessage("Something went wrong for getting category");
+      CommonUtils.showRedToastMessage(
+          "Something went wrong for getting category");
     }
   }
 
@@ -137,8 +139,7 @@ setState(() {
                         itemCount: Constants.categoryTextList.length,
                         itemBuilder: (ctx, int) {
                           return InkWell(
-                            onTap: (){
-                            },
+                            onTap: () {},
                             child: Padding(
                               padding: EdgeInsets.only(right: D.W / 35.0),
                               child: Container(
@@ -212,9 +213,12 @@ setState(() {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: (){
+                            onTap: () {
                               NavigationHelpers.redirect(
-                                  context, JobDetailsScreen(iconpath: "assets/images/topazicon.png",));
+                                  context,
+                                  JobDetailsScreen(
+                                    iconpath: "assets/images/topazicon.png",
+                                  ));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -235,10 +239,12 @@ setState(() {
                                     Container(
                                         padding: EdgeInsets.all(18),
                                         decoration: BoxDecoration(
-                                            color: categoryModelData[index].color,
+                                            color:
+                                                categoryModelData[index].color,
                                             shape: BoxShape.circle),
                                         child: Image.network(
-                                        categoryModelData[index].icon
+                                          categoryModelData[index]
+                                              .icon
                                               .toString(),
                                           height: 45,
                                           width: 45,
@@ -247,23 +253,29 @@ setState(() {
                                       height: 8,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Flexible(
                                           child: Text(
-                                            categoryModelData[index].text1
+                                            categoryModelData[index]
+                                                .text1
                                                 .toString(),
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.openSans(
-                                                color:categoryModelData[index].color,
-                                                fontWeight: FontWeight.w600,fontSize: 12),
+                                                color: categoryModelData[index]
+                                                    .color,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 12),
                                           ),
                                         ),
                                       ],
                                     ),
                                     Text(
-                                      categoryModelData[index].text2
-                                          .toString()+" Jobs",
+                                      categoryModelData[index]
+                                              .text2
+                                              .toString() +
+                                          " Jobs",
                                       style: GoogleFonts.openSans(
                                           color: Color(0xFF4F4F4F),
                                           fontWeight: FontWeight.w600),
@@ -314,9 +326,12 @@ setState(() {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: (){
+                            onTap: () {
                               NavigationHelpers.redirect(
-                                  context, JobDetailsScreen(iconpath: "assets/images/searchicontwo.png",));
+                                  context,
+                                  JobDetailsScreen(
+                                    iconpath: "assets/images/searchicontwo.png",
+                                  ));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -338,36 +353,43 @@ setState(() {
                                               width: D.W / 9,
                                               decoration: BoxDecoration(
                                                   color: Color(0xFFE9F4FF),
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(8))),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(8))),
                                               child: Center(
                                                   child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(4.0),
-                                                child: SvgPicture.asset(Constants
-                                                    .popularjobs[index].icon
-                                                    .toString()),
+                                                child: SvgPicture.asset(
+                                                    Constants
+                                                        .popularjobs[index].icon
+                                                        .toString()),
                                               )),
                                             ),
                                           ),
                                           Expanded(child: Container()),
-                                          Constants.popularjobs[index].isLiked==true?IconButton(icon: Icon(Icons.favorite),
-                                            color: Colors.red,
-                                            onPressed: () {
-                                              Constants.popularjobs[index].isLiked=false;
-                                              setState(() {
-
-                                              });
-                                            },
-                                          ):IconButton(icon: Icon(Icons.favorite),
-                                            color: Colors.grey.withOpacity(0.5),
-                                            onPressed: () {
-                                              Constants.popularjobs[index].isLiked=true;
-                                              setState(() {
-
-                                              });
-                                            },
-                                          ),
+                                          Constants.popularjobs[index]
+                                                      .isLiked ==
+                                                  true
+                                              ? IconButton(
+                                                  icon: Icon(Icons.favorite),
+                                                  color: Colors.red,
+                                                  onPressed: () {
+                                                    Constants.popularjobs[index]
+                                                        .isLiked = false;
+                                                    setState(() {});
+                                                  },
+                                                )
+                                              : IconButton(
+                                                  icon: Icon(Icons.favorite),
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  onPressed: () {
+                                                    Constants.popularjobs[index]
+                                                        .isLiked = true;
+                                                    setState(() {});
+                                                  },
+                                                ),
                                           SizedBox(
                                             width: 16,
                                           ),
@@ -376,8 +398,8 @@ setState(() {
                                       Row(
                                         children: [
                                           Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 15, top: 4),
+                                            padding: EdgeInsets.only(
+                                                left: 15, top: 4),
                                             child: Text(
                                               Constants.popularjobs[index].text3
                                                   .toString(),
@@ -490,7 +512,11 @@ setState(() {
                                 child: InkWell(
                                   onTap: () {
                                     NavigationHelpers.redirect(
-                                        context, JobDetailsScreen(iconpath: "assets/images/searchiconfour.png",));
+                                        context,
+                                        JobDetailsScreen(
+                                          iconpath:
+                                              "assets/images/searchiconfour.png",
+                                        ));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -583,7 +609,6 @@ setState(() {
   }
 
   showFilterBottomSheet() {
-
     showModalBottomSheet<void>(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -853,12 +878,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Full Time";
+                          selcetedFilter = "Full Time";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Full Time"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Full Time"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -866,7 +893,9 @@ setState(() {
                                 child: Text(
                               "Full Time",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Full Time"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Full Time"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -877,12 +906,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Part Time";
+                          selcetedFilter = "Part Time";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Part Time"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Part Time"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -890,7 +921,9 @@ setState(() {
                                 child: Text(
                               "Part Time",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Part Time"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Part Time"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -901,12 +934,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Contract";
+                          selcetedFilter = "Contract";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Contract"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Contract"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -914,7 +949,9 @@ setState(() {
                                 child: Text(
                               "Contract",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Contract"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Contract"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -930,12 +967,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Freelance";
+                          selcetedFilter = "Freelance";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Freelance"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Freelance"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -943,7 +982,9 @@ setState(() {
                                 child: Text(
                               "Freelance",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Freelance"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Freelance"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -954,14 +995,15 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Remote";
+                          selcetedFilter = "Remote";
 
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Remote"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
-
+                                color: selcetedFilter == "Remote"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -969,7 +1011,9 @@ setState(() {
                                 child: Text(
                               "Remote",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Remote"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Remote"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -980,13 +1024,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Show All Type";
+                          selcetedFilter = "Show All Type";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Show All Type"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
-
+                                color: selcetedFilter == "Show All Type"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -994,8 +1039,9 @@ setState(() {
                                 child: Text(
                               "Show All Type",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Show All Type"?Colors.white:ColorConstants.blackColor,
-
+                                  color: selcetedFilter == "Show All Type"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -1015,7 +1061,8 @@ setState(() {
                     fontweight: FontWeight.w500,
                     onTap: () {
                       Navigator.pop(context);
-                    }, bordercolor: ColorConstants.primaryBlueColor,
+                    },
+                    bordercolor: ColorConstants.primaryBlueColor,
                     textcolor: ColorConstants.whiteColor,
                   ),
                 ],
