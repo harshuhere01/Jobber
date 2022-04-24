@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,6 +31,7 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
   PageController _pageController = PageController(
     keepPage: true,
   );
+  late File uploadedphoto ;
   String userPhotoPath = 'assets/images/user_visiting_card.png';
   String userName = 'Your Name';
   String userJobCity = 'Location';
@@ -136,8 +139,8 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(10),
                                               bottomLeft: Radius.circular(10)),
-                                          child: Image.asset(
-                                            userPhotoPath,
+                                          child: Image.file(
+                                            uploadedphoto,
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -154,9 +157,14 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
                                           SizedBox(
                                               height: 147,
                                               width: 122,
-                                              child: Image.asset(
-                                                userPhotoPath,
-                                                fit: BoxFit.cover,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(10),
+                                                    bottomLeft: Radius.circular(10)),
+                                                child: Image.asset(
+                                                  userPhotoPath,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               )),
                                         ],
                                       ),
@@ -820,7 +828,7 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
     if (pickedFile != null) {
       setState(() {
         photouploaded = true;
-        userPhotoPath = pickedFile.path;
+        uploadedphoto = File(pickedFile.path);
       });
     }
   }
@@ -835,7 +843,7 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
       // imageFile = File(pickedFile.path);
       setState(() {
         photouploaded = true;
-        userPhotoPath = pickedFile.path;
+        uploadedphoto = File(pickedFile.path);
       });
     }
   }
