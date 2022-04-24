@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -13,9 +12,11 @@ import 'package:jobber/CustomWidgets/search_bar_widget.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/category_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
 import '../../Model/API Models/get_job_response_model.dart';
+import '../../Model/API Models/get_recent_job_response_model.dart';
 import '../../Model/API Models/login_model.dart';
 import '../../Model/model.dart';
 import '../../Utils/common_utils.dart';
@@ -32,16 +33,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController controller = TextEditingController();
-  String selcetedFilter="Full Time";
-  static List<CategoryModelData> categoryModelData = <CategoryModelData>[
+  String selcetedFilter = "Full Time";
+  List<CategoryModelData> categoryModelData = <CategoryModelData>[];
+
+  static List<PopularJobModelData> popularjobs = <PopularJobModelData>[
+    PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: true ,text1: "Product Manager",text2: '\$2500/m',text3: "Google",id: ""),
+    PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: true ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify",id: ""),
+    PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: false ,text1: "Product Manager",text2: '\$2500/m',text3: "Google",id: ""),
+    PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: false ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify",id: ""),
   ];
-@override
+
+  static List<PopularJobModelData> recentJopbs = <PopularJobModelData>[
+     ];
+
+  @override
   void initState() {
-   getJobCategory();
+    getJobCategory();
+    getRecentJob();
     super.initState();
   }
+
   Future<void> getJobCategory() async {
-    LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
+    LoginModel? loginModel =
+        await PreferenceUtils.getLoginObject("LoginResponse");
     final token = loginModel!.token;
     final uri = ApiEndPoint.getJobCategory;
     final headers = {
@@ -58,17 +72,49 @@ class _HomeScreenState extends State<HomeScreen> {
     if (statusCode == 200 && res["success"]) {
       GetJobResponseModel responsee = GetJobResponseModel.fromJson(res);
       responsee.data!.forEach((element) {
-        categoryModelData.add(CategoryModelData(icon: element.imageUrl, text1: element.name, text2: element.jobsCount.toString(), color: Color(0xFF0062FF)));
+        categoryModelData.add(CategoryModelData(
+            icon: element.imageUrl,
+            text1: element.name,
+            text2: element.jobsCount.toString(),
+            color: Color(0xFF0062FF)));
       });
-setState(() {
+      setState(() {});
 
-});
-      
       CommonUtils.hideProgressDialog(context);
-      
     } else {
       CommonUtils.hideProgressDialog(context);
-      CommonUtils.showRedToastMessage("Something went wrong for getting category");
+      CommonUtils.showRedToastMessage(res["message"]);
+    }
+  }
+
+  Future<void> getRecentJob() async {
+    LoginModel? loginModel =
+        await PreferenceUtils.getLoginObject("LoginResponse");
+    final token = loginModel!.token;
+    final uri = ApiEndPoint.getRecentJob;
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + token!
+    };
+    Response response = await get(
+      uri,
+      headers: headers,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+      GetRecentJobResponseModel responsee =
+      GetRecentJobResponseModel.fromJson(res);
+      responsee.data!.forEach((element) {
+        recentJopbs.add(PopularJobModelData(text1: element.jobTitle.toString(), text2: '\$${element.salaryFrom.toString()+"-"+element.salaryTo.toString()}/m', icon: element.company!.companyUrl.toString(), text3:  'no name', isLiked: false,id: element.jobId.toString()));
+      });
+      setState(() {});
+
+      CommonUtils.hideProgressDialog(context);
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage(res["message"]);
     }
   }
 
@@ -137,8 +183,7 @@ setState(() {
                         itemCount: Constants.categoryTextList.length,
                         itemBuilder: (ctx, int) {
                           return InkWell(
-                            onTap: (){
-                            },
+                            onTap: () {},
                             child: Padding(
                               padding: EdgeInsets.only(right: D.W / 35.0),
                               child: Container(
@@ -204,78 +249,120 @@ setState(() {
                       height: D.H / 100,
                     ),
                     SizedBox(
-                      // Horizontal ListView
-                      height: D.H / 4.5,
-                      child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: categoryModelData.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: (){
-                              NavigationHelpers.redirect(
-                                  context, JobDetailsScreen(iconpath: "assets/images/topazicon.png",));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF0062FF).withOpacity(0.1),
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(25.0),
-                                      bottomRight: Radius.circular(25.0),
-                                      topLeft: Radius.circular(25.0),
-                                      bottomLeft: Radius.circular(25.0)),
-                                ),
-                                width: D.W / 2.5,
-                                alignment: Alignment.center,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        padding: EdgeInsets.all(18),
+                        // Horizontal ListView
+                        height: D.H / 4.5,
+                        child: categoryModelData.isNotEmpty
+                            ? ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: categoryModelData.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      // NavigationHelpers.redirect(
+                                      //     context,
+                                      //     JobDetailsScreen(
+                                      //       iconpath:
+                                      //           "assets/images/topazicon.png",
+                                      //       jobId: ,
+                                      //     ));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
                                         decoration: BoxDecoration(
-                                            color: categoryModelData[index].color,
-                                            shape: BoxShape.circle),
-                                        child: Image.network(
-                                        categoryModelData[index].icon
-                                              .toString(),
-                                          height: 45,
-                                          width: 45,
-                                        )),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            categoryModelData[index].text1
-                                                .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.openSans(
-                                                color:categoryModelData[index].color,
-                                                fontWeight: FontWeight.w600,fontSize: 12),
-                                          ),
+                                          color: Color(0xFF0062FF)
+                                              .withOpacity(0.1),
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(25.0),
+                                              bottomRight:
+                                                  Radius.circular(25.0),
+                                              topLeft: Radius.circular(25.0),
+                                              bottomLeft:
+                                                  Radius.circular(25.0)),
                                         ),
-                                      ],
+                                        width: D.W / 2.5,
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.all(18),
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                        categoryModelData[index]
+                                                            .color,
+                                                    shape: BoxShape.circle),
+                                                child: Image.network(
+                                                  categoryModelData[index]
+                                                      .icon
+                                                      .toString(),
+                                                  height: 45,
+                                                  width: 45,
+                                                )),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Flexible(
+                                                  child: Text(
+                                                    categoryModelData[index]
+                                                        .text1
+                                                        .toString(),
+                                                    textAlign: TextAlign.center,
+                                                    style: GoogleFonts.openSans(
+                                                        color:
+                                                            categoryModelData[
+                                                                    index]
+                                                                .color,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 12),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              categoryModelData[index]
+                                                      .text2
+                                                      .toString() +
+                                                  " Jobs",
+                                              style: GoogleFonts.openSans(
+                                                  color: Color(0xFF4F4F4F),
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    Text(
-                                      categoryModelData[index].text2
-                                          .toString()+" Jobs",
-                                      style: GoogleFonts.openSans(
-                                          color: Color(0xFF4F4F4F),
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
+                                  );
+                                },
+                              )
+                            : Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                direction:ShimmerDirection.ttb,
+                                child: ListView.builder(
+                                  itemCount: 3,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return Card(
+                                      elevation: 1.0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: SizedBox(
+                                        height: D.H / 4.5,
+                                        width: D.W / 2.5,
+                                      ),
+                                    );
+                                  },
                                 ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                              )),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: D.W / 27.0),
                       child: Row(
@@ -310,13 +397,17 @@ setState(() {
                       height: D.H / 4.5,
                       child: ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: Constants.popularjobs.length,
+                        itemCount: popularjobs.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: (){
+                            onTap: () {
                               NavigationHelpers.redirect(
-                                  context, JobDetailsScreen(iconpath: "assets/images/searchicontwo.png",));
+                                  context,
+                                  JobDetailsScreen(
+                                    iconpath: "assets/images/searchicontwo.png",
+                                    jobId: popularjobs[index].id.toString(),
+                                  ));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -338,36 +429,41 @@ setState(() {
                                               width: D.W / 9,
                                               decoration: BoxDecoration(
                                                   color: Color(0xFFE9F4FF),
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(8))),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(8))),
                                               child: Center(
                                                   child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(4.0),
-                                                child: SvgPicture.asset(Constants
-                                                    .popularjobs[index].icon
-                                                    .toString()),
+                                                child: SvgPicture.asset(
+                                                    popularjobs[index]
+                                                        .icon
+                                                        .toString()),
                                               )),
                                             ),
                                           ),
                                           Expanded(child: Container()),
-                                          Constants.popularjobs[index].isLiked==true?IconButton(icon: Icon(Icons.favorite),
-                                            color: Colors.red,
-                                            onPressed: () {
-                                              Constants.popularjobs[index].isLiked=false;
-                                              setState(() {
-
-                                              });
-                                            },
-                                          ):IconButton(icon: Icon(Icons.favorite),
-                                            color: Colors.grey.withOpacity(0.5),
-                                            onPressed: () {
-                                              Constants.popularjobs[index].isLiked=true;
-                                              setState(() {
-
-                                              });
-                                            },
-                                          ),
+                                          popularjobs[index].isLiked == true
+                                              ? IconButton(
+                                                  icon: Icon(Icons.favorite),
+                                                  color: Colors.red,
+                                                  onPressed: () {
+                                                    popularjobs[index].isLiked =
+                                                        false;
+                                                    setState(() {});
+                                                  },
+                                                )
+                                              : IconButton(
+                                                  icon: Icon(Icons.favorite),
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  onPressed: () {
+                                                    popularjobs[index].isLiked =
+                                                        true;
+                                                    setState(() {});
+                                                  },
+                                                ),
                                           SizedBox(
                                             width: 16,
                                           ),
@@ -376,10 +472,11 @@ setState(() {
                                       Row(
                                         children: [
                                           Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 15, top: 4),
+                                            padding: EdgeInsets.only(
+                                                left: 15, top: 4),
                                             child: Text(
-                                              Constants.popularjobs[index].text3
+                                              popularjobs[index]
+                                                  .text3
                                                   .toString(),
                                               style: GoogleFonts.openSans(
                                                   color: Colors.grey,
@@ -397,7 +494,8 @@ setState(() {
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Text(
-                                              Constants.popularjobs[index].text1
+                                              popularjobs[index]
+                                                  .text1
                                                   .toString(),
                                               style: GoogleFonts.openSans(
                                                   color: Colors.black,
@@ -414,7 +512,8 @@ setState(() {
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Text(
-                                              Constants.popularjobs[index].text2
+                                              popularjobs[index]
+                                                  .text2
                                                   .toString(),
                                               style: GoogleFonts.openSans(
                                                   fontSize: 12,
@@ -475,7 +574,7 @@ setState(() {
                     Container(
                       child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: Constants.popularjobs.length,
+                        itemCount: recentJopbs.length,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
@@ -490,7 +589,11 @@ setState(() {
                                 child: InkWell(
                                   onTap: () {
                                     NavigationHelpers.redirect(
-                                        context, JobDetailsScreen(iconpath: "assets/images/searchiconfour.png",));
+                                        context,
+                                        JobDetailsScreen(
+                                          iconpath:
+                                          recentJopbs[index].icon.toString(), jobId: recentJopbs[index].id.toString(),
+                                        ));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -517,9 +620,8 @@ setState(() {
                                                     child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(6.0),
-                                                  child: SvgPicture.asset(
-                                                      Constants
-                                                          .popularjobs[index]
+                                                  child: Image.network(
+                                                      recentJopbs[index]
                                                           .icon
                                                           .toString()),
                                                 )),
@@ -534,7 +636,8 @@ setState(() {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              Constants.popularjobs[index].text1
+                                              recentJopbs[index]
+                                                  .text1
                                                   .toString(),
                                               style: GoogleFonts.openSans(
                                                   fontSize: 18,
@@ -542,7 +645,7 @@ setState(() {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
-                                              'Full Time',
+                                              'Full Time static',
                                               style: GoogleFonts.openSans(
                                                   fontSize: 13,
                                                   color: Colors.grey,
@@ -552,10 +655,9 @@ setState(() {
                                         ),
                                         Expanded(child: Container()),
                                         Text(
-                                          Constants.popularjobs[index].text2
-                                              .toString(),
+                                          recentJopbs[index].text2.toString(),
                                           style: GoogleFonts.openSans(
-                                              fontSize: 14,
+                                              fontSize: 13,
                                               color: Colors.grey,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -583,7 +685,6 @@ setState(() {
   }
 
   showFilterBottomSheet() {
-
     showModalBottomSheet<void>(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -853,12 +954,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Full Time";
+                          selcetedFilter = "Full Time";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Full Time"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Full Time"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -866,7 +969,9 @@ setState(() {
                                 child: Text(
                               "Full Time",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Full Time"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Full Time"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -877,12 +982,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Part Time";
+                          selcetedFilter = "Part Time";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Part Time"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Part Time"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -890,7 +997,9 @@ setState(() {
                                 child: Text(
                               "Part Time",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Part Time"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Part Time"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -901,12 +1010,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Contract";
+                          selcetedFilter = "Contract";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Contract"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Contract"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -914,7 +1025,9 @@ setState(() {
                                 child: Text(
                               "Contract",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Contract"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Contract"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -930,12 +1043,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Freelance";
+                          selcetedFilter = "Freelance";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Freelance"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
+                                color: selcetedFilter == "Freelance"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -943,7 +1058,9 @@ setState(() {
                                 child: Text(
                               "Freelance",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Freelance"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Freelance"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -954,14 +1071,15 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Remote";
+                          selcetedFilter = "Remote";
 
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Remote"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
-
+                                color: selcetedFilter == "Remote"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -969,7 +1087,9 @@ setState(() {
                                 child: Text(
                               "Remote",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Remote"?Colors.white:ColorConstants.blackColor,
+                                  color: selcetedFilter == "Remote"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -980,13 +1100,14 @@ setState(() {
                       Expanded(
                           child: InkWell(
                         onTap: () {
-                          selcetedFilter="Show All Type";
+                          selcetedFilter = "Show All Type";
                           state(() {});
                         },
                         child: Container(
                             decoration: BoxDecoration(
-                                color: selcetedFilter=="Show All Type"?ColorConstants.primaryBlueColor:ColorConstants.greycolor.withOpacity(0.2),
-
+                                color: selcetedFilter == "Show All Type"
+                                    ? ColorConstants.primaryBlueColor
+                                    : ColorConstants.greycolor.withOpacity(0.2),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12))),
                             height: 45,
@@ -994,8 +1115,9 @@ setState(() {
                                 child: Text(
                               "Show All Type",
                               style: GoogleFonts.roboto(
-                                  color:  selcetedFilter=="Show All Type"?Colors.white:ColorConstants.blackColor,
-
+                                  color: selcetedFilter == "Show All Type"
+                                      ? Colors.white
+                                      : ColorConstants.blackColor,
                                   fontWeight: FontWeight.w400,
                                   fontSize: D.H / 70),
                             ))),
@@ -1015,7 +1137,8 @@ setState(() {
                     fontweight: FontWeight.w500,
                     onTap: () {
                       Navigator.pop(context);
-                    }, bordercolor: ColorConstants.primaryBlueColor,
+                    },
+                    bordercolor: ColorConstants.primaryBlueColor,
                     textcolor: ColorConstants.whiteColor,
                   ),
                 ],

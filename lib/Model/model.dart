@@ -56,9 +56,10 @@ class PopularJobModelData {
   String? text1;
   String? text2;
   String? text3;
+  String? id;
 
 
-  PopularJobModelData({required this.icon,required this.isLiked,required this.text1,required this.text2, required this.text3});
+  PopularJobModelData({required this.icon,required this.isLiked,required this.text1,required this.text2, required this.text3,required this.id});
 
   PopularJobModelData.fromJson(Map<String, dynamic> json) {
     icon = json['icon'];
@@ -66,6 +67,7 @@ class PopularJobModelData {
     text1 = json['text1'];
     text2 = json['text2'];
     text3 = json['text3'];
+    id = json['id'];
 
   }
 
@@ -76,6 +78,7 @@ class PopularJobModelData {
     data['text1'] = this.text1;
     data['text2'] = this.text2;
     data['text3'] = this.text3;
+    data['id'] = this.id;
     return data;
   }
 }

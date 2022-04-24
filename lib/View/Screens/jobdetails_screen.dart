@@ -1,15 +1,24 @@
+import 'dart:convert';
+
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:jobber/Constants/color_constants.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
+import '../../Constants/api_endpoint.dart';
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
+import '../../Model/API Models/get_job_detail_model.dart';
+import '../../Model/API Models/login_model.dart';
+import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
+import '../../Utils/preferences.dart';
 import 'job_applied_screen.dart';
 class JobDetailsScreen extends StatefulWidget {
   String iconpath;
-   JobDetailsScreen({required this.iconpath});
+  String jobId;
+   JobDetailsScreen({required this.iconpath,required this.jobId});
 
   @override
   _JobDetailsScreenState createState() => _JobDetailsScreenState();
@@ -17,6 +26,42 @@ class JobDetailsScreen extends StatefulWidget {
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
   int selectedTab=0;
+  bool isLoading=true;
+  late GetJobDetailModel getJobDetailModel;
+  @override
+  void initState() {
+    CommonUtils.checkNetwork().then((value) => getJobDetailAPi());
+    super.initState();
+  }
+  Future<void> getJobDetailAPi() async {
+    LoginModel? loginModel =
+    await PreferenceUtils.getLoginObject("LoginResponse");
+    final token = loginModel!.token;
+    final uri = Uri.parse("https://hindustanbrassindustries.com/api/job/"+widget.jobId);
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + token!
+    };
+    Response response = await get(
+      uri,
+      headers: headers,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+       getJobDetailModel =
+      GetJobDetailModel.fromJson(res);
+      isLoading=false;
+      setState(() {});
+
+      CommonUtils.hideProgressDialog(context);
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage(res["message"]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +82,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             Row(
               children: [
                 Container(
-                    height: 60,width: 60,
-                    child: Image.asset(widget.iconpath,fit: BoxFit.cover,)),
+
+                    child: Image.network(widget.iconpath,fit: BoxFit.contain,height: 70,width: 70,)),
               ],
             ),
             SizedBox(height: D.H/50,),
@@ -46,19 +91,19 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               children: [
               Row(
                 children: [
-                  Text( "Mid-level UX Designer ",style: GoogleFonts.poppins(fontSize:25,color:  Colors.black,fontWeight: FontWeight.bold),),
+                  Text( getJobDetailModel.data!.jobTitle.toString(),style: GoogleFonts.poppins(fontSize:25,color:  Colors.black,fontWeight: FontWeight.bold),),
                 ],
               ),
               Row(
                 children: [
-                  Text( "Toptal",style: GoogleFonts.poppins(fontSize:14,color:  Colors.grey,fontWeight: FontWeight.w400),),
+                  Text( "Toptal static",style: GoogleFonts.poppins(fontSize:14,color:  Colors.grey,fontWeight: FontWeight.w400),),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text( "Posted on 20 July",style: GoogleFonts.poppins(fontSize:14,color:  Colors.grey,fontWeight: FontWeight.w400),),
-                  Text( "21h 45m left",style: GoogleFonts.poppins(fontSize:14,color:Color(0xFF4CA6A8),fontWeight: FontWeight.w400),),
+                  Text( "Posted on 20 July static",style: GoogleFonts.poppins(fontSize:14,color:  Colors.grey,fontWeight: FontWeight.w400),),
+                  Text( "21h 45m left static",style: GoogleFonts.poppins(fontSize:14,color:Color(0xFF4CA6A8),fontWeight: FontWeight.w400),),
                 ],
               ),
 
@@ -76,7 +121,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                  Text( "30 July, 2021",style: GoogleFonts.poppins(fontSize:14,color:  Colors.black,fontWeight: FontWeight.normal),),
+                  Text( "30 July, 2021 static",style: GoogleFonts.poppins(fontSize:14,color:  Colors.black,fontWeight: FontWeight.normal),),
                   SizedBox(width: D.W/4,),
                   Text( "Contractual",style: GoogleFonts.poppins(fontSize:14,color:  Colors.black,fontWeight: FontWeight.normal),),
                 ],
@@ -93,7 +138,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                  Text( "\$100k - \$120k/yearly",style: GoogleFonts.poppins(fontSize:14,color:  Colors.black,fontWeight: FontWeight.normal),),
+                  Text( "\$${getJobDetailModel.data!.salaryFrom.toString()}k - \$${getJobDetailModel.data!.salaryTo.toString()}k/yearly",style: GoogleFonts.poppins(fontSize:14,color:  Colors.black,fontWeight: FontWeight.normal),),
                   SizedBox(width: D.W/10,),
                   Text( "Work from anywhere",style: GoogleFonts.poppins(fontSize:14,color:  Colors.black,fontWeight: FontWeight.normal),),
                 ],
@@ -174,7 +219,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
                 SizedBox(height: D.H/30,),
                 ExpandableText(
-                  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea',
+                  getJobDetailModel.data!.description.toString(),
                   expandText: 'show more',
                   collapseText: 'show less',
                   maxLines: 6,
@@ -195,7 +240,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
                 SizedBox(height: 10.0),
                 ExpandableText(
-                  '- Someone who has ample work experience with synthesizing primary research, developing insight-driven product strategy, and extending that strategy into artefacts in a creative, systematic and logical fashion -Adapt and meticulous with creating user ',
+                  'description static',
                   expandText: 'show more',
                   collapseText: 'show less',
                   maxLines: 4,

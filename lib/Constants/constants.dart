@@ -19,15 +19,7 @@ class Constants{
 
 
   ];
-  static List<PopularJobModelData> popularjobs = <PopularJobModelData>[
-    PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: true ,text1: "Product Manager",text2: '\$2500/m',text3: "Google"),
-    PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: true ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify"),
-    PopularJobModelData(icon: "assets/images/googleicon.svg",isLiked: false ,text1: "Product Manager",text2: '\$2500/m',text3: "Google"),
-    PopularJobModelData(icon: "assets/images/spotify.svg",isLiked: false ,text1: "Ui/Ux Designer",text2: '\$2500/m',text3: "Spotify"),
 
-
-
-  ];
 
   static List<SearchJobListData> searchJobList = <SearchJobListData>[
     SearchJobListData(icon: "assets/images/searchiconone.png",isLiked: false ,text1: "Mid level UX Designer",text2: 'Contractual',text3: "Total"),
