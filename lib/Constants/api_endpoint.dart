@@ -9,7 +9,8 @@ class ApiEndPoint {
   static Uri ForgetPassword = Uri.parse(BASE_URL + "forgot-password");
   static Uri socialmediasignup = Uri.parse(BASE_URL + "social-media-signup");
   static Uri getJobCategory = Uri.parse(BASE_URL + "job-categories");
+  static Uri logout = Uri.parse(BASE_URL + "logout");
   // static Uri LOGIN = Uri.parse(BASE_URL + "/auth/login");
 
-
+ 
 }
