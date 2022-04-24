@@ -12,6 +12,7 @@ import 'package:jobber/View/Screens/auth_screen.dart';
 import 'package:jobber/View/Screens/visiting_card_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Model/API Models/login_model.dart';
 import '../Utils/common_utils.dart';
 import '../Utils/navigation_helper.dart';
 import '../View/Screens/dash_board_screen.dart';
@@ -141,10 +142,9 @@ class AuthClass {
     String responseBody = response.body;
     var res = jsonDecode(responseBody);
     if (statusCode == 200 && res["success"]) {
-      SocialSignUpModel responsee = SocialSignUpModel.fromJson(res);
-      PreferenceUtils.putObject("SocialLoginResponse", responsee);
-      SocialSignUpModel? rr =
-          await PreferenceUtils.getSocialLoginObject("SocialLoginResponse");
+      LoginModel responsee = LoginModel.fromJson(res);
+      PreferenceUtils.putObject("LoginResponse", responsee);
+
 
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showGreenToastMessage("Login Successfully");
