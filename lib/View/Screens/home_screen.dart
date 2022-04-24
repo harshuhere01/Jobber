@@ -70,14 +70,32 @@ class _HomeScreenState extends State<HomeScreen> {
     String responseBody = response.body;
     var res = jsonDecode(responseBody);
     if (statusCode == 200 && res["success"]) {
+      categoryModelData.clear();
       GetJobResponseModel responsee = GetJobResponseModel.fromJson(res);
-      responsee.data!.forEach((element) {
+      // responsee.data!.forEach((element) {
+      //
+      //   categoryModelData.add(CategoryModelData(
+      //       icon: element.imageUrl,
+      //       text1: element.name,
+      //       text2: element.jobsCount.toString(),
+      //       color: Color(0xFF0062FF)));
+      // });
+      for(int i=0;i<responsee.data!.length;i++){
+        Color cc=Color(0xFF0062FF);
+        if(i%2==0 && i!=0){
+          cc= Color(0xFF84FF89);
+
+        }else if(i%2==1){
+          cc= Color(0xFF7000FF);
+        }else{
+          cc=Color(0xFF0062FF);
+        }
         categoryModelData.add(CategoryModelData(
-            icon: element.imageUrl,
-            text1: element.name,
-            text2: element.jobsCount.toString(),
-            color: Color(0xFF0062FF)));
-      });
+            icon: responsee.data![i].imageUrl,
+            text1:  responsee.data![i].name,
+            text2:  responsee.data![i].jobsCount.toString(),
+            color:cc));
+      }
       setState(() {});
 
       CommonUtils.hideProgressDialog(context);
@@ -104,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String responseBody = response.body;
     var res = jsonDecode(responseBody);
     if (statusCode == 200 && res["success"]) {
+      recentJopbs.clear();
       GetRecentJobResponseModel responsee =
       GetRecentJobResponseModel.fromJson(res);
       responsee.data!.forEach((element) {
