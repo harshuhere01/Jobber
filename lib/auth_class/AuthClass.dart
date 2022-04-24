@@ -106,11 +106,8 @@ class AuthClass {
     try {
       await _googleSignIn.signOut();
       await FacebookAuth.instance.logOut();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.clear();
-      NavigationHelpers.redirectFromSplash(context, AuthScreen());
     } catch (e) {
-      print('$e + Error while signing out');
+      print('Error while social sign out :--- $e ');
     }
   }
 

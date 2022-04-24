@@ -13,6 +13,7 @@ class ApiEndPoint {
   static Uri getRecentJob = Uri.parse(BASE_URL + "latest-jobs");
   static Uri getJobDetails = Uri.parse(BASE_URL + "job/");
   static Uri applyJob = Uri.parse(BASE_URL + "apply-job");
+  static Uri logout = Uri.parse(BASE_URL + "logout");
   // static Uri LOGIN = Uri.parse(BASE_URL + "/auth/login");
 
 

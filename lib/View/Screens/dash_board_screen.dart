@@ -1,8 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:jobber/Constants/api_endpoint.dart';
 import 'package:jobber/Constants/color_constants.dart';
+import 'package:jobber/Model/API%20Models/login_model.dart';
+import 'package:jobber/Utils/common_utils.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/Utils/preferences.dart';
+import 'package:jobber/View/Screens/auth_screen.dart';
 import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
@@ -47,6 +56,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     // ProfileScreen()
   ];
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  late LoginModel loginModel;
+
+  @override
+  void initState() {
+    getprefrences();
+    super.initState();
+  }
+
+  getprefrences() async {
+    loginModel = (await PreferenceUtils.getLoginObject('LoginResponse'))!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,59 +151,99 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 SizedBox(
                   height: D.H / 40,
                 ),
-                DrawerListTile("assets/images/usericondrawer.svg","Edit profile",Colors.red,(){
+                DrawerListTile("assets/images/usericondrawer.svg",
+                    "Edit profile", Colors.red, () {
                   Navigator.pop(context);
                   NavigationHelpers.redirect(context, DashBoardScreen(4));
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/appliedjob.svg","Applied Job",Colors.green,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/appliedjob.svg", "Applied Job", Colors.green,
+                    () {
                   Navigator.pop(context);
                   NavigationHelpers.redirect(context, DashBoardScreen(1));
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/resume.svg","Resume Builder",Colors.pink,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/resume.svg", "Resume Builder", Colors.pink,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,CreateVisitingCardMainPage());
+                  NavigationHelpers.redirect(
+                      context, CreateVisitingCardMainPage());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/cv.svg","Digital CV",ColorConstants.primaryBlueColor,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile("assets/images/cv.svg", "Digital CV",
+                    ColorConstants.primaryBlueColor, () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,CreateVisitingCardMainPage());
+                  NavigationHelpers.redirect(
+                      context, CreateVisitingCardMainPage());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/news.svg","News",Colors.black,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile("assets/images/news.svg", "News", Colors.black,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,DashBoardScreen(3));
+                  NavigationHelpers.redirect(context, DashBoardScreen(3));
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/aboutus.svg","About Us",Colors.blueGrey,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/aboutus.svg", "About Us", Colors.blueGrey,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,AboutUsScreen());
+                  NavigationHelpers.redirect(context, AboutUsScreen());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/contactus.svg","Contact Us",Colors.green,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/contactus.svg", "Contact Us", Colors.green,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,ContactUsScreen());
+                  NavigationHelpers.redirect(context, ContactUsScreen());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/feedback.svg","Feedback",Colors.pinkAccent,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/feedback.svg", "Feedback", Colors.pinkAccent,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,FeedBackScreen());
+                  NavigationHelpers.redirect(context, FeedBackScreen());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/privacy.svg","Privacy Policy",Colors.black,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/privacy.svg", "Privacy Policy", Colors.black,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,PrivacyPolicyScreen());
+                  NavigationHelpers.redirect(context, PrivacyPolicyScreen());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/terms.svg","Terms & Condition",Colors.grey,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile(
+                    "assets/images/terms.svg", "Terms & Condition", Colors.grey,
+                    () {
                   Navigator.pop(context);
-                  NavigationHelpers.redirect(context,TermsAndConditioScreen());
+                  NavigationHelpers.redirect(context, TermsAndConditioScreen());
                 }),
-                SizedBox(height: D.H/60,),
-                DrawerListTile("assets/images/logout.svg","LogOut",Colors.red,(){
+                SizedBox(
+                  height: D.H / 60,
+                ),
+                DrawerListTile("assets/images/logout.svg", "LogOut", Colors.red,
+                    () async {
                   Navigator.pop(context);
-                  AuthClass().signOut(context);
+                  await logout();
                 }),
               ],
             ),
@@ -303,5 +363,35 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> logout() async {
+    CommonUtils.showProgressDialog(context);
+    final token = loginModel.token;
+    final uri = ApiEndPoint.logout;
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + token!
+    };
+
+    Response response = await get(
+      uri,
+      headers: headers,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200) {
+      AuthClass().signOut(context);
+      CommonUtils.hideProgressDialog(context);
+      Fluttertoast.showToast(msg: "${res['message']}");
+      PreferenceUtils.clear();
+      NavigationHelpers.redirectto(context, AuthScreen());
+      print(res);
+    } else {
+      print(res);
+      Fluttertoast.showToast(
+          msg: "${res['message']}", toastLength: Toast.LENGTH_LONG);
+    }
   }
 }
