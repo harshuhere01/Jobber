@@ -74,7 +74,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           Container(width: 40,)
         ],
       ),
-      body: Padding(
+      body:isLoading?Center(child: CircularProgressIndicator(),): Padding(
         padding:  EdgeInsets.all(D.H/40.0),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
@@ -268,7 +268,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               btnradius: D.H/50,
               fontweight: FontWeight.w500,
               onTap: () {
-                NavigationHelpers.redirect(context, JobAppliedScreen());
+                applyJobApi(getJobDetailModel.data!.id.toString(),"100", "1000", "test notes", "apply");
               },
             ),
             SizedBox(height: D.H/50,),
@@ -290,5 +290,50 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
         ),
       ),
     );
+  }
+  Future<void> applyJobApi(
+      String job_id,
+      String resume_id,
+      String expected_salary,
+      String notes,
+      String application_type,
+      ) async {
+    CommonUtils.showProgressDialog(context);
+    LoginModel? loginModel =
+    await PreferenceUtils.getLoginObject("LoginResponse");
+    final token = loginModel!.token;
+    final uri = ApiEndPoint.applyJob;
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + token!
+    };
+    Map<String, dynamic> body = {
+      "job_id": job_id,
+      "resume_id": resume_id,
+      "expected_salary": expected_salary,
+      "notes": notes,
+      "application_type": "application_type",
+    };
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+
+    Response response = await post(
+      uri,
+      headers: headers,
+      body: jsonBody,
+      encoding: encoding,
+    );
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showGreenToastMessage(res["message"]);
+      NavigationHelpers.redirect(context, JobAppliedScreen());
+
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage(res["message"]);
+    }
   }
 }
