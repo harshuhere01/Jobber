@@ -1,10 +1,16 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart';
+import '../../Constants/api_endpoint.dart';
 import '../../Constants/color_constants.dart';
+import '../../Model/API Models/applied_job_model.dart';
+import '../../Model/API Models/login_model.dart';
+import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
+import '../../Utils/preferences.dart';
 
 class AppliedJobScreen extends StatefulWidget {
   const AppliedJobScreen({Key? key}) : super(key: key);
@@ -14,6 +20,60 @@ class AppliedJobScreen extends StatefulWidget {
 }
 
 class _AppliedJobScreenState extends State<AppliedJobScreen> {
+
+  static List<Job> jobData = <Job>[];
+
+  @override
+  void initState() {
+    getAppliedJob();
+    super.initState();
+  }
+
+  Future<void> getAppliedJob() async {
+    LoginModel? loginModel =
+        await PreferenceUtils.getLoginObject("LoginResponse");
+    final token = loginModel!.token;
+    final uri = ApiEndPoint.AppliedJob;
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + token!
+    };
+    Map<String, dynamic> body = {
+      "status": 1,
+    };
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+    Response response = await post(
+      uri,
+      headers: headers,
+      body: jsonBody,
+      encoding: encoding,
+    );
+
+    int statusCode = response.statusCode;
+    String responseBody = response.body;
+    var res = jsonDecode(responseBody);
+    if (statusCode == 200 && res["success"]) {
+      print("Sucess");
+      AppliedJobModel responsee = AppliedJobModel.fromJson(res);
+      responsee.data!.forEach((element) {
+        jobData.add(Job(
+            jobTitle:element.job!.jobTitle.toString(),
+            salaryTo:element.job!.salaryTo!.toInt(),
+            createdAt:element.job!.createdAt.toString(),
+            status:element.job!.status!.toInt()
+        ));
+      });
+      setState(() {});
+
+      CommonUtils.hideProgressDialog(context);
+    } else {
+      CommonUtils.hideProgressDialog(context);
+      CommonUtils.showRedToastMessage(
+          "Something went wrong for getting category");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,119 +117,130 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
               ),
               SizedBox(height: D.H / 60),
               ListView.builder(
-                  itemCount: 4,
+                  itemCount: jobData.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding:  EdgeInsets.only(left:D.H /70,right:D.H /70,top:D.H /55),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: D.H / 6.5,
-                    decoration: BoxDecoration(
-                      color: ColorConstants.whiteColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 3,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(D.W / 60.0),
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(D.W / 30.0),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  Icons.more_horiz,
-                                  color: Colors.grey,
-                                  size: D.H / 40,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.shop,
-                                  color: Colors.grey,
-                                  size: D.H / 40,
-                                ),
-                                SizedBox(width: D.H / 80),
-                                Text("php developer",
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: D.H / 55)),
-                                SizedBox(width: D.H / 80),
-                                Padding(
-                                  padding:  EdgeInsets.only(top: D.W / 100.0),
-                                  child: Container(
-                                      height: D.H/50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.withOpacity(0.1),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(D.W / 100.0),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding:  EdgeInsets.only(left: D.W / 60.0,right:D.W / 60.0 ),
-                                        child: Center(child: Text("Applied",style: GoogleFonts.roboto(color: Colors.blue,fontWeight: FontWeight.normal,fontSize: D.H/80))),
-                                      )),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: D.H / 100),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_outlined,
-                                  color: Colors.grey,
-                                  size: D.H / 40,
-                                ),
-                                SizedBox(width: D.H / 80),
-                                Text("Applied On:",
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: D.H / 55)),
-                                Text("29th Mar,2022",
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: D.H / 55)),
-                              ],
-                            ),
-                            SizedBox(height: D.H / 100),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.credit_card,
-                                  color: Colors.grey,
-                                  size: D.H / 40,
-                                ),
-                                SizedBox(width: D.H / 80),
-                                Text("1,212\$",
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: D.H / 55)),
-                                SizedBox(width: D.H / 80),
-                              ],
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          left: D.H / 70, right: D.H / 70, top: D.H / 55),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: D.H / 6.5,
+                        decoration: BoxDecoration(
+                          color: ColorConstants.whiteColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(D.W / 60.0),
+                          ),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(D.W / 30.0),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(
+                                      Icons.more_horiz,
+                                      color: Colors.grey,
+                                      size: D.H / 40,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.shop,
+                                      color: Colors.grey,
+                                      size: D.H / 40,
+                                    ),
+                                    SizedBox(width: D.H / 80),
+                                    Text(jobData[index].jobTitle.toString(),
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.blue,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: D.H / 55)),
+                                    SizedBox(width: D.H / 80),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.only(top: D.W / 100.0),
+                                      child: Container(
+                                          height: D.H / 50,
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue.withOpacity(0.1),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(D.W / 100.0),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: D.W / 60.0,
+                                                right: D.W / 60.0),
+                                            child: Center(
+                                                child: Text("Applied",
+                                                    style: GoogleFonts.roboto(
+                                                        color: Colors.blue,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: D.H / 80))),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: D.H / 100),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.access_time_outlined,
+                                      color: Colors.grey,
+                                      size: D.H / 40,
+                                    ),
+                                    SizedBox(width: D.H / 80),
+                                    Text("Applied On:",
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: D.H / 55)),
+                                    Text(jobData[index].createdAt.toString().substring(0,10),
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: D.H / 55)),
+                                  ],
+                                ),
+                                SizedBox(height: D.H / 100),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.credit_card,
+                                      color: Colors.grey,
+                                      size: D.H / 40,
+                                    ),
+                                    SizedBox(width: D.H / 80),
+                                    Text(jobData[index].salaryTo.toString(),
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: D.H / 55)),
+                                    SizedBox(width: D.H / 80),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                );
-              }),
+                    );
+                  }),
               SizedBox(height: D.H / 25),
             ],
           ),
