@@ -54,12 +54,14 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
     String responseBody = response.body;
     var res = jsonDecode(responseBody);
     if (statusCode == 200 && res["success"]) {
+      jobData.clear();
       print("Sucess");
       AppliedJobModel responsee = AppliedJobModel.fromJson(res);
       responsee.data!.forEach((element) {
         jobData.add(Job(
             jobTitle:element.job!.jobTitle.toString(),
             salaryTo:element.job!.salaryTo!.toInt(),
+            salaryFrom:element.job!.salaryFrom!.toInt(),
             createdAt:element.job!.createdAt.toString(),
             status:element.job!.status!.toInt()
         ));
@@ -226,7 +228,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
                                       size: D.H / 40,
                                     ),
                                     SizedBox(width: D.H / 80),
-                                    Text(jobData[index].salaryTo.toString(),
+                                    Text("\$"+jobData[index].salaryFrom.toString()+"-"+jobData[index].salaryTo.toString(),
                                         style: GoogleFonts.roboto(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
