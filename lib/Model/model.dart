@@ -29,7 +29,6 @@ class CategoryModelData {
   String? text2;
   Color? color;
 
-
   CategoryModelData({required this.icon,required this.text1,required this.text2, required this.color});
 
   CategoryModelData.fromJson(Map<String, dynamic> json) {
