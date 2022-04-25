@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Constants/api_endpoint.dart';
 import '../../Constants/color_constants.dart';
 import '../../Model/API Models/applied_job_model.dart';
@@ -21,15 +22,25 @@ class AppliedJobScreen extends StatefulWidget {
 
 class _AppliedJobScreenState extends State<AppliedJobScreen> {
 
-  static List<Job> jobData = <Job>[];
+  // static List<Job> jobData = <Job>[];
+  static List<String> jobData = <String>[];
 
   @override
   void initState() {
-    getAppliedJob();
+    // getAppliedJob();
+    getsharedData();
     super.initState();
   }
+ Future<void> getsharedData() async {
+   jobData.clear();
+   SharedPreferences ss=await SharedPreferences.getInstance();
+   jobData.addAll(ss.getStringList("appliedJobList")??[]);
+   setState(() {
 
-  Future<void> getAppliedJob() async {
+   });
+
+ }
+ /* Future<void> getAppliedJob() async {
     LoginModel? loginModel =
         await PreferenceUtils.getLoginObject("LoginResponse");
     final token = loginModel!.token;
@@ -74,7 +85,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
       CommonUtils.showRedToastMessage(
           "Something went wrong for getting category");
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +177,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
                                       size: D.H / 40,
                                     ),
                                     SizedBox(width: D.H / 80),
-                                    Text(jobData[index].jobTitle.toString(),
+                                    Text(jobData[index],
                                         style: GoogleFonts.roboto(
                                             color: Colors.blue,
                                             fontWeight: FontWeight.bold,
@@ -212,7 +223,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
                                             color: Colors.grey,
                                             fontWeight: FontWeight.bold,
                                             fontSize: D.H / 55)),
-                                    Text(jobData[index].createdAt.toString().substring(0,10),
+                                    Text("29th March",
                                         style: GoogleFonts.roboto(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
@@ -228,7 +239,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
                                       size: D.H / 40,
                                     ),
                                     SizedBox(width: D.H / 80),
-                                    Text("\$"+jobData[index].salaryFrom.toString()+"-"+jobData[index].salaryTo.toString(),
+                                    Text("\$"+"1000",
                                         style: GoogleFonts.roboto(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,

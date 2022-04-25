@@ -124,7 +124,7 @@ class _JobScreenState extends State<JobScreen> {
                     ),
                   ),
                   SizedBox(height: 12,),
-                  Padding(
+                 /* Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,7 +156,7 @@ class _JobScreenState extends State<JobScreen> {
                         )),
                       ],
                     ),
-                  ),
+                  ),*/
                 ],
               ),
               SizedBox(height: D.W/60,),

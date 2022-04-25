@@ -89,25 +89,54 @@ class _ExploreScreenState extends State<ExploreScreen> {
   }
 }
 
+// class Choice {
+//   Choice({required this.imgUrl, required this.name, required this.post, required this.matual, required this.location});
+//   final String imgUrl;
+//   final String name;
+//   final String post;
+//   final String matual;
+//   final String location;
+// }
 class Choice {
-  Choice({required this.imgUrl, required this.name, required this.post, required this.matual, required this.location});
-  final String imgUrl;
-  final String name;
-  final String post;
-  final String matual;
-  final String location;
+  String? imgUrl;
+  String? name;
+  String? post;
+  String? matual;
+  String? location;
+  bool? isPending;
+  Choice({required this.imgUrl, required this.name, required this.post, required this.matual, required this.location,required this.isPending});
+
+
+  Choice.fromJson(Map<String, dynamic> json) {
+    imgUrl = json['imgUrl'];
+    name = json['name'];
+    post = json['post'];
+    matual = json['matual'];
+    isPending = json['isPending'];
+
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['imgUrl'] = this.imgUrl;
+    data['name'] = this.name;
+    data['post'] = this.post;
+    data['matual'] = this.matual;
+    data['isPending'] = this.isPending;
+    return data;
+  }
 }
 
 List<Choice> choices = <Choice>[
-  Choice(imgUrl: 'https://images.pexels.com/photos/3671083/pexels-photo-3671083.jpeg', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80', name: 'Mary M', post: "Business Ownwer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1576828831022-ca41d3905fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=723&q=80', name: 'Mary M', post: "Designer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893629034-7a948592ce75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80', name: 'Mary M', post: "Project Manager",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1540174401473-df5f1c06c716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615892376613-4ee6dbe6ceef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1610521411256-6664ca58a072?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1613964143672-ae5cc4f412d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad"),
+  Choice(imgUrl: 'https://images.pexels.com/photos/3671083/pexels-photo-3671083.jpeg', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80', name: 'Mary M', post: "Business Ownwer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1576828831022-ca41d3905fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=723&q=80', name: 'Mary M', post: "Designer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893629034-7a948592ce75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80', name: 'Mary M', post: "Project Manager",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1540174401473-df5f1c06c716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1615892376613-4ee6dbe6ceef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1610521411256-6664ca58a072?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1613964143672-ae5cc4f412d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
 ];
 
 class SelectCard extends StatefulWidget {
@@ -159,7 +188,7 @@ class _SelectCardState extends State<SelectCard> {
 
                             height: D.H/8,
                             width: D.H/8,
-                            fit: BoxFit.fill, image: NetworkImage( widget.choice.imgUrl), placeholder:AssetImage("assets/images/placeholder.png") ,
+                            fit: BoxFit.fill, image: NetworkImage( widget.choice.imgUrl.toString()), placeholder:AssetImage("assets/images/placeholder.png") ,
                           ),
                         ),
                       ),
@@ -171,22 +200,53 @@ class _SelectCardState extends State<SelectCard> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top:D.H/100),
-                  child: Text(widget.choice.name,style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.w500,fontSize: D.H/50)),
+                  child: Text(widget.choice.name.toString(),style: GoogleFonts.roboto(color: Colors.black,fontWeight: FontWeight.w500,fontSize: D.H/50)),
                 ),
                 SizedBox(height: D.H/500),
-                Text(widget.choice.post,style: GoogleFonts.roboto(color: Colors.black.withOpacity(0.5),fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                Text(widget.choice.post.toString(),style: GoogleFonts.roboto(color: Colors.black.withOpacity(0.5),fontWeight: FontWeight.normal,fontSize: D.H/65)),
                 SizedBox(height: D.H/125),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset("assets/images/connect.svg",height: 12,width: 12,color: ColorConstants.primaryBlueColor,),
                     SizedBox(width: 4,),
-                    Text(widget.choice.matual,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                    Text(widget.choice.matual.toString(),style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
                   ],
                 ),
                 SizedBox(height: D.H/125),
-                Text(widget.choice.location,style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
-                Padding(
+                Text(widget.choice.location.toString(),style: GoogleFonts.roboto(color: Colors.grey,fontWeight: FontWeight.normal,fontSize: D.H/65)),
+                widget.choice.isPending??false?Padding(
+                  padding: EdgeInsets.only(top: D.H/100),
+                  child: GestureDetector(
+                    child: Container(
+                      height: D.H/24,
+                      width: D.W/3.2,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        border: Border.all(
+                          width: 1,
+                          color:Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(D.H/50),
+                      ),
+                      child: Container(
+                        child: Center(
+                          child: Text(
+                            "Pending",
+                            style: TextStyle(
+                                fontSize: D.H/55,color:ColorConstants.blackColor,fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      widget.choice.isPending=true;
+                      setState(() {
+
+                      });
+                    },
+                  ),
+                ):Padding(
                   padding: EdgeInsets.only(top: D.H/100),
                   child: GestureDetector(
                     child: Container(
@@ -202,7 +262,7 @@ class _SelectCardState extends State<SelectCard> {
                       child: Container(
                         child: Center(
                           child: Text(
-                            "Connect",
+                           "Connect",
                             style: TextStyle(
                                 fontSize: D.H/55,color:ColorConstants.primaryBlueColor,fontWeight: FontWeight.w500),
                           ),
@@ -210,7 +270,10 @@ class _SelectCardState extends State<SelectCard> {
                       ),
                     ),
                     onTap: () {
+                        widget.choice.isPending=true;
+                        setState(() {
 
+                        });
                     },
                   ),
                 ),

@@ -381,7 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return InkWell(
                             onTap: (){
                               NavigationHelpers.redirect(
-                                  context, JobDetailsScreen(iconpath: "assets/images/searchicontwo.png",));
+                                  context, JobDetailsScreen(iconpath: "assets/images/searchicontwo.png", titlename: popularjobs[index].text1.toString(),));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -554,7 +554,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     NavigationHelpers.redirect(
-                                        context, JobDetailsScreen(iconpath: "assets/images/searchiconfour.png",));
+                                        context, JobDetailsScreen(iconpath: "assets/images/searchiconfour.png", titlename: popularjobs[index].text1.toString(),));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
