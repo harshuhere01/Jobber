@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jobber/Constants/color_constants.dart';
@@ -13,6 +14,7 @@ import 'package:jobber/CustomWidgets/welcome_page_rounded_button.dart';
 import 'package:jobber/Utils/common_utils.dart';
 import 'package:jobber/Utils/dimensions.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
+import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -31,17 +33,18 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
   PageController _pageController = PageController(
     keepPage: true,
   );
-  late File uploadedphoto ;
+  late File uploadedphoto;
+
   String userPhotoPath = 'assets/images/user_visiting_card.png';
   String userName = 'Your Name';
   String userJobCity = 'Location';
-  String userOtherdetails = 'Education | Experience |  Location';
   String userworkExperience = 'Experience';
   String userCompanyName = '';
   String userJobTitle = 'Preferred Job Location';
   String usereducation = 'Education';
   String userdegree = '0';
   String useruniversity = '0';
+  String pickedfilepath = '';
   bool photouploaded = false;
 
   TextEditingController namecontroller = TextEditingController();
@@ -159,8 +162,10 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
                                               width: 122,
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(10),
-                                                    bottomLeft: Radius.circular(10)),
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
                                                 child: Image.asset(
                                                   userPhotoPath,
                                                   fit: BoxFit.cover,
@@ -809,7 +814,15 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
             btnradius: D.H / 100,
             fontweight: FontWeight.w900,
             onTap: () {
-
+              PreferenceUtils.setString('visitingcardname', userName);
+              PreferenceUtils.setString('visitingcardphoto', pickedfilepath);
+              PreferenceUtils.setString('visitingcardjobtitle', userJobTitle);
+              PreferenceUtils.setString('visitingcardcompanyname', userCompanyName);
+              PreferenceUtils.setString('visitingcardeducation', usereducation);
+              PreferenceUtils.setString('visitingcardjobcity', userJobCity);
+              PreferenceUtils.setString('visitingcardexperience', userworkExperience);
+              Fluttertoast.showToast(msg: 'Card Saved');
+              NavigationHelpers.redirectto(context, DashBoardScreen(0));
             },
           ),
           SizedBox(
@@ -861,6 +874,7 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
       setState(() {
         photouploaded = true;
         uploadedphoto = File(pickedFile.path);
+        pickedfilepath = pickedFile.path;
       });
     }
   }

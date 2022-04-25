@@ -15,6 +15,7 @@ import 'package:jobber/View/Screens/auth_screen.dart';
 import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
+import 'package:jobber/View/Screens/news_page.dart';
 import 'package:jobber/View/Screens/news_screen.dart';
 import 'package:jobber/View/Screens/privacy_policy_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
@@ -47,7 +48,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     HomeScreen(),
     JobScreen(),
     ExploreScreen(),
-    NewsScreen(),
+    NewsPage(),
     AccountScreen(),
     // ExploreScreen(
     //   isFromProfile: false,

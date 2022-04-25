@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../Constants/color_constants.dart';
@@ -13,6 +14,18 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorConstants.whiteColor,
+        elevation: 0,
+        leading: IconButton(
+            icon: Icon(
+              CupertinoIcons.left_chevron,
+              color: Colors.black87,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ),
       floatingActionButton: Padding(
         padding:  EdgeInsets.only(bottom: D.H / 15.0,right:D.W /100.0 ),
         child: Container(
