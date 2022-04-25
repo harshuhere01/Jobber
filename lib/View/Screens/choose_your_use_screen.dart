@@ -8,6 +8,8 @@ import 'package:jobber/CustomWidgets/welcome_page_rounded_button.dart';
 import 'package:jobber/Utils/dimensions.dart';
 import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/dash_board_screen.dart';
+import 'package:jobber/View/Screens/visiting_card_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChooseYourUseScreen extends StatefulWidget {
   const ChooseYourUseScreen({Key? key}) : super(key: key);
@@ -133,8 +135,11 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
               width: D.H / 2.5,
               btnradius: D.H / 50,
               fontweight: FontWeight.w500,
-              onTap: () {
-                NavigationHelpers.redirect(context, DashBoardScreen(0));
+              onTap: () async {
+                SharedPreferences pref=await SharedPreferences.getInstance();
+                pref.setString("UserType", radioGroupValue.toString());
+                print(radioGroupValue.toString());
+                 NavigationHelpers.redirect(context, VisitingCardMain());
               },
             ),
           ],

@@ -798,6 +798,23 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
           SizedBox(
             height: D.H / 50,
           ),
+          WelcomePageRoundedButton(
+            textcolor: ColorConstants.primaryBlueColor,
+            color: ColorConstants.whiteColor,
+            bordercolor: ColorConstants.primaryBlueColor,
+            text: 'Save',
+            fontsize: 22,
+            height: D.H / 17,
+            width: D.H,
+            btnradius: D.H / 100,
+            fontweight: FontWeight.w900,
+            onTap: () {
+
+            },
+          ),
+          SizedBox(
+            height: D.H / 50,
+          ),
           InkWell(
             onTap: () {
               NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));

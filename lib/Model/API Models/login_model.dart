@@ -49,6 +49,7 @@ class User {
   String? pinterestUrl;
   String? stripeId;
   String? regionCode;
+  int? first_time;
   String? fullName;
   String? avatar;
   String? countryName;
@@ -86,6 +87,7 @@ class User {
         this.pinterestUrl,
         this.stripeId,
         this.regionCode,
+        this.first_time,
         this.fullName,
         this.avatar,
         this.countryName,
@@ -123,6 +125,7 @@ class User {
     pinterestUrl = json['pinterest_url'];
     stripeId = json['stripe_id'];
     regionCode = json['region_code'];
+    first_time = json['first_time'];
     fullName = json['full_name'];
     avatar = json['avatar'];
     countryName = json['country_name'];
@@ -162,6 +165,7 @@ class User {
     data['pinterest_url'] = this.pinterestUrl;
     data['stripe_id'] = this.stripeId;
     data['region_code'] = this.regionCode;
+    data['first_time'] = this.first_time;
     data['full_name'] = this.fullName;
     data['avatar'] = this.avatar;
     data['country_name'] = this.countryName;

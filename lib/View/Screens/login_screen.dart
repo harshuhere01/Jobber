@@ -12,6 +12,7 @@ import 'package:jobber/CustomWidgets/custom_textform_field.dart';
 import 'package:jobber/Model/API%20Models/login_model.dart';
 import 'package:jobber/Model/API%20Models/social_login_model.dart';
 import 'package:jobber/Utils/preferences.dart';
+import 'package:jobber/View/Screens/choose_your_use_screen.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
 import 'package:jobber/View/Screens/visiting_card_main.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
@@ -20,6 +21,7 @@ import '../../Constants/api_endpoint.dart';
 import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
+import 'dash_board_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -281,7 +283,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showGreenToastMessage("Login Successfullyu");
-      NavigationHelpers.redirectto(context, VisitingCardMain());
+      if(responsee.user!.first_time==0){
+        NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
+
+      }else{
+        NavigationHelpers.redirectto(context, ChooseYourUseScreen());
+      }
+
     } else {
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showRedToastMessage("Something went wrong");
