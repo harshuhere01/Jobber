@@ -5,14 +5,13 @@ class CategortTextModel {
   bool? isFavourite;
   Color? color;
 
-
-  CategortTextModel({required this.text, required this.color,required this.isFavourite});
+  CategortTextModel(
+      {required this.text, required this.color, required this.isFavourite});
 
   CategortTextModel.fromJson(Map<String, dynamic> json) {
     text = json['text'];
     color = json['color'];
     isFavourite = json['isFavourite'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -23,20 +22,24 @@ class CategortTextModel {
     return data;
   }
 }
+
 class CategoryModelData {
   String? icon;
   String? text1;
   String? text2;
   Color? color;
 
-  CategoryModelData({required this.icon,required this.text1,required this.text2, required this.color});
+  CategoryModelData(
+      {required this.icon,
+      required this.text1,
+      required this.text2,
+      required this.color});
 
   CategoryModelData.fromJson(Map<String, dynamic> json) {
     icon = json['icon'];
     text1 = json['text1'];
     text2 = json['text2'];
     color = json['color'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -57,8 +60,13 @@ class PopularJobModelData {
   String? text3;
   String? id;
 
-
-  PopularJobModelData({required this.icon,required this.isLiked,required this.text1,required this.text2, required this.text3,required this.id});
+  PopularJobModelData(
+      {required this.icon,
+      required this.isLiked,
+      required this.text1,
+      required this.text2,
+      required this.text3,
+      required this.id});
 
   PopularJobModelData.fromJson(Map<String, dynamic> json) {
     icon = json['icon'];
@@ -67,7 +75,6 @@ class PopularJobModelData {
     text2 = json['text2'];
     text3 = json['text3'];
     id = json['id'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -89,8 +96,12 @@ class SearchJobListData {
   String? text2;
   String? text3;
 
-
-  SearchJobListData({required this.icon,required this.isLiked,required this.text1,required this.text2, required this.text3});
+  SearchJobListData(
+      {required this.icon,
+      required this.isLiked,
+      required this.text1,
+      required this.text2,
+      required this.text3});
 
   SearchJobListData.fromJson(Map<String, dynamic> json) {
     icon = json['icon'];
@@ -98,7 +109,6 @@ class SearchJobListData {
     text1 = json['text1'];
     text2 = json['text2'];
     text3 = json['text3'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -108,6 +118,27 @@ class SearchJobListData {
     data['text1'] = this.text1;
     data['text2'] = this.text2;
     data['text3'] = this.text3;
+    return data;
+  }
+}
+
+class NewsModel {
+  String? newstext;
+  String? imagepath;
+
+  NewsModel({required this.newstext, required this.imagepath});
+
+  NewsModel.fromJson(Map<String, dynamic> json) {
+    newstext = json['newstext'];
+    imagepath = json['imagepath'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['newstext'] = this.newstext;
+    data['imagepath'] = this.imagepath;
+
     return data;
   }
 }
