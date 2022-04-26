@@ -6,6 +6,7 @@ import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/digital_cv_page.dart';
 import 'package:jobber/View/Screens/favourite_jobs_page.dart';
 import 'package:jobber/View/Screens/following_screen.dart';
+import 'package:jobber/View/Screens/jobs_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/dimensions.dart';
@@ -490,7 +491,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     ],),
                   ),),
                 onTap: (){
-                  {NavigationHelpers.redirect(context, MyExperienceScreen());}
+                  {NavigationHelpers.redirect(context, JobsScreen());}
                 },
               ),
               SizedBox(height: 8,),

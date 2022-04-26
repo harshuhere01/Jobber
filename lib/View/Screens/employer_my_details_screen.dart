@@ -20,14 +20,20 @@ class _EmployerMyDetailScreenState extends State<EmployerMyDetailScreen> {
   TextEditingController controller=TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final fatherNameController = TextEditingController();
-  final bithDateController = TextEditingController();
+  final NameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final industryController = TextEditingController();
+  final sizeController = TextEditingController();
+  final stateController = TextEditingController();
+  final detailController = TextEditingController();
+  final ceoNameController = TextEditingController();
+  final ownershipController = TextEditingController();
+  final countryController = TextEditingController();
+  final cityController = TextEditingController();
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final skillController = TextEditingController();
-  final languageController = TextEditingController();
+  final locationController = TextEditingController();
+  final websiteController = TextEditingController();
+  final officeNumberController = TextEditingController();
   var _selectedGender = "male";
 
   @override
@@ -76,50 +82,102 @@ class _EmployerMyDetailScreenState extends State<EmployerMyDetailScreen> {
                     height: D.H / 30,
                   ),
                   CustomTextFormFieldForProfile(
-                    controller: firstNameController,
+                    controller: NameController,
                     readOnly: false,
-                    hint: "Ram",
+                    hint: "Atom Technology",
                     validators: (val) {
-                      if (firstNameController.text == null ||
-                          firstNameController.text == '') {
+                      if (NameController.text == null ||
+                          NameController.text == '') {
                         return '*Please enter first name';
                       }
                     },
                     keyboardTYPE: TextInputType.name,
                     obscured: false,
-                    headerText: 'First Name',
+                    headerText: 'Name',
                   ),
                   SizedBox(
                     height: D.H / 70,
                   ),
                   CustomTextFormFieldForProfile(
-                    controller: lastNameController,
+                    controller: phoneController,
                     readOnly: false,
-                    hint: "Kumar",
+                    hint: "7637465678",
                     validators: (val) {
-                      if (lastNameController.text == null ||
-                          lastNameController.text == '') {
-                        return '*Please enter last name';
+                      if (phoneController.text == null ||
+                          phoneController.text == '') {
+                        return '*Please enter phone';
                       }
                     },
                     keyboardTYPE: TextInputType.name,
                     obscured: false,
-                    headerText: 'Last Name',
+                    headerText: 'Phone',
                   ),
                   SizedBox(
                     height: D.H / 70,
                   ),
                   CustomTextFormFieldForProfile(
-                    controller: emailController,
+                    controller: industryController,
                     readOnly: false,
-                    hint: "test@gmail.com",
+                    hint: "Marketing",
                     validators: (val) {
-                      if (emailController.text == null ||
-                          emailController.text == '') {
-                        return '*Please enter Email';
+                      if (industryController.text == null ||
+                          industryController.text == '') {
+                        return '*Please enter industry';
                       } else if (!EmailValidator.validate(
                           emailController.text)) {
                         return '*Please enter valid Email';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'Industry',
+                  ),
+                  SizedBox(
+                    height: D.H / 70,
+                  ),
+                  CustomTextFormFieldForProfile(
+                    controller: stateController,
+                    readOnly: false,
+                    hint: "select state",
+                    validators: (val) {
+                      if (stateController.text == null ||
+                          stateController.text == '') {
+                        return '*Please enter state';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'State',
+                  ),
+                  SizedBox(
+                    height: D.H / 70,
+                  ),
+                  CustomTextFormFieldForProfile(
+                    controller: detailController,
+                    readOnly: false,
+                    hint: "Employer Detail",
+                    validators: (val) {
+                      if (detailController.text == null ||
+                          detailController.text == '') {
+                        return '*Please enter detail';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'Birth Date',
+                  ),
+                  SizedBox(
+                    height: D.H / 70,
+                  ),
+
+                  CustomTextFormFieldForProfile(
+                    controller: emailController,
+                    readOnly: false,
+                    hint: "email",
+                    validators: (val) {
+                      if (emailController.text == null ||
+                          emailController.text == '') {
+                        return '*Please enter email';
                       }
                     },
                     keyboardTYPE: TextInputType.name,
@@ -130,123 +188,106 @@ class _EmployerMyDetailScreenState extends State<EmployerMyDetailScreen> {
                     height: D.H / 70,
                   ),
                   CustomTextFormFieldForProfile(
-                    controller: fatherNameController,
+                    controller: ceoNameController,
                     readOnly: false,
-                    hint: "Rajesh Kumar",
+                    hint: "Chris Silver",
                     validators: (val) {
-                      if (fatherNameController.text == null ||
-                          fatherNameController.text == '') {
-                        return '*Please enter father name';
+                      if (ceoNameController.text == null ||
+                          ceoNameController.text == '') {
+                        return '*Please enter ceo name';
                       }
                     },
                     keyboardTYPE: TextInputType.name,
                     obscured: false,
-                    headerText: 'Father Name',
+                    headerText: 'CEO Name',
                   ),
                   SizedBox(
                     height: D.H / 70,
                   ),
                   CustomTextFormFieldForProfile(
-                    controller: bithDateController,
+                    controller: ownershipController,
                     readOnly: false,
-                    hint: "Birth Date",
+                    hint: "Chris Silver",
                     validators: (val) {
-                      if (bithDateController.text == null ||
-                          bithDateController.text == '') {
-                        return '*Please enter father name';
+                      if (ownershipController.text == null ||
+                          ownershipController.text == '') {
+                        return '*Please enter ownership';
                       }
                     },
                     keyboardTYPE: TextInputType.name,
                     obscured: false,
-                    headerText: 'Birth Date',
-                  ),
-                  SizedBox(
-                    height: D.H / 70,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Gender",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14, color: Colors.black.withOpacity(0.6),fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "*",
-                          style:
-                              GoogleFonts.roboto(fontSize: 12, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                 Padding(
-                   padding: const EdgeInsets.only(left: 6.0),
-                   child: Row(children: [
-                     Text(
-                       "Male",
-                       style: GoogleFonts.roboto(
-                           fontSize: 14, color: Colors.black.withOpacity(0.6)),
-                     ),
-                     new Radio(onChanged: (value) {
-                       _selectedGender="male";
-                       setState(() {
-
-                       });
-                     }, groupValue: _selectedGender, value: "male",),
-                     SizedBox(width: 14,),
-                     Text(
-                       "Female",
-                       style: GoogleFonts.roboto(
-                           fontSize: 14, color: Colors.black.withOpacity(0.6)),
-                     ),
-                     new Radio(onChanged: (value) {
-                       _selectedGender="Female";
-                       setState(() {
-
-                       });
-                     }, groupValue: _selectedGender, value: "Female",),
-                   ],),
-                 ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  CustomTextFormFieldForProfile(
-                    controller: skillController,
-                    readOnly: false,
-                    hint: "Skill",
-                    validators: (val) {
-                      if (skillController.text == null ||
-                          skillController.text == '') {
-                        return '*Please enter skill';
-                      }
-                    },
-                    keyboardTYPE: TextInputType.name,
-                    obscured: false,
-                    headerText: 'Skill',
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  CustomTextFormFieldForProfile(
-                    controller: languageController,
-                    readOnly: false,
-                    hint: "Language",
-                    validators: (val) {
-                      if (languageController.text == null ||
-                          languageController.text == '') {
-                        return '*Please enter language';
-                      }
-                    },
-                    keyboardTYPE: TextInputType.name,
-                    obscured: false,
-                    headerText: 'Language',
+                    headerText: 'OwnerShip Type',
                   ),
                   SizedBox(
                     height: 12,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  CustomTextFormFieldForProfile(
+                    controller: stateController,
+                    readOnly: false,
+                    hint: "select state",
+                    validators: (val) {
+                      if (stateController.text == null ||
+                          stateController.text == '') {
+                        return '*Please enter state';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'City',
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  CustomTextFormFieldForProfile(
+                    controller: officeNumberController,
+                    readOnly: false,
+                    hint: "5",
+                    validators: (val) {
+                      if (officeNumberController.text == null ||
+                          officeNumberController.text == '') {
+                        return '*Please enter office number';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'No of Office',
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  CustomTextFormFieldForProfile(
+                    controller: websiteController,
+                    readOnly: false,
+                    hint: "www.test.com",
+                    validators: (val) {
+                      if (websiteController.text == null ||
+                          websiteController.text == '') {
+                        return '*Please enter website';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'Website',
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  CustomTextFormFieldForProfile(
+                    controller: locationController,
+                    readOnly: false,
+                    hint: "Location",
+                    validators: (val) {
+                      if (locationController.text == null ||
+                          locationController.text == '') {
+                        return '*Please enter location';
+                      }
+                    },
+                    keyboardTYPE: TextInputType.name,
+                    obscured: false,
+                    headerText: 'Location',
                   ),
                   WelcomePageRoundedButton(
                     color: ColorConstants.primaryBlueColor,
