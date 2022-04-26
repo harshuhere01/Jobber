@@ -12,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/dimensions.dart';
 import 'change_password_screen.dart';
 import '../../Utils/navigation_helper.dart';
+import 'employe_job_stages_screen.dart';
+import 'employee_follower_screen.dart';
 import 'employer_my_details_screen.dart';
 import 'myExperience_screen.dart';
 import 'myResume_screen.dart';
@@ -508,7 +510,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     ],),
                   ),),
                 onTap: (){
-                  {NavigationHelpers.redirect(context, AppliedJobScreen());}
+                  {NavigationHelpers.redirect(context, EmployeJobStages());}
                 },
               ),
               SizedBox(height: 8,),
@@ -562,7 +564,7 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               SizedBox(height: 8,),
               InkWell(
-                onTap: (){NavigationHelpers.redirect(context, FollowingScreen());},
+                onTap: (){NavigationHelpers.redirect(context, EmployeFollower());},
                 child: Container(
                   decoration: BoxDecoration(
                       color:Color(0xFFEEEEEE),
