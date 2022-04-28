@@ -70,7 +70,7 @@ class _DigitalCVState extends State<DigitalCV> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
-                            flex: 8,
+                            flex:9,
                             child: SizedBox(
                               height: 190,
                               child: ClipRRect(
@@ -88,7 +88,7 @@ class _DigitalCVState extends State<DigitalCV> {
                             ),
                           ),
                           Expanded(
-                            flex: 16,
+                            flex: 18,
                             child: Padding(
                               padding:
                                   EdgeInsets.symmetric(horizontal: D.W / 20),

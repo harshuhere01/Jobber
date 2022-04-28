@@ -859,6 +859,7 @@ class _VisitingCardMainState extends State<VisitingCardMain> {
       setState(() {
         photouploaded = true;
         uploadedphoto = File(pickedFile.path);
+        pickedfilepath = pickedFile.path;
       });
     }
   }
