@@ -14,7 +14,6 @@ import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/View/Screens/category_screen.dart';
 import 'package:jobber/View/Screens/search_screen.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
 import '../../Model/API Models/get_job_response_model.dart';
 import '../../Model/API Models/get_recent_job_response_model.dart';
