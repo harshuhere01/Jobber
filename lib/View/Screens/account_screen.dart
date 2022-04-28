@@ -9,6 +9,7 @@ import 'package:jobber/View/Screens/following_screen.dart';
 import 'package:jobber/View/Screens/idea_comment.dart';
 import 'package:jobber/View/Screens/write_a_blog_screen.dart';
 import 'package:jobber/View/Screens/write_a_idea.dart';
+import 'package:jobber/View/Screens/jobs_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/dimensions.dart';
@@ -500,7 +501,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     ],),
                   ),),
                 onTap: (){
-                  {NavigationHelpers.redirect(context, MyExperienceScreen());}
+                  {NavigationHelpers.redirect(context, JobsScreen());}
                 },
               ),
               SizedBox(height: 8,),
