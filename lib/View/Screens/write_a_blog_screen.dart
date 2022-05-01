@@ -1,3 +1,4 @@
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jobber/CustomWidgets/custom_textform_field_for_profile.dart';
+import 'package:jobber/Utils/common_utils.dart';
 
 import '../../Constants/color_constants.dart';
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
@@ -31,6 +33,7 @@ class _WriteBlogState extends State<WriteBlog> {
   final skillController = TextEditingController();
   final languageController = TextEditingController();
   var _selectedGender = "male";
+
 
   @override
   Widget build(BuildContext context) {
@@ -157,18 +160,25 @@ class _WriteBlogState extends State<WriteBlog> {
                     children: [
                       WelcomePageRoundedButton(
                         color: ColorConstants.primaryBlueColor,
-                        text: 'SAVE',
-                        fontsize: 22,
-                        height: D.H / 15,
+                        text: 'Submit',
+                        fontsize: 18,
+                        height: D.H /15,
                         width: D.W/2.4,
-                        btnradius: D.H / 50,
+                        btnradius: D.H /50,
                         fontweight: FontWeight.w500,
-                        onTap: () {
+                        onTap: () async {
                           if (_formkey.currentState!.validate()) {
                           } else {
                             return null;
                           }
-                          setState(() {});
+                          CommonUtils.showProgressDialog(context);
+                          await Future.delayed(Duration(milliseconds: 2000), () {
+                            CommonUtils.hideProgressDialog(context);
+                            CommonUtils.showGreenToastMessage("Your Blog has been gone for verification ");
+                          });
+                          setState(() {
+
+                          });
                         },
                         bordercolor: ColorConstants.primaryBlueColor,
                         textcolor: ColorConstants.whiteColor,
@@ -176,7 +186,7 @@ class _WriteBlogState extends State<WriteBlog> {
                       WelcomePageRoundedButton(
                         color: Colors.grey.shade200,
                         text: 'Cancel',
-                        fontsize: 22,
+                        fontsize: 18,
                         height: D.H / 15,
                         width: D.W/2.4,
                         btnradius: D.H / 50,
