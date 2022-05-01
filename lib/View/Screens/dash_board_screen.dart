@@ -45,6 +45,8 @@ class DashBoardScreen extends StatefulWidget {
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
+  String userName="Adom Shafi";
+  String UserEmail="hellobesnik@gmail.com";
   final List<Widget> _children = [
     HomeScreen(),
     JobScreen(),
@@ -68,6 +70,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   getprefrences() async {
     loginModel = (await PreferenceUtils.getLoginObject('LoginResponse'))!;
+
+    if(loginModel!=null){
+      userName=loginModel.user!.firstName??"Adom Shafi";
+      UserEmail=loginModel.user!.email??"hellobesnik@gmail.com";
+    }else{
+
+    }
+    setState(() {
+
+    });
   }
 
   @override
@@ -128,23 +140,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   height: D.H / 20,
                 ),
                 Container(
-                  height: D.H / 10,
-                  width: D.W / 5,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.network(
-                      "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
-                      fit: BoxFit.cover,
-                    ),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(100))),
+                  height: D.H / 12,
+                  width: D.W / 6,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset("assets/images/drawerlogo.png"),
                   ),
                 ),
                 Text(
-                  "Adom Shafi",
+                  "$userName",
                   style: GoogleFonts.roboto(
                       fontSize: 26, fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  "hellobesnik@gmail.com",
+                  "$UserEmail",
                   style: GoogleFonts.roboto(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,

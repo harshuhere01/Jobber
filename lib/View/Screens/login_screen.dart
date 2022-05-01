@@ -282,7 +282,7 @@ class _LoginScreenState extends State<LoginScreen> {
       PreferenceUtils.putObject("LoginResponse", responsee);
 
       CommonUtils.hideProgressDialog(context);
-      CommonUtils.showGreenToastMessage("Login Successfullyu");
+      CommonUtils.showGreenToastMessage("Login Successfully");
       if(responsee.user!.first_time==0){
         NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
 

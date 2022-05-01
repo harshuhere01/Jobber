@@ -129,14 +129,8 @@ class Choice {
 
 List<Choice> choices = <Choice>[
   Choice(imgUrl: 'https://images.pexels.com/photos/3671083/pexels-photo-3671083.jpeg', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80', name: 'Mary M', post: "Business Ownwer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1576828831022-ca41d3905fb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=723&q=80', name: 'Mary M', post: "Designer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893629034-7a948592ce75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80', name: 'Mary M', post: "Project Manager",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1540174401473-df5f1c06c716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjJ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1615892376613-4ee6dbe6ceef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1610521411256-6664ca58a072?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
-  Choice(imgUrl: 'https://images.unsplash.com/photo-1613964143672-ae5cc4f412d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Mary M', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1615893208238-ead83e5a2b3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80', name: 'Cristien R', post: "Business Ownwer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
+  Choice(imgUrl: 'https://images.unsplash.com/photo-1613964143672-ae5cc4f412d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fHN0eWxlJTIwZ2lybHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60', name: 'Tom Fer', post: "Engineer",matual:"2 mutual connections",location:"Ahmedabad",isPending: false),
 ];
 
 class SelectCard extends StatefulWidget {

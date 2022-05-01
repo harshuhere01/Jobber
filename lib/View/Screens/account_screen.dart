@@ -12,7 +12,9 @@ import 'package:jobber/View/Screens/write_a_idea.dart';
 import 'package:jobber/View/Screens/jobs_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Model/API Models/login_model.dart';
 import '../../Utils/dimensions.dart';
+import '../../Utils/preferences.dart';
 import 'all_blog_screen.dart';
 import 'all_idea_screen.dart';
 import 'blog_comment.dart';
@@ -33,9 +35,13 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   String roleType="Candidate";
+  String userName="Adom Shafi";
+  String UserEmail="hellobesnik@gmail.com";
+  late LoginModel loginModel;
   @override
   void initState() {
   getDataFromSharedPref();
+  getprefrences();
     super.initState();
   }
   Future<void> getDataFromSharedPref() async {
@@ -49,6 +55,19 @@ class _AccountScreenState extends State<AccountScreen> {
       roleType="Blogger";
     }else if(nn=="3"){
       roleType="Businessman";
+    }
+    setState(() {
+
+    });
+  }
+  getprefrences() async {
+    loginModel = (await PreferenceUtils.getLoginObject('LoginResponse'))!;
+
+    if(loginModel!=null){
+      userName=loginModel.user!.firstName??"Adom Shafi";
+      UserEmail=loginModel.user!.email??"hellobesnik@gmail.com";
+    }else{
+
     }
     setState(() {
 
@@ -82,14 +101,15 @@ class _AccountScreenState extends State<AccountScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(100))),
                         height: D.H / 12,
                         width: D.W / 6,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
-                            fit: BoxFit.cover,
-                          ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset("assets/images/drawerlogo.png"),
                         ),
                       ),
                     ),
@@ -97,9 +117,9 @@ class _AccountScreenState extends State<AccountScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text("Name",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),),
+                      Text("$userName",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),),
                      SizedBox(height: 8,),
-                      Text("Email Id",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),)
+                      Text("$UserEmail",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),)
 
 
                     ],),
@@ -328,14 +348,15 @@ class _AccountScreenState extends State<AccountScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(100))),
                           height: D.H / 12,
                           width: D.W / 6,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.network(
-                              "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
-                              fit: BoxFit.cover,
-                            ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset("assets/images/drawerlogo.png"),
                           ),
                         ),
                       ),
@@ -343,9 +364,9 @@ class _AccountScreenState extends State<AccountScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Name",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),),
+                          Text("$userName",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),),
                           SizedBox(height: 8,),
-                          Text("Email Id",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),)
+                          Text("$UserEmail",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),)
 
 
                         ],),
@@ -604,7 +625,8 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               SizedBox(height: 8,),
             ],
-          ):roleType=="Blogger"? Column(
+          ):roleType=="Blogger"?
+          Column(
             children: [
               Container(
             height:D.H/3.5,width:D.W,decoration: BoxDecoration(
@@ -625,14 +647,15 @@ class _AccountScreenState extends State<AccountScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(100))),
                       height: D.H / 12,
                       width: D.W / 6,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.network(
-                          "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
-                          fit: BoxFit.cover,
-                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset("assets/images/drawerlogo.png"),
                       ),
                     ),
                   ),
@@ -640,9 +663,9 @@ class _AccountScreenState extends State<AccountScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Name",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),),
+                      Text("$userName",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),),
                       SizedBox(height: 8,),
-                      Text("Email Id",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),)
+                      Text("$UserEmail",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),)
 
 
                     ],),
@@ -903,14 +926,15 @@ class _AccountScreenState extends State<AccountScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(100))),
                           height: D.H / 12,
                           width: D.W / 6,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.network(
-                              "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1921&q=80",
-                              fit: BoxFit.cover,
-                            ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset("assets/images/drawerlogo.png"),
                           ),
                         ),
                       ),
@@ -918,9 +942,9 @@ class _AccountScreenState extends State<AccountScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Name",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),),
+                          Text("$userName",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),),
                           SizedBox(height: 8,),
-                          Text("Email Id",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/50,fontWeight: FontWeight.w500),)
+                          Text("$UserEmail",style: GoogleFonts.roboto(color:Colors.black,fontSize: D.H/55,fontWeight: FontWeight.w500),)
 
 
                         ],),
