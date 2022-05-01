@@ -13,6 +13,7 @@ import 'package:jobber/Utils/navigation_helper.dart';
 import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/auth_screen.dart';
 import 'package:jobber/View/Screens/create_visiting_card_main_screen.dart';
+import 'package:jobber/View/Screens/digital_cv_page.dart';
 import 'package:jobber/View/Screens/explore_screen.dart';
 import 'package:jobber/View/Screens/home_screen.dart';
 import 'package:jobber/View/Screens/news_page.dart';
@@ -174,7 +175,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     () {
                   Navigator.pop(context);
                   NavigationHelpers.redirect(
-                      context, CreateVisitingCardMainPage());
+                      context, DigitalCV());
                 }),
                 SizedBox(
                   height: D.H / 60,
@@ -183,7 +184,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     ColorConstants.primaryBlueColor, () {
                   Navigator.pop(context);
                   NavigationHelpers.redirect(
-                      context, CreateVisitingCardMainPage());
+                      context, DigitalCV());
                 }),
                 SizedBox(
                   height: D.H / 60,
