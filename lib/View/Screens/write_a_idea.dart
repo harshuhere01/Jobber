@@ -8,6 +8,7 @@ import 'package:jobber/CustomWidgets/custom_textform_field_for_profile.dart';
 
 import '../../Constants/color_constants.dart';
 import '../../CustomWidgets/welcome_page_rounded_button.dart';
+import '../../Utils/common_utils.dart';
 import '../../Utils/dimensions.dart';
 
 class WriteIdea extends StatefulWidget {
@@ -157,18 +158,25 @@ class _WriteIdeaState extends State<WriteIdea> {
                     children: [
                       WelcomePageRoundedButton(
                         color: ColorConstants.primaryBlueColor,
-                        text: 'SAVE',
-                        fontsize: 22,
-                        height: D.H / 15,
+                        text: 'Submit',
+                        fontsize: 18,
+                        height: D.H /15,
                         width: D.W/2.4,
-                        btnradius: D.H / 50,
+                        btnradius: D.H /50,
                         fontweight: FontWeight.w500,
-                        onTap: () {
+                        onTap: () async {
                           if (_formkey.currentState!.validate()) {
                           } else {
                             return null;
                           }
-                          setState(() {});
+                          CommonUtils.showProgressDialog(context);
+                          await Future.delayed(Duration(milliseconds: 2000), () {
+                            CommonUtils.hideProgressDialog(context);
+                            CommonUtils.showGreenToastMessage("Your Idea has been gone for verification ");
+                          });
+                          setState(() {
+
+                          });
                         },
                         bordercolor: ColorConstants.primaryBlueColor,
                         textcolor: ColorConstants.whiteColor,
@@ -176,7 +184,7 @@ class _WriteIdeaState extends State<WriteIdea> {
                       WelcomePageRoundedButton(
                         color: Colors.grey.shade200,
                         text: 'Cancel',
-                        fontsize: 22,
+                        fontsize: 18,
                         height: D.H / 15,
                         width: D.W/2.4,
                         btnradius: D.H / 50,
