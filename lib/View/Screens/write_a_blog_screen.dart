@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class WriteBlog extends StatefulWidget {
 class _WriteBlogState extends State<WriteBlog> {
 
   TextEditingController controller=TextEditingController();
-
+   String _uploadedphoto="";
   final _formkey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -128,29 +130,86 @@ class _WriteBlogState extends State<WriteBlog> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 8,),
                   Row(
                     children: [
                       GestureDetector(
-                        child: Icon(Icons.image,size: D.H/7,color: Colors.grey.shade500,),
-                        onTap: () {
+                        child: _uploadedphoto.isNotEmpty?SizedBox(
+                          height: 150,
+                          width: 120,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                            ),
+                            child: Image.file(
+                              File(_uploadedphoto),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ):Icon(Icons.image,size: D.H/7,color: Colors.grey.shade500,),
+                        onTap: () async {
+                          PickedFile? pickedFile = await ImagePicker().getImage(
+                            source: ImageSource.gallery,
+                            maxWidth: 1800,
+                            maxHeight: 1800,
+                          );
+                          if (pickedFile != null) {
+                            setState(() {
+                              // _uploadedphoto = File(pickedFile.path);
+                              _uploadedphoto = pickedFile.path;
 
+                            });
+                          }
                         },
                       ),
                     ],
                   ),
-                  CustomTextFormFieldForProfile(
-                    controller: emailController,
-                    readOnly: false,
-                    hint: "Description",
-                    validators: (val) {
-                      if (emailController.text == null ||
-                          emailController.text == '') {
-                        return '*Please enter Description';
+                  SizedBox(height: 8,),
+
+                  TextFormField(
+                    validator: (v){
+                      if(emailController.text.isEmpty){
+                        return "Please enter description";
+                      }else{
+                        return null;
                       }
                     },
-                    keyboardTYPE: TextInputType.name,
-                    obscured: false,
-                    headerText: 'Description',
+                    controller: emailController,
+                    maxLines: 4,
+                    cursorColor: ColorConstants.greycolor,
+                    style: GoogleFonts.roboto(),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: D.W / 40, vertical: D.H / 60),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:  BorderSide(
+                            color: ColorConstants.greycolor, width: 2.0),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color(0xFFD7D7D7), width: 2.0),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide:  BorderSide(
+                            color:  ColorConstants.greycolor, width: 1.0),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      counterText: "",
+                      border: OutlineInputBorder(
+                        borderSide:  BorderSide(
+                            color: ColorConstants.greycolor, width: 1.0),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorMaxLines: 1,
+                      hintText: "Description",
+                      labelStyle: GoogleFonts.roboto(
+                          fontSize: 16.0, color: Colors.grey),
+                    ),
                   ),
                   SizedBox(
                     height: 12,
@@ -175,6 +234,7 @@ class _WriteBlogState extends State<WriteBlog> {
                           await Future.delayed(Duration(milliseconds: 2000), () {
                             CommonUtils.hideProgressDialog(context);
                             CommonUtils.showGreenToastMessage("Your Blog has been gone for verification ");
+                            Navigator.pop(context);
                           });
                           setState(() {
 
