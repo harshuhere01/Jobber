@@ -126,6 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textColor: ColorConstants.whiteColor,
                 bordercolor: ColorConstants.primaryBlueColor,
                 onTap: () async {
+
                   if (_formkey.currentState!.validate()) {
                     await signIn(emailController.text, passwordController.text);
                   }
