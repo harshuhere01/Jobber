@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +10,6 @@ import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/welcome_page_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Constants/api_endpoint.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -75,11 +73,11 @@ class _SplashScreenState extends State<SplashScreen> {
     LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
     if(loginModel!=null && loginModel.token!.isNotEmpty){
       refressToken();
-      await Future.delayed(Duration(milliseconds: 6500), () {
+      await Future.delayed(Duration(milliseconds: 3000), () {
         NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
       });
     }else{
-      await Future.delayed(Duration(milliseconds: 6500), () {
+      await Future.delayed(Duration(milliseconds: 3000), () {
         NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
       });
     }
@@ -121,6 +119,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     D.H=MediaQuery.of(context).size.height;
     D.W=MediaQuery.of(context).size.width;
@@ -128,12 +127,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffa9abc5),
-        body: Center(
-          child: Container(
-              height: 250,
-              child: Center(child: Stack(children: <Widget>[_getVideoBackground(),]))),
-        ),
+        backgroundColor: ColorConstants.whiteColor,
+        body: Center(child: Container(child: Image.asset("assets/images/splashimage.png"),)),
       ),
     );
   }

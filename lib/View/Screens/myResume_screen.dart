@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Constants/color_constants.dart';
 import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
@@ -13,6 +17,22 @@ class MyResumeScreen extends StatefulWidget {
 }
 
 class _MyResumeScreenState extends State<MyResumeScreen> {
+  File? file;
+  static List<String> resumeList = <String>[];
+
+  getPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    resumeList = prefs.getStringList("resumeList")??[];
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+   getPreferences();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,24 +76,76 @@ class _MyResumeScreenState extends State<MyResumeScreen> {
               ),
               SizedBox(height: D.H / 35),
               Padding(
-                padding:  EdgeInsets.only(right:D.H / 35,left:D.H / 30,top:D.H / 35),
+                padding:  EdgeInsets.only(right:D.H / 40,left:D.H / 40,top:D.H / 35),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        /*Container(
+                          width: D.W / 2.6,
+                          height: D.H / 19,
+                          child: RaisedButton(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            onPressed: ()  {
+
+                            },
+                            color: Colors.blue,
+                            textColor: Colors.white,
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add,
+                                    size: D.H / 50,
+                                  ),
+                                  Text("Create Resume",
+                                      style: GoogleFonts.roboto(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: D.H / 60)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),*/
                         Padding(
-                          padding: EdgeInsets.only(right: D.W / 50),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: Container(
-                            width: D.W / 2.40,
+                            width: D.W / 2.6,
                             height: D.H / 19,
                             child: RaisedButton(
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['pdf', 'doc'],
+                                );
+
+                                if (result != null) {
+                                  file = File(result.files.single.path.toString());
+                                  var name = file.toString().split("/").last;
+                                  print("Name:"+name.toString());
+                                  resumeList.add(name.toString());
+
+                                  final prefs = await SharedPreferences.getInstance();
+                                  getPreferences();
+                                  prefs.setStringList("resumeList", resumeList);
+                                  setState(() {
+
+                                  });
+                                } else {
+                                  // User canceled the picker
+                                }
+                              },
                               color: Colors.blue,
                               textColor: Colors.white,
                               child: Center(
@@ -97,6 +169,72 @@ class _MyResumeScreenState extends State<MyResumeScreen> {
                         ),
                       ],
                     ),
+                    SizedBox(height: D.H / 30),
+                    ListView.builder(
+                        itemCount: resumeList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                left: D.H / 100, right: D.H / 100, top: D.H / 100),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: D.H / 14,
+                              decoration: BoxDecoration(
+                                color: ColorConstants.whiteColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 7,
+                                    offset:
+                                    Offset(0, 3), // changes position of shadow
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(D.W / 60.0),
+                                ),
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.all(D.W / 30.0),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(
+                                        Icons.picture_as_pdf,
+                                        color: Colors.grey,
+                                        size: D.H / 40,
+                                      ),
+                                      SizedBox(width: D.H / 80),
+                                      Text(resumeList[index],
+                                          style: GoogleFonts.roboto(
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: D.H / 55)),
+                                      SizedBox(width: D.H / 80),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          final prefs = await SharedPreferences.getInstance();
+                                          resumeList.removeAt(index);
+                                          prefs.setStringList("resumeList", resumeList);
+                                          setState(() {
+
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.close_sharp,
+                                          color: Colors.grey,
+                                          size: D.H / 40,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
                     SizedBox(height: D.H / 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
