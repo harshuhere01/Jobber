@@ -283,12 +283,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showGreenToastMessage("Login Successfully");
-      if(responsee.user!.first_time==0){
-        NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
-
-      }else{
-        NavigationHelpers.redirectto(context, ChooseYourUseScreen());
-      }
+      NavigationHelpers.redirectto(context, ChooseYourUseScreen());
+      // if(responsee.user!.first_time==0){
+      //   NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
+      //
+      // }else{
+      //   NavigationHelpers.redirectto(context, ChooseYourUseScreen());
+      // }
 
     } else {
       CommonUtils.hideProgressDialog(context);

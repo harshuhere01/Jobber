@@ -139,7 +139,12 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                 SharedPreferences pref=await SharedPreferences.getInstance();
                 pref.setString("UserType", radioGroupValue.toString());
                 print(radioGroupValue.toString());
-                 NavigationHelpers.redirect(context, VisitingCardMain());
+                if( radioGroupValue.toString()=="0"){
+                  NavigationHelpers.redirect(context, VisitingCardMain());
+                }else{
+                  NavigationHelpers.redirect(context, DashBoardScreen(0));
+                }
+
               },
             ),
           ],

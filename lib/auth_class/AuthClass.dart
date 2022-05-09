@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Model/API Models/login_model.dart';
 import '../Utils/common_utils.dart';
 import '../Utils/navigation_helper.dart';
+import '../View/Screens/choose_your_use_screen.dart';
 import '../View/Screens/dash_board_screen.dart';
 
 class AuthClass {
@@ -42,7 +43,8 @@ class AuthClass {
               userCredential.user!.displayName ?? '', "test", "2");
 
           await Future.delayed(Duration(milliseconds: 500), () {
-            NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
+            NavigationHelpers.redirectto(context, ChooseYourUseScreen());
+            // NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
             // CommonUtils.hideDialog(context);
           });
         } catch (e) {
@@ -145,7 +147,11 @@ class AuthClass {
 
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showGreenToastMessage("Login Successfully");
-      NavigationHelpers.redirectto(context, VisitingCardMain());
+      await Future.delayed(Duration(milliseconds: 500), () {
+        NavigationHelpers.redirectto(context, ChooseYourUseScreen());
+        // NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
+        // CommonUtils.hideDialog(context);
+      });
     } else {
       CommonUtils.hideProgressDialog(context);
       CommonUtils.showRedToastMessage("Something went wrong");
