@@ -112,7 +112,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           textColor: ColorConstants.primaryBlueColor,
                         ),
                         SizedBox(
-                          height: D.H / 50,
+                          height: D.H / 30,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -150,7 +150,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: D.H / 60,
+                          height: D.H / 30,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -163,12 +163,12 @@ class _AuthScreenState extends State<AuthScreen> {
                                   AuthClass().googleSignin(context);
                                 },
                                 child: Container(
-                                  height: D.H/13,
-                                  width: D.W/6.6,
+                                  height: D.H/16,
+                                  width: D.H/16,
                                   decoration: BoxDecoration(
                                       color: Color(0xFFE9F4FF),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(8))),
+                                          BorderRadius.all(Radius.circular(12))),
                                   child: Center(
                                       child: SvgPicture.asset(
                                           "assets/images/googleicon.svg")),
@@ -182,12 +182,12 @@ class _AuthScreenState extends State<AuthScreen> {
                                   AuthClass().facebookLogin(context);
                                 },
                                 child: Container(
-                                    height: D.H/13.5,
-                                    width: D.W/6.8,
+                                    height: D.H/16,
+                                    width: D.H/16,
                                     decoration: BoxDecoration(
                                         color: Color(0xFF4460A0),
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(12))),
+                                            Radius.circular(18))),
                                     child: Center(
                                       child: Container(
                                         child: SvgPicture.asset(
@@ -201,24 +201,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: D.H / 15,
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text.rich(TextSpan(
-                                style: GoogleFonts.roboto(fontSize: 15),
-                                text: 'Already Have Account? ',
-                                children: <InlineSpan>[
-                                  TextSpan(
-                                    text: ' Log in',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ])),
-                          ),
-                        ),
+
                       ],
                     ),
                   )),

@@ -28,6 +28,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formkey = GlobalKey<FormState>();
+  final fnameController = TextEditingController();
+  final lnameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -39,14 +41,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,
         elevation: 0,
-        leading: IconButton(
-            icon: Icon(
-              CupertinoIcons.left_chevron,
-              color: Colors.black87,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        leadingWidth: 100,
+        leading: ElevatedButton.icon(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.keyboard_backspace,color: Colors.black),
+          label: Text(
+            "Back",
+            style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w500, fontSize: D.H / 60,color: Colors.black),
+          ),
+          style: ElevatedButton.styleFrom(
+              elevation: 0, primary: Colors.transparent),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -81,6 +87,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: D.H / 50,
               ),
               CustomTextFormField(
+                controller: fnameController,
+                readOnly: false,
+                hint: "First Name",
+                iconPath: Icons.account_circle_outlined,
+                validators: (e) {
+                  if (fnameController.text == null ||
+                      fnameController.text == '') {
+                    return '*Please enter Email';
+                  } else if (!EmailValidator.validate(fnameController.text)) {
+                    return '*Please enter valid Email';
+                  }
+                },
+                keyboardTYPE: TextInputType.emailAddress,
+                obscured: false,
+              ),
+              CustomTextFormField(
+                controller: lnameController,
+                readOnly: false,
+                hint: "Last Name",
+                iconPath: Icons.account_circle_outlined,
+                validators: (e) {
+                  if (lnameController.text == null ||
+                      lnameController.text == '') {
+                    return '*Please enter Email';
+                  } else if (!EmailValidator.validate(lnameController.text)) {
+                    return '*Please enter valid Email';
+                  }
+                },
+                keyboardTYPE: TextInputType.emailAddress,
+                obscured: false,
+              ),
+              CustomTextFormField(
                 controller: emailController,
                 readOnly: false,
                 hint: "Email Address",
@@ -110,7 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 keyboardTYPE: TextInputType.emailAddress,
                 obscured: true,
               ),
-              CustomTextFormField(
+              /*CustomTextFormField(
                 controller: confirmPasswordController,
                 readOnly: false,
                 hint: "Confirm Password",
@@ -123,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 keyboardTYPE: TextInputType.emailAddress,
                 obscured: true,
-              ),
+              ),*/
               SizedBox(
                 height: D.H / 60,
               ),
@@ -147,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     setState(() {});
                   }),
               SizedBox(
-                height: D.H / 35,
+                height: D.H / 30,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -185,7 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               SizedBox(
-                height: D.H / 35,
+                height: D.H / 30,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -198,8 +236,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         AuthClass().googleSignin(context);
                       },
                       child: Container(
-                        height: D.H / 13,
-                        width: D.W / 6.6,
+                        height: D.H / 16,
+                        width: D.H / 16,
                         decoration: BoxDecoration(
                             color: Color(0xFFE9F4FF),
                             borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -212,12 +250,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: D.W / 10,
                     ),
                     Container(
-                        height: D.H / 13.5,
-                        width: D.W / 6.8,
+                        height: D.H / 16,
+                        width: D.H / 16,
                         decoration: BoxDecoration(
                             color: Color(0xFF4460A0),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
+                                BorderRadius.all(Radius.circular(16))),
                         child: Center(
                           child: Container(
                             child: SvgPicture.asset(
@@ -233,22 +271,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Expanded(
                 child: Container(),
               ),
-              Container(
-                child: Center(
-                  child: Text.rich(TextSpan(
-                      style: GoogleFonts.roboto(fontSize: 15),
-                      text: 'Already Have Account? ',
-                      children: <InlineSpan>[
-                        TextSpan(
-                          text: ' Log in',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )
-                      ])),
+              InkWell(
+                onTap: (){
+                  NavigationHelpers.redirect(context, LoginScreen());
+                },
+                child: Container(
+                  child: Center(
+                    child: Text.rich(TextSpan(
+                        style: GoogleFonts.roboto(fontSize: 15),
+                        text: 'Already Have Account? ',
+                        children: <InlineSpan>[
+                          TextSpan(
+                            text: ' Log in',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          )
+                        ])),
+                  ),
                 ),
               ),
               SizedBox(
-                height: D.H / 30,
+                height: D.H / 20,
               ),
             ],
           ),

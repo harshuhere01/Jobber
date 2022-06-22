@@ -23,7 +23,10 @@ class WelcomePage3 extends StatelessWidget {
                   vertical: D.H / 50, horizontal: D.H / 30),
               
             ),
-            Center(child: SvgPicture.asset('assets/images/welcome_page3.svg')),
+            Container(
+                height: D.H/3.5,
+                width: D.H/1.8,
+                child: Center(child: SvgPicture.asset('assets/images/welcome_page3.svg'))),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: D.H / 100),
               child: Text(
@@ -31,7 +34,7 @@ class WelcomePage3 extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     color: ColorConstants.blackColor,
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.w700),
               ),
             ),
@@ -42,7 +45,7 @@ class WelcomePage3 extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     color: ColorConstants.blackColor,
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300),
               ),
             ),
@@ -51,7 +54,7 @@ class WelcomePage3 extends StatelessWidget {
               color: ColorConstants.primaryBlueColor,
               bordercolor: ColorConstants.primaryBlueColor,
               text: 'Get Started',
-              fontsize: 22,
+              fontsize: 20,
               height: D.H / 15,
               width: D.H / 2.5,
               btnradius: D.H/50,

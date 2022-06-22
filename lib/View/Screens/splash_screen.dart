@@ -15,14 +15,13 @@ import '../../Utils/dimensions.dart';
 import '../../Utils/navigation_helper.dart';
 import 'auth_screen.dart';
 import 'package:video_player/video_player.dart';
-class SplashScreen extends StatefulWidget {
 
+class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   VideoPlayerController? _controller;
   bool _visible = false;
 
@@ -50,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
     super.initState();
   }
+
   _getVideoBackground() {
     return AnimatedOpacity(
       opacity: _visible ? 1.0 : 0.0,
@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _getBackgroundColor() {
     return Container(color: Colors.transparent //.withAlpha(120),
-    );
+        );
   }
 
   _getContent() {
@@ -69,14 +69,16 @@ class _SplashScreenState extends State<SplashScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
     );
   }
+
   Future changeRoute() async {
-    LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
-    if(loginModel!=null && loginModel.token!.isNotEmpty){
+    LoginModel? loginModel =
+        await PreferenceUtils.getLoginObject("LoginResponse");
+    if (loginModel != null && loginModel.token!.isNotEmpty) {
       refressToken();
       await Future.delayed(Duration(milliseconds: 3000), () {
         NavigationHelpers.redirectFromSplash(context, DashBoardScreen(0));
       });
-    }else{
+    } else {
       await Future.delayed(Duration(milliseconds: 3000), () {
         NavigationHelpers.redirectFromSplash(context, WelcomePageMain());
       });
@@ -95,7 +97,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> refressToken() async {
-    LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
+    LoginModel? loginModel =
+        await PreferenceUtils.getLoginObject("LoginResponse");
     final token = loginModel!.token;
     final uri = ApiEndPoint.refressToken;
     final headers = {
@@ -110,25 +113,30 @@ class _SplashScreenState extends State<SplashScreen> {
     String responseBody = response.body;
     var res = jsonDecode(responseBody);
     if (statusCode == 200 && res["success"]) {
-      LoginModel? loginModel=await PreferenceUtils.getLoginObject("LoginResponse");
-      loginModel!.token=res["token"];
+      LoginModel? loginModel =
+          await PreferenceUtils.getLoginObject("LoginResponse");
+      loginModel!.token = res["token"];
       PreferenceUtils.putObject("LoginResponse", loginModel);
-
-    } else {
-    }
+    } else {}
   }
 
   @override
   @override
   Widget build(BuildContext context) {
-    D.H=MediaQuery.of(context).size.height;
-    D.W=MediaQuery.of(context).size.width;
-    D.S=MediaQuery.of(context).size.height*MediaQuery.of(context).size.width;
+    D.H = MediaQuery.of(context).size.height;
+    D.W = MediaQuery.of(context).size.width;
+    D.S =
+        MediaQuery.of(context).size.height * MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorConstants.whiteColor,
-        body: Center(child: Container(child: Image.asset("assets/images/splashimage.png"),)),
+        body: Center(
+            child: Container(
+              height: D.H/2,
+              width: D.W/1.75,
+          child: Image.asset("assets/images/splashimage.png"),
+        )),
       ),
     );
   }

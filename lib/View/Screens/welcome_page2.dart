@@ -32,7 +32,10 @@ Function onTap;
                 ),
               ),
             ),
-            Center(child: SvgPicture.asset('assets/images/welcome_page2.svg')),
+            Container(
+                height: D.H/3.5,
+                width: D.H/1.8,
+                child: Center(child: SvgPicture.asset('assets/images/welcome_page2.svg'))),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: D.H / 100),
               child: Text(
@@ -40,7 +43,7 @@ Function onTap;
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     color: ColorConstants.blackColor,
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.w700),
               ),
             ),
@@ -51,7 +54,7 @@ Function onTap;
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     color: ColorConstants.blackColor,
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300),
               ),
             ),
@@ -60,9 +63,9 @@ Function onTap;
               color: ColorConstants.primaryBlueColor,
               bordercolor: ColorConstants.primaryBlueColor,
               text: 'Next',
-              fontsize: 26,
-              height: D.H / 10,
-              width: D.H / 10,
+              fontsize: 20,
+              height: D.H / 12,
+              width: D.H / 12,
               btnradius: D.H/5,
               fontweight: FontWeight.bold,
               onTap: () {onTap();},

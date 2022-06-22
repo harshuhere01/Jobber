@@ -35,7 +35,7 @@ class ChooseYourUseTile extends StatelessWidget {
           width: D.W,
           decoration: BoxDecoration(
             // border: Border.all(color: bordercolor,width: 2),
-            color:radioValue == radioGroupValue ? ColorConstants.primaryBlueColor : ColorConstants.chooseusecardcolor,
+            color:radioValue == radioGroupValue ? Colors.lightGreen : ColorConstants.chooseusecardcolor,
             borderRadius: BorderRadius.all(Radius.circular(D.H/50)),
           ),
           child: Row(

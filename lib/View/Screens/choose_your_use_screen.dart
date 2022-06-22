@@ -11,6 +11,8 @@ import 'package:jobber/View/Screens/dash_board_screen.dart';
 import 'package:jobber/View/Screens/visiting_card_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'create_visiting_card_main_screen.dart';
+
 class ChooseYourUseScreen extends StatefulWidget {
   const ChooseYourUseScreen({Key? key}) : super(key: key);
 
@@ -140,7 +142,7 @@ class _ChooseYourUseScreenState extends State<ChooseYourUseScreen> {
                 pref.setString("UserType", radioGroupValue.toString());
                 print(radioGroupValue.toString());
                 if( radioGroupValue.toString()=="0"){
-                  NavigationHelpers.redirect(context, VisitingCardMain());
+                  NavigationHelpers.redirect(context, CreateVisitingCardMainPage());
                 }else{
                   NavigationHelpers.redirect(context, DashBoardScreen(0));
                 }

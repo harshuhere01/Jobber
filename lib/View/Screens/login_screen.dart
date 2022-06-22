@@ -13,6 +13,7 @@ import 'package:jobber/Model/API%20Models/login_model.dart';
 import 'package:jobber/Model/API%20Models/social_login_model.dart';
 import 'package:jobber/Utils/preferences.dart';
 import 'package:jobber/View/Screens/choose_your_use_screen.dart';
+import 'package:jobber/View/Screens/register_screen.dart';
 import 'package:jobber/View/Screens/resetPassword_screen.dart';
 import 'package:jobber/View/Screens/visiting_card_main.dart';
 import 'package:jobber/auth_class/AuthClass.dart';
@@ -42,15 +43,21 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         backgroundColor: ColorConstants.whiteColor,
         elevation: 0,
-        leading: IconButton(
-            icon: Icon(
-              CupertinoIcons.left_chevron,
-              color: Colors.black87,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        automaticallyImplyLeading: false,
+        leadingWidth: 100,
+        leading: ElevatedButton.icon(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.keyboard_backspace,color: Colors.black),
+          label: Text(
+            "Back",
+            style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w500, fontSize: D.H / 60,color: Colors.black),
+          ),
+          style: ElevatedButton.styleFrom(
+              elevation: 0, primary: Colors.transparent),
+        ),
       ),
+
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: D.W / 20),
         child: Column(
@@ -147,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: D.H / 10,
+              height: D.H / 30,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -185,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: D.H / 35,
+              height: D.H / 30,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: D.W / 20),
@@ -198,8 +205,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       AuthClass().googleSignin(context);
                     },
                     child: Container(
-                      height: D.H / 13,
-                      width: D.W / 6.6,
+                      height: D.H /16,
+                      width:  D.H /16,
                       decoration: BoxDecoration(
                           color: Color(0xFFE9F4FF),
                           borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -212,17 +219,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: D.W / 10,
                   ),
                   Container(
-                      height: D.H / 13.5,
-                      width: D.W / 6.8,
+                      height:  D.H /16,
+                      width:  D.H /16,
                       decoration: BoxDecoration(
                           color: Color(0xFF4460A0),
-                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
                       child: Center(
                         child: Container(
                           child: SvgPicture.asset(
                             "assets/images/facebooklogo.svg",
-                            height: D.H / 14.5,
-                            width: D.W / 6.4,
+
                           ),
                         ),
                       )),
@@ -232,22 +238,27 @@ class _LoginScreenState extends State<LoginScreen> {
             Expanded(
               child: Container(),
             ),
-            Container(
-              child: Center(
-                child: Text.rich(TextSpan(
-                    style: GoogleFonts.roboto(fontSize: 15),
-                    text: 'Already Have Account? ',
-                    children: <InlineSpan>[
-                      TextSpan(
-                        text: ' Log in',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      )
-                    ])),
+            InkWell(
+              onTap: (){
+                NavigationHelpers.redirect(context, RegisterScreen());
+              },
+              child: Container(
+                child: Center(
+                  child: Text.rich(TextSpan(
+                      style: GoogleFonts.roboto(fontSize: 15),
+                      text: "Don't Have Account? ",
+                      children: <InlineSpan>[
+                        TextSpan(
+                          text: 'Sign up',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )
+                      ])),
+                ),
               ),
             ),
             SizedBox(
-              height: D.H / 30,
+              height: D.H / 20,
             ),
           ],
         ),

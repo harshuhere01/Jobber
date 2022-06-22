@@ -47,7 +47,7 @@ class _CreateVisitingCardMainPageState
                   ),
                   TextMedium500(
                     text: 'Let\’s start with creating your visiting card',
-                    fontSize: D.H / 30,
+                    fontSize: D.H / 35,
                     textColor: ColorConstants.blackColor,
                   ),
                   SizedBox(
@@ -58,7 +58,7 @@ class _CreateVisitingCardMainPageState
                     textAlign: TextAlign.center,
                     style: GoogleFonts.roboto(
                         color: ColorConstants.greycolor,
-                        fontSize: D.H / 40,
+                        fontSize: D.H / 50,
                         fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
@@ -103,7 +103,7 @@ class _CreateVisitingCardMainPageState
                     bordercolor: ColorConstants.primaryBlueColor,
                     textcolor: ColorConstants.whiteColor,
                     text: 'Let’s go!',
-                    fontsize: 22,
+                    fontsize: 20,
                     height: D.H / 15,
                     width: D.H / 2.5,
                     btnradius: D.H / 50,
@@ -111,6 +111,9 @@ class _CreateVisitingCardMainPageState
                     onTap: () {
                       NavigationHelpers.redirect(context, VisitingCardMain());
                     },
+                  ),
+                  SizedBox(
+                    height: D.H / 50,
                   ),
                 ],
               ),
